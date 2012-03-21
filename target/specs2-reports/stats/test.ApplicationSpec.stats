@@ -1,0 +1,5 @@
+<test.ApplicationSpec-results timestamp="1332303670995"><result location="test.ApplicationSpec (ApplicationSpec.scala:29)" id="586220426"><stats expectations="1" examples="1" failures="1" time="99"></stats></result>
+<result location="test.ApplicationSpec (ApplicationSpec.scala:40)" id="1704224789"><stats expectations="1" examples="1" failures="1" time="70"></stats></result>
+<result location="test.ApplicationSpec (ApplicationSpec.scala:51)" id="71219845"><stats expectations="1" examples="1" failures="1" time="340"></stats></result>
+</test.ApplicationSpec-results>
+<test.ApplicationSpec-stats timestamp="1332303670997"><stats expectations="4" successes="1" examples="4" failures="3" time="529"></stats></test.ApplicationSpec-stats>

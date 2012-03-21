@@ -1,0 +1,500 @@
+[info] ApplicationSpec
+[info] 
+[info] Application should
+[info] + redirect to the model list on /
+[error] x list models on the the first page
+[error]     '
+[error] 
+[error] 
+[error] 
+[error] 
+[error] 
+[error] 
+[error] 
+[error] 
+[error] 
+[error] <!DOCTYPE html>
+[error] <html>
+[error]     <head>
+[error]         <title>App that probably won't be completed</title>
+[error]         <link rel="stylesheet" type="text/css" media="screen" href="/assets/stylesheets/bootstrap.min.css"> 
+[error]         <link rel="stylesheet" type="text/css" media="screen" href="/assets/stylesheets/main.css"> 
+[error]     </head>
+[error]     <body>
+[error]         
+[error]         <header class="topbar">
+[error]             <h1 class="fill">
+[error]                 <a href="/">
+[error]                    App that probably won't be completed
+[error]                 </a>
+[error]             </h1>
+[error]         </header>
+[error]         
+[error]         <section id="main">
+[error]             
+[error]     
+[error]     <h1>7 cars found</h1>
+[error] 
+[error]     
+[error] 
+[error]     <div id="actions">
+[error]         
+[error]          
+[error] 
+[error] <form action="/models" method="GET" >
+[error]     
+[error]             <input type="search" id="searchbox" name="f" value="" placeholder="Filter by model name...">
+[error]             <input type="submit" id="searchsubmit" value="Filter by name" class="btn primary">
+[error]         
+[error] </form>
+[error] 
+[error]         
+[error]         <a class="btn success" id="add" href="/models/new">Add a new model</a>
+[error]         
+[error]     </div>
+[error]     
+[error]     
+[error]         
+[error]         <table class="models zebra-striped">
+[error]             <thead>
+[error]                 <tr>
+[error]                 	
+[error]     <th class="col2 header headerSortUp">
+[error]         <a href="/models?s=-2">Make</a>
+[error]     </th>
+[error] 
+[error]                     
+[error]     <th class="col8 header ">
+[error]         <a href="/models?s=8">Model name</a>
+[error]     </th>
+[error] 
+[error]                     
+[error]     <th class="col6 header ">
+[error]         <a href="/models?s=6">Aspiration</a>
+[error]     </th>
+[error] 
+[error]                     
+[error]     <th class="col3 header ">
+[error]         <a href="/models?s=3">Introduced</a>
+[error]     </th>
+[error] 
+[error]                     
+[error]     <th class="col4 header ">
+[error]         <a href="/models?s=4">Discontinued</a>
+[error]     </th>
+[error] 
+[error]                 </tr>
+[error]             </thead>
+[error]             <tbody>
+[error] 				
+[error]                 
+[error]                         <tr>
+[error]                             <td><a href="/models/3">370Z</a></td>
+[error]                             <td>
+[error]                                 Nissan
+[error]                             </td>
+[error]                             <td>
+[error]                                 N/A
+[error]                             </td>
+[error]                             <td>
+[error]                                 01 May 1980
+[error]                             </td>
+[error]                             <td>
+[error]                                 01 Apr 1984
+[error]                             </td>                            
+[error]                             
+[error]                         </tr>
+[error]                     
+[error]                         <tr>
+[error]                             <td><a href="/models/5">911</a></td>
+[error]                             <td>
+[error]                                 Porsche
+[error]                             </td>
+[error]                             <td>
+[error]                                 N/A
+[error]                             </td>
+[error]                             <td>
+[error]                                 01 May 1980
+[error]                             </td>
+[error]                             <td>
+[error]                                 01 Apr 1984
+[error]                             </td>                            
+[error]                             
+[error]                         </tr>
+[error]                     
+[error]                         <tr>
+[error]                             <td><a href="/models/4">Cayman</a></td>
+[error]                             <td>
+[error]                                 Porsche
+[error]                             </td>
+[error]                             <td>
+[error]                                 N/A
+[error]                             </td>
+[error]                             <td>
+[error]                                 01 May 1980
+[error]                             </td>
+[error]                             <td>
+[error]                                 01 Apr 1984
+[error]                             </td>                            
+[error]                             
+[error]                         </tr>
+[error]                     
+[error]                         <tr>
+[error]                             <td><a href="/models/1">Clio</a></td>
+[error]                             <td>
+[error]                                 Renault
+[error]                             </td>
+[error]                             <td>
+[error]                                 N/A
+[error]                             </td>
+[error]                             <td>
+[error]                                 01 May 1980
+[error]                             </td>
+[error]                             <td>
+[error]                                 01 Apr 1984
+[error]                             </td>                            
+[error]                             
+[error]                         </tr>
+[error]                     
+[error]                         <tr>
+[error]                             <td><a href="/models/6">Impreza</a></td>
+[error]                             <td>
+[error]                                 Subaru
+[error]                             </td>
+[error]                             <td>
+[error]                                 Turbocharged
+[error]                             </td>
+[error]                             <td>
+[error]                                 01 May 1980
+[error]                             </td>
+[error]                             <td>
+[error]                                 01 Apr 1984
+[error]                             </td>                            
+[error]                             
+[error]                         </tr>
+[error]                     
+[error]                         <tr>
+[error]                             <td><a href="/models/7">Legacy</a></td>
+[error]                             <td>
+[error]                                 Subaru
+[error]                             </td>
+[error]                             <td>
+[error]                                 Turbocharged
+[error]                             </td>
+[error]                             <td>
+[error]                                 01 May 1980
+[error]                             </td>
+[error]                             <td>
+[error]                                 01 Apr 1984
+[error]                             </td>                            
+[error]                             
+[error]                         </tr>
+[error]                     
+[error]                         <tr>
+[error]                             <td><a href="/models/2">Skyline</a></td>
+[error]                             <td>
+[error]                                 Nissan
+[error]                             </td>
+[error]                             <td>
+[error]                                 Turbocharged
+[error]                             </td>
+[error]                             <td>
+[error]                                 01 May 1980
+[error]                             </td>
+[error]                             <td>
+[error]                                 01 Apr 1984
+[error]                             </td>                            
+[error]                             
+[error]                         </tr>
+[error]                     
+[error] 
+[error]             </tbody>
+[error]         </table>
+[error] 
+[error]         <div id="pagination" class="pagination">
+[error]             <ul>
+[error]                 
+[error]                     <li class="prev disabled">
+[error]                         <a>&larr; Previous</a>
+[error]                     </li>
+[error]                 
+[error]                 <li class="current">
+[error]                     <a>Displaying 1 to 7 of 7</a>
+[error]                 </li>
+[error]                 
+[error]                     <li class="next disabled">
+[error]                         <a>Next &rarr;</a>
+[error]                     </li>
+[error]                 
+[error]             </ul>
+[error]         </div>
+[error]         
+[error]     
+[error] 
+[error]         
+[error] 
+[error]         </section>
+[error]         
+[error]     </body>
+[error] </html>
+[error] 
+[error]             ' doesn't contain '574 models found' (ApplicationSpec.scala:35)
+[error] x filter model by name
+[error]     '
+[error] 
+[error] 
+[error] 
+[error] 
+[error] 
+[error] 
+[error] 
+[error] 
+[error] 
+[error] <!DOCTYPE html>
+[error] <html>
+[error]     <head>
+[error]         <title>App that probably won't be completed</title>
+[error]         <link rel="stylesheet" type="text/css" media="screen" href="/assets/stylesheets/bootstrap.min.css"> 
+[error]         <link rel="stylesheet" type="text/css" media="screen" href="/assets/stylesheets/main.css"> 
+[error]     </head>
+[error]     <body>
+[error]         
+[error]         <header class="topbar">
+[error]             <h1 class="fill">
+[error]                 <a href="/">
+[error]                    App that probably won't be completed
+[error]                 </a>
+[error]             </h1>
+[error]         </header>
+[error]         
+[error]         <section id="main">
+[error]             
+[error]     
+[error]     <h1>No cars found</h1>
+[error] 
+[error]     
+[error] 
+[error]     <div id="actions">
+[error]         
+[error]          
+[error] 
+[error] <form action="/models" method="GET" >
+[error]     
+[error]             <input type="search" id="searchbox" name="f" value="Apple" placeholder="Filter by model name...">
+[error]             <input type="submit" id="searchsubmit" value="Filter by name" class="btn primary">
+[error]         
+[error] </form>
+[error] 
+[error]         
+[error]         <a class="btn success" id="add" href="/models/new">Add a new model</a>
+[error]         
+[error]     </div>
+[error]     
+[error]     
+[error]         
+[error]         <div class="well">
+[error]             <em>Nothing to display</em>
+[error]         </div>
+[error]         
+[error]     
+[error] 
+[error]         
+[error] 
+[error]         </section>
+[error]         
+[error]     </body>
+[error] </html>
+[error] 
+[error]             ' doesn't contain '13 models found' (ApplicationSpec.scala:46)
+[error] x create new model
+[error]     '
+[error] 
+[error] 
+[error]  
+[error] 
+[error] 
+[error] 
+[error] <!DOCTYPE html>
+[error] <html>
+[error]     <head>
+[error]         <title>App that probably won't be completed</title>
+[error]         <link rel="stylesheet" type="text/css" media="screen" href="/assets/stylesheets/bootstrap.min.css"> 
+[error]         <link rel="stylesheet" type="text/css" media="screen" href="/assets/stylesheets/main.css"> 
+[error]     </head>
+[error]     <body>
+[error]         
+[error]         <header class="topbar">
+[error]             <h1 class="fill">
+[error]                 <a href="/">
+[error]                    App that probably won't be completed
+[error]                 </a>
+[error]             </h1>
+[error]         </header>
+[error]         
+[error]         <section id="main">
+[error]             
+[error]     
+[error]     <h1>Add a model</h1>
+[error]     
+[error]      
+[error] 
+[error] <form action="/models" method="POST" >
+[error]     
+[error]         
+[error]         <fieldset>
+[error]         
+[error]             
+[error] 
+[error] 
+[error] 
+[error] 
+[error] 
+[error] 
+[error] 
+[error] 
+[error] <div class="clearfix ">
+[error]     <label for="name">Car model name</label>
+[error]     <div class="input">
+[error]         
+[error]     <input type="text" id="name" name="name" value="FooBar" >
+[error] 
+[error]         <span class="help-inline">Required</span> 
+[error]     </div>
+[error] </div>
+[error] 
+[error] 
+[error] 
+[error]             
+[error] 
+[error] 
+[error] 
+[error] 
+[error] 
+[error] 
+[error] 
+[error] 
+[error] <div class="clearfix error">
+[error]     <label for="introduced">Introduced date</label>
+[error]     <div class="input">
+[error]         
+[error]     <input type="text" id="introduced" name="introduced" value="badbadbad" >
+[error] 
+[error]         <span class="help-inline">Date ('yyyy-MM-dd')</span> 
+[error]     </div>
+[error] </div>
+[error] 
+[error] 
+[error] 
+[error]             
+[error] 
+[error] 
+[error] 
+[error] 
+[error] 
+[error] 
+[error] 
+[error] 
+[error] <div class="clearfix ">
+[error]     <label for="discontinued">Discontinued date</label>
+[error]     <div class="input">
+[error]         
+[error]     <input type="text" id="discontinued" name="discontinued" value="" >
+[error] 
+[error]         <span class="help-inline">Date ('yyyy-MM-dd')</span> 
+[error]     </div>
+[error] </div>
+[error] 
+[error] 
+[error] 
+[error] 
+[error]             
+[error] 
+[error] 
+[error] 
+[error] 
+[error] 
+[error] 
+[error] 
+[error] 
+[error] <div class="clearfix ">
+[error]     <label for="make">Make</label>
+[error]     <div class="input">
+[error]         
+[error]     <select id="make" name="make" >
+[error]         
+[error]             <option class="blank" value="">-- Choose a Make --</option>
+[error]         
+[error]         
+[error]             <option value="2" >Nissan</option>
+[error]         
+[error]             <option value="3" >Porsche</option>
+[error]         
+[error]             <option value="1" selected>Renault</option>
+[error]         
+[error]             <option value="4" >Subaru</option>
+[error]         
+[error]     </select>
+[error] 
+[error]         <span class="help-inline"></span> 
+[error]     </div>
+[error] </div>
+[error] 
+[error] 
+[error] 
+[error]             
+[error]             
+[error] 
+[error] 
+[error] 
+[error] 
+[error] 
+[error] 
+[error] 
+[error] 
+[error] <div class="clearfix ">
+[error]     <label for="aspiration">Aspiration</label>
+[error]     <div class="input">
+[error]         
+[error]     <select id="aspiration" name="aspiration" >
+[error]         
+[error]             <option class="blank" value="">-- Choose an aspiration type --</option>
+[error]         
+[error]         
+[error]             <option value="2" >N/A</option>
+[error]         
+[error]             <option value="3" >Supercharged</option>
+[error]         
+[error]             <option value="1" >Turbocharged</option>
+[error]         
+[error]     </select>
+[error] 
+[error]         <span class="help-inline"></span> 
+[error]     </div>
+[error] </div>
+[error] 
+[error] 
+[error] 
+[error]             
+[error] 
+[error]         </fieldset>
+[error]         
+[error]         <div class="actions">
+[error]             <input type="submit" value="Create this model" class="btn primary"> or 
+[error]             <a href="/models" class="btn">Cancel</a> 
+[error]         </div>
+[error]         
+[error]     
+[error] </form>
+[error] 
+[error]     
+[error] 
+[error]         </section>
+[error]         
+[error]     </body>
+[error] </html>' doesn't contain '<option value="1" selected>Nissan</option>' (ApplicationSpec.scala:63)
+[info]  
+[info]  
+[info] Total for specification ApplicationSpec
+[info] Finished in 529 ms
+[info] 4 examples, 3 failures, 0 error
+[info] 

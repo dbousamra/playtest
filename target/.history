@@ -1,0 +1,11 @@
+h2-browser
+run
+h2-browser
+run
+cd ..
+run
+eclipse
+eclipsify
+test
+play run
+run

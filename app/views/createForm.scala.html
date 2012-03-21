@@ -1,0 +1,43 @@
+@(modelForm: Form[Model])
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) } 
+
+@main {
+    
+    <h1>Add a model</h1>
+    
+    @form(routes.Application.save()) {
+        
+        <fieldset>
+        
+            @inputText(modelForm("name"), '_label -> "Car model name")
+            @inputText(modelForm("introduced"), '_label -> "Introduced date")
+            @inputText(modelForm("discontinued"), '_label -> "Discontinued date")
+
+            @select(
+                modelForm("make"), 
+                Make.options, 
+                '_label -> "Make", '_default -> "-- Choose a Make --",
+                '_showConstraints -> false
+            )
+            
+            @select(
+                modelForm("aspiration"), 
+                Aspiration.options, 
+                '_label -> "Aspiration", '_default -> "-- Choose an aspiration type --",
+                '_showConstraints -> false
+            )
+            
+
+        </fieldset>
+        
+        <div class="actions">
+            <input type="submit" value="Create this model" class="btn primary"> or 
+            <a href="@routes.Application.list()" class="btn">Cancel</a> 
+        </div>
+        
+    }
+    
+}

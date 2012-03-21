@@ -1,0 +1,513 @@
+<testsuite tests="4" skipped="0" name="test.ApplicationSpec" hostname="Dominic-PC" failures="0" time="0.000" errors="0">
+        <properties>
+      <property name="sbt.ivy.home" value="C:\play-2.0\framework\..\repository"></property><property name="java.runtime.name" value="Java(TM) SE Runtime Environment"></property><property name="sun.boot.library.path" value="C:\Program Files\Java\jre6\bin"></property><property name="java.vm.version" value="19.1-b02"></property><property name="java.vm.vendor" value="Sun Microsystems Inc."></property><property name="java.vendor.url" value="http://java.sun.com/"></property><property name="path.separator" value=";"></property><property name="java.vm.name" value="Java HotSpot(TM) Client VM"></property><property name="file.encoding.pkg" value="sun.io"></property><property name="sun.java.launcher" value="SUN_STANDARD"></property><property name="user.country" value="US"></property><property name="sun.os.patch.level" value=""></property><property name="java.vm.specification.name" value="Java Virtual Machine Specification"></property><property name="user.dir" value="C:\Users\Dominic\workspace\playtest"></property><property name="java.runtime.version" value="1.6.0_24-b07"></property><property name="sbt.boot.properties" value="file:///C:/play-2.0/framework/sbt/sbt.boot.properties"></property><property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"></property><property name="java.endorsed.dirs" value="C:\Program Files\Java\jre6\lib\endorsed"></property><property name="os.arch" value="x86"></property><property name="java.io.tmpdir" value="C:\Users\Dominic\AppData\Local\Temp\"></property><property name="line.separator" value="
+"></property><property name="java.vm.specification.vendor" value="Sun Microsystems Inc."></property><property name="user.variant" value=""></property><property name="os.name" value="Windows 7"></property><property name="sun.jnu.encoding" value="Cp1252"></property><property name="java.library.path" value="C:\Windows\system32;.;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files\NVIDIA Corporation\PhysX\Common;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;c:\Program Files\Microsoft SQL Server\100\Tools\Binn\;c:\Program Files\Microsoft SQL Server\100\DTS\Binn\;C:\Program Files\Mercurial;C:\Program Files\QuickTime\QTSystem\;C:\Program Files\Git\cmd;C:\Program Files\Git\bin;c:\Program Files\Microsoft SQL Server\90\Tools\binn\;C:\Program Files\scala\\bin;C:\ghc\ghc-6.12.3\bin;C:\Program Files\Haskell\bin;C:\ghc\ghc-7.0.3\bin;C:\Program Files\OpenVPN\bin;C:\sbt.bat;C:\Python26;C:\Python26\Scripts;C:\play-2.0;C:\Program Files\Java\jdk1.6.0_24\bin"></property><property name="java.specification.name" value="Java Platform API Specification"></property><property name="java.class.version" value="50.0"></property><property name="play.home" value="C:\play-2.0\framework\."></property><property name="sun.management.compiler" value="HotSpot Client Compiler"></property><property name="os.version" value="6.1"></property><property name="user.home" value="C:\Users\Dominic"></property><property name="user.timezone" value="Australia/Brisbane"></property><property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"></property><property name="file.encoding" value="UTF8"></property><property name="java.specification.version" value="1.6"></property><property name="java.class.path" value="C:\play-2.0\framework\sbt\sbt-launch.jar"></property><property name="user.name" value="Dominic"></property><property name="play.version" value="2.0"></property><property name="java.vm.specification.version" value="1.0"></property><property name="java.home" value="C:\Program Files\Java\jre6"></property><property name="sun.arch.data.model" value="32"></property><property name="user.language" value="en"></property><property name="java.specification.vendor" value="Sun Microsystems Inc."></property><property name="awt.toolkit" value="sun.awt.windows.WToolkit"></property><property name="java.vm.info" value="mixed mode"></property><property name="java.version" value="1.6.0_24"></property><property name="java.ext.dirs" value="C:\Program Files\Java\jre6\lib\ext;C:\Windows\Sun\Java\lib\ext"></property><property name="sun.boot.class.path" value="C:\Program Files\Java\jre6\lib\resources.jar;C:\Program Files\Java\jre6\lib\rt.jar;C:\Program Files\Java\jre6\lib\sunrsasign.jar;C:\Program Files\Java\jre6\lib\jsse.jar;C:\Program Files\Java\jre6\lib\jce.jar;C:\Program Files\Java\jre6\lib\charsets.jar;C:\Program Files\Java\jre6\lib\modules\jdk.boot.jar;C:\Program Files\Java\jre6\classes"></property><property name="java.vendor" value="Sun Microsystems Inc."></property><property name="file.separator" value="\"></property><property name="java.vendor.url.bug" value="http://java.sun.com/cgi-bin/bugreport.cgi"></property><property name="sun.io.unicode.encoding" value="UnicodeLittle"></property><property name="sun.cpu.endian" value="little"></property><property name="sun.desktop" value="windows"></property><property name="sun.cpu.isalist" value="pentium_pro+mmx pentium_pro pentium+mmx pentium i486 i386 i86"></property>
+      </properties>
+        <testcase name="Application should::redirect to the model list on /" time="0.020" classname="test.ApplicationSpec">
+        
+      </testcase><testcase name="Application should::list models on the the first page" time="0.099" classname="test.ApplicationSpec">
+        <failure message="'
+
+
+
+
+
+
+
+
+
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;App that probably won't be completed&lt;/title&gt;
+        &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; media=&quot;screen&quot; href=&quot;/assets/stylesheets/bootstrap.min.css&quot;&gt; 
+        &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; media=&quot;screen&quot; href=&quot;/assets/stylesheets/main.css&quot;&gt; 
+    &lt;/head&gt;
+    &lt;body&gt;
+        
+        &lt;header class=&quot;topbar&quot;&gt;
+            &lt;h1 class=&quot;fill&quot;&gt;
+                &lt;a href=&quot;/&quot;&gt;
+                   App that probably won't be completed
+                &lt;/a&gt;
+            &lt;/h1&gt;
+        &lt;/header&gt;
+        
+        &lt;section id=&quot;main&quot;&gt;
+            
+    
+    &lt;h1&gt;7 cars found&lt;/h1&gt;
+
+    
+
+    &lt;div id=&quot;actions&quot;&gt;
+        
+         
+
+&lt;form action=&quot;/models&quot; method=&quot;GET&quot; &gt;
+    
+            &lt;input type=&quot;search&quot; id=&quot;searchbox&quot; name=&quot;f&quot; value=&quot;&quot; placeholder=&quot;Filter by model name...&quot;&gt;
+            &lt;input type=&quot;submit&quot; id=&quot;searchsubmit&quot; value=&quot;Filter by name&quot; class=&quot;btn primary&quot;&gt;
+        
+&lt;/form&gt;
+
+        
+        &lt;a class=&quot;btn success&quot; id=&quot;add&quot; href=&quot;/models/new&quot;&gt;Add a new model&lt;/a&gt;
+        
+    &lt;/div&gt;
+    
+    
+        
+        &lt;table class=&quot;models zebra-striped&quot;&gt;
+            &lt;thead&gt;
+                &lt;tr&gt;
+                	
+    &lt;th class=&quot;col2 header headerSortUp&quot;&gt;
+        &lt;a href=&quot;/models?s=-2&quot;&gt;Make&lt;/a&gt;
+    &lt;/th&gt;
+
+                    
+    &lt;th class=&quot;col8 header &quot;&gt;
+        &lt;a href=&quot;/models?s=8&quot;&gt;Model name&lt;/a&gt;
+    &lt;/th&gt;
+
+                    
+    &lt;th class=&quot;col6 header &quot;&gt;
+        &lt;a href=&quot;/models?s=6&quot;&gt;Aspiration&lt;/a&gt;
+    &lt;/th&gt;
+
+                    
+    &lt;th class=&quot;col3 header &quot;&gt;
+        &lt;a href=&quot;/models?s=3&quot;&gt;Introduced&lt;/a&gt;
+    &lt;/th&gt;
+
+                    
+    &lt;th class=&quot;col4 header &quot;&gt;
+        &lt;a href=&quot;/models?s=4&quot;&gt;Discontinued&lt;/a&gt;
+    &lt;/th&gt;
+
+                &lt;/tr&gt;
+            &lt;/thead&gt;
+            &lt;tbody&gt;
+				
+                
+                        &lt;tr&gt;
+                            &lt;td&gt;&lt;a href=&quot;/models/3&quot;&gt;370Z&lt;/a&gt;&lt;/td&gt;
+                            &lt;td&gt;
+                                Nissan
+                            &lt;/td&gt;
+                            &lt;td&gt;
+                                N/A
+                            &lt;/td&gt;
+                            &lt;td&gt;
+                                01 May 1980
+                            &lt;/td&gt;
+                            &lt;td&gt;
+                                01 Apr 1984
+                            &lt;/td&gt;                            
+                            
+                        &lt;/tr&gt;
+                    
+                        &lt;tr&gt;
+                            &lt;td&gt;&lt;a href=&quot;/models/5&quot;&gt;911&lt;/a&gt;&lt;/td&gt;
+                            &lt;td&gt;
+                                Porsche
+                            &lt;/td&gt;
+                            &lt;td&gt;
+                                N/A
+                            &lt;/td&gt;
+                            &lt;td&gt;
+                                01 May 1980
+                            &lt;/td&gt;
+                            &lt;td&gt;
+                                01 Apr 1984
+                            &lt;/td&gt;                            
+                            
+                        &lt;/tr&gt;
+                    
+                        &lt;tr&gt;
+                            &lt;td&gt;&lt;a href=&quot;/models/4&quot;&gt;Cayman&lt;/a&gt;&lt;/td&gt;
+                            &lt;td&gt;
+                                Porsche
+                            &lt;/td&gt;
+                            &lt;td&gt;
+                                N/A
+                            &lt;/td&gt;
+                            &lt;td&gt;
+                                01 May 1980
+                            &lt;/td&gt;
+                            &lt;td&gt;
+                                01 Apr 1984
+                            &lt;/td&gt;                            
+                            
+                        &lt;/tr&gt;
+                    
+                        &lt;tr&gt;
+                            &lt;td&gt;&lt;a href=&quot;/models/1&quot;&gt;Clio&lt;/a&gt;&lt;/td&gt;
+                            &lt;td&gt;
+                                Renault
+                            &lt;/td&gt;
+                            &lt;td&gt;
+                                N/A
+                            &lt;/td&gt;
+                            &lt;td&gt;
+                                01 May 1980
+                            &lt;/td&gt;
+                            &lt;td&gt;
+                                01 Apr 1984
+                            &lt;/td&gt;                            
+                            
+                        &lt;/tr&gt;
+                    
+                        &lt;tr&gt;
+                            &lt;td&gt;&lt;a href=&quot;/models/6&quot;&gt;Impreza&lt;/a&gt;&lt;/td&gt;
+                            &lt;td&gt;
+                                Subaru
+                            &lt;/td&gt;
+                            &lt;td&gt;
+                                Turbocharged
+                            &lt;/td&gt;
+                            &lt;td&gt;
+                                01 May 1980
+                            &lt;/td&gt;
+                            &lt;td&gt;
+                                01 Apr 1984
+                            &lt;/td&gt;                            
+                            
+                        &lt;/tr&gt;
+                    
+                        &lt;tr&gt;
+                            &lt;td&gt;&lt;a href=&quot;/models/7&quot;&gt;Legacy&lt;/a&gt;&lt;/td&gt;
+                            &lt;td&gt;
+                                Subaru
+                            &lt;/td&gt;
+                            &lt;td&gt;
+                                Turbocharged
+                            &lt;/td&gt;
+                            &lt;td&gt;
+                                01 May 1980
+                            &lt;/td&gt;
+                            &lt;td&gt;
+                                01 Apr 1984
+                            &lt;/td&gt;                            
+                            
+                        &lt;/tr&gt;
+                    
+                        &lt;tr&gt;
+                            &lt;td&gt;&lt;a href=&quot;/models/2&quot;&gt;Skyline&lt;/a&gt;&lt;/td&gt;
+                            &lt;td&gt;
+                                Nissan
+                            &lt;/td&gt;
+                            &lt;td&gt;
+                                Turbocharged
+                            &lt;/td&gt;
+                            &lt;td&gt;
+                                01 May 1980
+                            &lt;/td&gt;
+                            &lt;td&gt;
+                                01 Apr 1984
+                            &lt;/td&gt;                            
+                            
+                        &lt;/tr&gt;
+                    
+
+            &lt;/tbody&gt;
+        &lt;/table&gt;
+
+        &lt;div id=&quot;pagination&quot; class=&quot;pagination&quot;&gt;
+            &lt;ul&gt;
+                
+                    &lt;li class=&quot;prev disabled&quot;&gt;
+                        &lt;a&gt;&amp;larr; Previous&lt;/a&gt;
+                    &lt;/li&gt;
+                
+                &lt;li class=&quot;current&quot;&gt;
+                    &lt;a&gt;Displaying 1 to 7 of 7&lt;/a&gt;
+                &lt;/li&gt;
+                
+                    &lt;li class=&quot;next disabled&quot;&gt;
+                        &lt;a&gt;Next &amp;rarr;&lt;/a&gt;
+                    &lt;/li&gt;
+                
+            &lt;/ul&gt;
+        &lt;/div&gt;
+        
+    
+
+        
+
+        &lt;/section&gt;
+        
+    &lt;/body&gt;
+&lt;/html&gt;
+
+            ' doesn't contain '574 models found'" type="java.lang.Exception">test.ApplicationSpec$$anonfun$1$$anonfun$apply$21$$anonfun$apply$22.apply(ApplicationSpec.scala:35)
+test.ApplicationSpec$$anonfun$1$$anonfun$apply$21$$anonfun$apply$22.apply(ApplicationSpec.scala:30)
+play.api.test.Helpers$.running(Helpers.scala:33)
+test.ApplicationSpec$$anonfun$1$$anonfun$apply$21.apply(ApplicationSpec.scala:30)
+test.ApplicationSpec$$anonfun$1$$anonfun$apply$21.apply(ApplicationSpec.scala:30)</failure>
+      </testcase><testcase name="Application should::filter model by name" time="0.070" classname="test.ApplicationSpec">
+        <failure message="'
+
+
+
+
+
+
+
+
+
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;App that probably won't be completed&lt;/title&gt;
+        &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; media=&quot;screen&quot; href=&quot;/assets/stylesheets/bootstrap.min.css&quot;&gt; 
+        &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; media=&quot;screen&quot; href=&quot;/assets/stylesheets/main.css&quot;&gt; 
+    &lt;/head&gt;
+    &lt;body&gt;
+        
+        &lt;header class=&quot;topbar&quot;&gt;
+            &lt;h1 class=&quot;fill&quot;&gt;
+                &lt;a href=&quot;/&quot;&gt;
+                   App that probably won't be completed
+                &lt;/a&gt;
+            &lt;/h1&gt;
+        &lt;/header&gt;
+        
+        &lt;section id=&quot;main&quot;&gt;
+            
+    
+    &lt;h1&gt;No cars found&lt;/h1&gt;
+
+    
+
+    &lt;div id=&quot;actions&quot;&gt;
+        
+         
+
+&lt;form action=&quot;/models&quot; method=&quot;GET&quot; &gt;
+    
+            &lt;input type=&quot;search&quot; id=&quot;searchbox&quot; name=&quot;f&quot; value=&quot;Apple&quot; placeholder=&quot;Filter by model name...&quot;&gt;
+            &lt;input type=&quot;submit&quot; id=&quot;searchsubmit&quot; value=&quot;Filter by name&quot; class=&quot;btn primary&quot;&gt;
+        
+&lt;/form&gt;
+
+        
+        &lt;a class=&quot;btn success&quot; id=&quot;add&quot; href=&quot;/models/new&quot;&gt;Add a new model&lt;/a&gt;
+        
+    &lt;/div&gt;
+    
+    
+        
+        &lt;div class=&quot;well&quot;&gt;
+            &lt;em&gt;Nothing to display&lt;/em&gt;
+        &lt;/div&gt;
+        
+    
+
+        
+
+        &lt;/section&gt;
+        
+    &lt;/body&gt;
+&lt;/html&gt;
+
+            ' doesn't contain '13 models found'" type="java.lang.Exception">test.ApplicationSpec$$anonfun$1$$anonfun$apply$27$$anonfun$apply$28.apply(ApplicationSpec.scala:46)
+test.ApplicationSpec$$anonfun$1$$anonfun$apply$27$$anonfun$apply$28.apply(ApplicationSpec.scala:41)
+play.api.test.Helpers$.running(Helpers.scala:33)
+test.ApplicationSpec$$anonfun$1$$anonfun$apply$27.apply(ApplicationSpec.scala:41)
+test.ApplicationSpec$$anonfun$1$$anonfun$apply$27.apply(ApplicationSpec.scala:41)</failure>
+      </testcase><testcase name="Application should::create new model" time="0.340" classname="test.ApplicationSpec">
+        <failure message="'
+
+
+ 
+
+
+
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;App that probably won't be completed&lt;/title&gt;
+        &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; media=&quot;screen&quot; href=&quot;/assets/stylesheets/bootstrap.min.css&quot;&gt; 
+        &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; media=&quot;screen&quot; href=&quot;/assets/stylesheets/main.css&quot;&gt; 
+    &lt;/head&gt;
+    &lt;body&gt;
+        
+        &lt;header class=&quot;topbar&quot;&gt;
+            &lt;h1 class=&quot;fill&quot;&gt;
+                &lt;a href=&quot;/&quot;&gt;
+                   App that probably won't be completed
+                &lt;/a&gt;
+            &lt;/h1&gt;
+        &lt;/header&gt;
+        
+        &lt;section id=&quot;main&quot;&gt;
+            
+    
+    &lt;h1&gt;Add a model&lt;/h1&gt;
+    
+     
+
+&lt;form action=&quot;/models&quot; method=&quot;POST&quot; &gt;
+    
+        
+        &lt;fieldset&gt;
+        
+            
+
+
+
+
+
+
+
+
+&lt;div class=&quot;clearfix &quot;&gt;
+    &lt;label for=&quot;name&quot;&gt;Car model name&lt;/label&gt;
+    &lt;div class=&quot;input&quot;&gt;
+        
+    &lt;input type=&quot;text&quot; id=&quot;name&quot; name=&quot;name&quot; value=&quot;FooBar&quot; &gt;
+
+        &lt;span class=&quot;help-inline&quot;&gt;Required&lt;/span&gt; 
+    &lt;/div&gt;
+&lt;/div&gt;
+
+
+
+            
+
+
+
+
+
+
+
+
+&lt;div class=&quot;clearfix error&quot;&gt;
+    &lt;label for=&quot;introduced&quot;&gt;Introduced date&lt;/label&gt;
+    &lt;div class=&quot;input&quot;&gt;
+        
+    &lt;input type=&quot;text&quot; id=&quot;introduced&quot; name=&quot;introduced&quot; value=&quot;badbadbad&quot; &gt;
+
+        &lt;span class=&quot;help-inline&quot;&gt;Date ('yyyy-MM-dd')&lt;/span&gt; 
+    &lt;/div&gt;
+&lt;/div&gt;
+
+
+
+            
+
+
+
+
+
+
+
+
+&lt;div class=&quot;clearfix &quot;&gt;
+    &lt;label for=&quot;discontinued&quot;&gt;Discontinued date&lt;/label&gt;
+    &lt;div class=&quot;input&quot;&gt;
+        
+    &lt;input type=&quot;text&quot; id=&quot;discontinued&quot; name=&quot;discontinued&quot; value=&quot;&quot; &gt;
+
+        &lt;span class=&quot;help-inline&quot;&gt;Date ('yyyy-MM-dd')&lt;/span&gt; 
+    &lt;/div&gt;
+&lt;/div&gt;
+
+
+
+
+            
+
+
+
+
+
+
+
+
+&lt;div class=&quot;clearfix &quot;&gt;
+    &lt;label for=&quot;make&quot;&gt;Make&lt;/label&gt;
+    &lt;div class=&quot;input&quot;&gt;
+        
+    &lt;select id=&quot;make&quot; name=&quot;make&quot; &gt;
+        
+            &lt;option class=&quot;blank&quot; value=&quot;&quot;&gt;-- Choose a Make --&lt;/option&gt;
+        
+        
+            &lt;option value=&quot;2&quot; &gt;Nissan&lt;/option&gt;
+        
+            &lt;option value=&quot;3&quot; &gt;Porsche&lt;/option&gt;
+        
+            &lt;option value=&quot;1&quot; selected&gt;Renault&lt;/option&gt;
+        
+            &lt;option value=&quot;4&quot; &gt;Subaru&lt;/option&gt;
+        
+    &lt;/select&gt;
+
+        &lt;span class=&quot;help-inline&quot;&gt;&lt;/span&gt; 
+    &lt;/div&gt;
+&lt;/div&gt;
+
+
+
+            
+            
+
+
+
+
+
+
+
+
+&lt;div class=&quot;clearfix &quot;&gt;
+    &lt;label for=&quot;aspiration&quot;&gt;Aspiration&lt;/label&gt;
+    &lt;div class=&quot;input&quot;&gt;
+        
+    &lt;select id=&quot;aspiration&quot; name=&quot;aspiration&quot; &gt;
+        
+            &lt;option class=&quot;blank&quot; value=&quot;&quot;&gt;-- Choose an aspiration type --&lt;/option&gt;
+        
+        
+            &lt;option value=&quot;2&quot; &gt;N/A&lt;/option&gt;
+        
+            &lt;option value=&quot;3&quot; &gt;Supercharged&lt;/option&gt;
+        
+            &lt;option value=&quot;1&quot; &gt;Turbocharged&lt;/option&gt;
+        
+    &lt;/select&gt;
+
+        &lt;span class=&quot;help-inline&quot;&gt;&lt;/span&gt; 
+    &lt;/div&gt;
+&lt;/div&gt;
+
+
+
+            
+
+        &lt;/fieldset&gt;
+        
+        &lt;div class=&quot;actions&quot;&gt;
+            &lt;input type=&quot;submit&quot; value=&quot;Create this model&quot; class=&quot;btn primary&quot;&gt; or 
+            &lt;a href=&quot;/models&quot; class=&quot;btn&quot;&gt;Cancel&lt;/a&gt; 
+        &lt;/div&gt;
+        
+    
+&lt;/form&gt;
+
+    
+
+        &lt;/section&gt;
+        
+    &lt;/body&gt;
+&lt;/html&gt;' doesn't contain '&lt;option value=&quot;1&quot; selected&gt;Nissan&lt;/option&gt;'" type="java.lang.Exception">test.ApplicationSpec$$anonfun$1$$anonfun$apply$33$$anonfun$apply$34.apply(ApplicationSpec.scala:63)
+test.ApplicationSpec$$anonfun$1$$anonfun$apply$33$$anonfun$apply$34.apply(ApplicationSpec.scala:52)
+play.api.test.Helpers$.running(Helpers.scala:33)
+test.ApplicationSpec$$anonfun$1$$anonfun$apply$33.apply(ApplicationSpec.scala:52)
+test.ApplicationSpec$$anonfun$1$$anonfun$apply$33.apply(ApplicationSpec.scala:52)</failure>
+      </testcase>
+        <system-out></system-out>
+        <system-err></system-err>
+      </testsuite>

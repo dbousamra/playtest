@@ -1,0 +1,14 @@
+[info] IntegrationSpec
+[info] 
+[info] Application should
+[error] x work from within a browser
+[error]     'App that probably won't be completed' is not equal to 'Play 2.0 sample application — Computer database' (IntegrationSpec.scala:18)
+[error] Expected: Play 2.0 sample application — Computer database
+[error] Actual:   App that probably won't be completed
+[info] 
+[info]  
+[info]  
+[info] Total for specification IntegrationSpec
+[info] Finished in 4 seconds, 89 ms
+[info] 1 example, 1 failure, 0 error
+[info] 

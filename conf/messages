@@ -1,0 +1,3 @@
+# Messages
+
+models.list.title={0,choice,0#No cars|1#One car|1<{0,number,integer} cars} found
