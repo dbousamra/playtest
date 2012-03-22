@@ -5,17 +5,19 @@
     <head>
         <title>App that probably won't be completed</title>
         <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.min.css")"> 
+        <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.css")"> 
         <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/main.css")"> 
     </head>
-    <body>
-        
-        <header class="topbar">
-            <h1 class="fill">
-                <a href="@routes.Application.index()">
-                   App that probably won't be completed
-                </a>
-            </h1>
-        </header>
+    <body>    
+        <div class="navbar">
+  			<div class="navbar-inner">
+   				 <div class="container">
+      		     	<a class="brand" href="@routes.Application.index()">
+                   		App that probably won't be completed
+                	</a>	
+    			 </div>
+  			</div>
+		</div>
         
         <section id="main">
             @content

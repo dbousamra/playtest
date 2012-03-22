@@ -22,8 +22,18 @@ insert into model (id,name,introduced,discontinued,aspiration_id,make_id) values
 insert into model (id,name,introduced,discontinued,aspiration_id,make_id) values ( 6,'Impreza','1980-05-01','1984-04-01', 1, 4);
 insert into model (id,name,introduced,discontinued,aspiration_id,make_id) values ( 7,'Legacy','1980-05-01','1984-04-01', 1, 4);
 
+insert into sales (id,model_id, price) values ( 1, 1,10020);
+insert into sales (id,model_id, price) values ( 2, 2,12220);
+insert into sales (id,model_id, price) values ( 3, 2,10020);
+insert into sales (id,model_id, price) values ( 4, 3,12220);
+insert into sales (id,model_id, price) values ( 5, 3,10020);
+insert into sales (id,model_id, price) values ( 6, 3,12220);
+
+
+
 # --- !Downs
 
 delete from aspiration;
 delete from model;
 delete from make;
+delete from sales;

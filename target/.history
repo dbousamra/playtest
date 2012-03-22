@@ -49,3 +49,7 @@ compile
 clean
 compile
 clean
+eclipse
+run
+h2-browser
+run

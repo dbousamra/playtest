@@ -1,0 +1,35 @@
+@(sales: List[ (models.market.Sale, Option[Model])] )(implicit flash: play.api.mvc.Flash)
+
+	@main {
+		<table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                 <th> Test</th>
+                </tr>
+            </thead>
+            <tbody>
+				@sales.map { 
+                    case (sale, model) => {
+                        <tr>
+                            <td>
+                           	    @model.get.name</a>
+                           	</td>
+                            <td>
+                                @sale.price.getOrElse { <em>-</em> }
+                            </td>
+                            <td>
+                                @model.get.introduced.map(_.format("dd MMM yyyy")).getOrElse { <em>-</em> }
+                            </td>
+                            <td>
+                                @model.get.discontinued.map(_.format("dd MMM yyyy")).getOrElse { <em>-</em> }
+                            </td>                            
+                            
+                        </tr>
+                    }
+                }
+        </tbody>
+        </table>
+	}       
+
+
+            
