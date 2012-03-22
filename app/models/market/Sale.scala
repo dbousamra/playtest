@@ -24,7 +24,7 @@ object Sale {
   }
   
   
-  def list(id: Long): List[(Sale, Option[Model])] = {
+  def byId(id: Long): List[(Sale, Option[Model])] = {
 
     DB.withConnection { implicit connection =>
 
@@ -34,6 +34,20 @@ object Sale {
           left join model on sales.model_id = model.id
           where model_id = {id}
         """).on('id -> id).as(Sale.withmodelmake *)
+        
+     sales
+    }
+  }
+  
+  def list: List[(Sale, Option[Model])] = {
+
+    DB.withConnection { implicit connection =>
+
+      val sales = SQL(
+        """
+          select * from sales 
+          left join model on sales.model_id = model.id
+        """).as(Sale.withmodelmake *)
         
      sales
     }

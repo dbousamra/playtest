@@ -11,9 +11,15 @@ import models.market._
 
 object Market extends Controller {
   
-  def list(id: Long) = Action { implicit request =>
+  def byId(id: Long) = Action { implicit request =>
     Ok(html.sales(
-      Sale.list(id)
+      Sale.byId(id)
+    ))
+  }
+  
+  def list= Action { implicit request =>
+    Ok(html.sales(
+      Sale.list
     ))
   }
 

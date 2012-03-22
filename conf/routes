@@ -5,7 +5,9 @@
 # Default path will just redirect to the model list
 GET     /                        controllers.Application.index
 
-GET     /sales/:id               controllers.Market.list(id: Long)
+GET     /sales                   controllers.Market.list()
+GET     /sales/:id               controllers.Market.byId(id: Long)
+
 
 # Models list (look at the default values for pagination parameters)
 GET     /models                  controllers.Application.list(p:Int ?= 0, s:Int ?= 2, f ?= "")
