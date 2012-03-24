@@ -4,11 +4,11 @@ import play.api._
 import play.api.mvc._
 import play.api.data._
 import play.api.data.Forms._
-
 import anorm._
-
 import views._
 import models._
+import java.text.NumberFormat
+import java.util.Locale
 
 /**
  * Manage a database of models
@@ -79,7 +79,7 @@ object Application extends Controller {
         Home.flashing("success" -> "Model %s has been updated".format(model.name))
       }
     )
-  }
+    }
   
   /**
    * Display the 'new model form'.

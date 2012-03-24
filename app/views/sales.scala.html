@@ -1,17 +1,21 @@
-@(sales: List[ (models.market.Sale, Option[Model])] )(implicit flash: play.api.mvc.Flash)
+@(sales: List[ (models.market.Sale, Option[Model], Option[Make])], formatter: java.text.NumberFormat)(implicit flash: play.api.mvc.Flash)
 
 	@main {
 	<div class="page-header"><h1>@Messages("sales.list.title", sales.size)</h1></div>
   <div>
                   <ul class="thumbnails">
 					@sales.map { 
-	                    case (sale, model) => {
-                      <li class="span3">
+	                    case (sale, model, make) => {
+                      <li class="span4">
 	                     <div class="thumbnail">
-                            <img src="http://placehold.it/260x180" alt="">
+                            <img src="http://placehold.it/360x240" alt="">
                             <div class="caption">
-                              <h5>@model.get.name</h5>
-                              <h5>@sale.price.getOrElse { <em>-</em> }</h5>
+                              <h2>@make.get.name
+                                  @model.get.name
+                              </h2>
+                              <h5>@sale.year.format("yyyy")</h5>
+                              <h5>@formatter.format(sale.price)</h5>
+                              <h5>@sale.mileage km</h5>
                             </div>
 	                     </div>
 	                  </li>
@@ -23,4 +27,4 @@
 	}       
 
 
-            
+            `

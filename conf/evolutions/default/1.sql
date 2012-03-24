@@ -29,7 +29,9 @@ create table model (
 create table sales (
   id                        bigint not null,
   model_id                  bigint,
+  year                      timestamp,
   price						int,
+  mileage					int,
   constraint pk_sales primary key (id))
 ;
 
