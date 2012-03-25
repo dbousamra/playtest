@@ -5,12 +5,16 @@
 # Default path will just redirect to the model list
 GET     /                        controllers.Application.index
 
-GET     /sales                   controllers.Market.list()
-GET     /sales/:id               controllers.Market.byId(id: Long)
+GET     /sales                   controllers.Market.listSales()
+GET     /sales/:id               controllers.Market.listSalesById(id: Long)
 
+GET     /sale/:id                controllers.Market.showSaleById(id: Long)
+
+GET		/image/:id				 controllers.Market.showImageById(id: Long)
+GET		/sale/image/:id			 controllers.Market.getImageById(id: Long)
 
 # Models list (look at the default values for pagination parameters)
-GET     /models                  controllers.Application.list(p:Int ?= 0, s:Int ?= 2, f ?= "")
+GET     /models                  controllers.Application.listModels(p:Int ?= 0, s:Int ?= 2, f ?= "")
 
 # Add car model
 GET     /models/new              controllers.Application.create

@@ -30,6 +30,8 @@ insert into sales (id,model_id,year,price, mileage) values ( 5, 3, '2003-01-02',
 insert into sales (id,model_id,year,price, mileage) values ( 6, 3, '2007-01-02', 12220, 98000);
 
 
+insert into image values(1, FILE_READ('conf/evolutions/default/images/DSC_0015.JPG'));
+
 
 # --- !Downs
 
@@ -37,3 +39,4 @@ delete from aspiration;
 delete from model;
 delete from make;
 delete from sales;
+delete from image;

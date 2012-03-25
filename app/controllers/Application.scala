@@ -18,7 +18,7 @@ object Application extends Controller {
   /**
    * This result directly redirect to the application home.
    */
-  val Home = Redirect(routes.Application.list(0, 2, ""))
+  val Home = Redirect(routes.Application.listModels(0, 2, ""))
   
   /**
    * Describe the model form (used in both edit and create screens).
@@ -48,8 +48,8 @@ object Application extends Controller {
    * @param orderBy Column to be sorted
    * @param filter Filter applied on model names
    */
-  def list(page: Int, orderBy: Int, filter: String) = Action { implicit request =>
-    Ok(html.list(
+  def listModels(page: Int, orderBy: Int, filter: String) = Action { implicit request =>
+    Ok(html.listModels(
       Model.list(page = page, orderBy = orderBy, filter = ("%"+filter+"%")),
       orderBy, filter
     ))

@@ -2,6 +2,23 @@ html {
     background: #eee;
 }
 
+.container, .navbar-fixed-top .container, .navbar-fixed-bottom .container {
+	width: 1170px;
+}
+
+.dl-horizontal dd {
+	margin-left: 75px;
+}
+
+.dl-horizontal dt {
+	text-align: left;
+	width: 0px;	
+}
+
+.dl-horizontal {
+	margin-left: 10px;
+}
+
 header h1 {
     padding: 0.4em 1.1em;
     color: white;

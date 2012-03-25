@@ -4,7 +4,7 @@
 * Helper generating navigation links    *
 ****************************************@
 @link(newPage: Int, newOrderBy: Option[Int] = None) = @{
-    routes.Application.list(newPage, newOrderBy.map { orderBy =>
+    routes.Application.listModels(newPage, newOrderBy.map { orderBy =>
         if(orderBy == scala.math.abs(currentOrderBy)) -currentOrderBy else orderBy
     }.getOrElse(currentOrderBy), currentFilter)
     
@@ -31,7 +31,7 @@
 
     <div id="actions">
         
-        @helper.form(action=routes.Application.list()) {
+        @helper.form(action=routes.Application.listModels()) {
             <input type="search" id="searchbox" name="f" value="@currentFilter" placeholder="Filter by model name...">
             <input type="submit" id="searchsubmit" value="Filter by name" class="btn primary">
         }

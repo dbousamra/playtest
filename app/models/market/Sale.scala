@@ -26,36 +26,43 @@ object Sale {
   }
   
   
-  def byId(id: Long): List[(Sale, Option[Model], Option[Make])] = {
-
+  def listSalesById(id: Long): List[(Sale, Option[Model], Option[Make])] = {
     DB.withConnection { implicit connection =>
-
-      val sales = SQL(
+      SQL(
         """
           select * from sales 
           left join model on sales.model_id = model.id
           left join make on model.make_id = make.id
           where model_id = {id}
         """).on('id -> id).as(Sale.withmodelmake *)
-        
-     sales
     }
   }
   
-  def list: List[(Sale, Option[Model], Option[Make])] = {
+  def listSales: List[(Sale, Option[Model], Option[Make])] = {
 
-    DB.withConnection { implicit connection =>
-
-      val sales = SQL(
+    DB.withConnection { implicit connection =>   	
+      SQL(
         """
           select * from sales 
           left join model on sales.model_id = model.id
           left join make on model.make_id = make.id
-        """).as(Sale.withmodelmake *)
-        
-     sales
+        """).as(Sale.withmodelmake *) 
     }
   }
+  
+  def showSaleById(id: Long): (Sale, Option[Model], Option[Make]) = {
+    DB.withConnection { implicit connection =>
+      SQL(
+        """
+          select * from sales 
+          left join model on sales.model_id = model.id
+          left join make on model.make_id = make.id
+          where sales.id = {id}
+        """).on('id -> id).as(Sale.withmodelmake.single)
+    }
+  }
+  
+  
 }
 
 

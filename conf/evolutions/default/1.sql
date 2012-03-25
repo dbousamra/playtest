@@ -35,10 +35,18 @@ create table sales (
   constraint pk_sales primary key (id))
 ;
 
+create table image (
+  id                        bigint not null,
+  data                 		blob,
+  constraint pk_image primary key (id))
+;
+
+
 create sequence make_seq start with 1000;
 create sequence aspiration_seq start with 1000;
 create sequence model_seq start with 1000;
 create sequence sales_seq start with 1000;
+create sequence image_seq start with 1000;
 
 alter table model add constraint fk_model_make_1 foreign key (make_id) references make (id) on delete restrict on update restrict;
 alter table model add constraint fk_model_aspiration_1 foreign key (aspiration_id) references aspiration (id) on delete restrict on update restrict;
@@ -56,6 +64,7 @@ drop table if exists make;
 drop table if exists aspiration;
 drop table if exists model;
 drop table if exists sales;
+drop table if exists image;
 
 
 SET REFERENTIAL_INTEGRITY TRUE;
@@ -64,3 +73,4 @@ drop sequence if exists make_seq;
 drop sequence if exists aspiration_seq;
 drop sequence if exists model_seq;
 drop sequence if exists sales_seq;
+drop sequence if exists image_seq

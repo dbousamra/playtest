@@ -2,7 +2,7 @@
 
 	@main {
 	<div class="page-header"><h1>@Messages("sales.list.title", sales.size)</h1></div>
-  <div>
+  				<div>
                   <ul class="thumbnails">
 					@sales.map { 
 	                    case (sale, model, make) => {
@@ -10,20 +10,22 @@
 	                     <div class="thumbnail">
                             <img src="http://placehold.it/360x240" alt="">
                             <div class="caption">
+                            <a href="@routes.Market.showSaleById(sale.id.get)">
                               <h2>@make.get.name
                                   @model.get.name
                               </h2>
+                            </a>
                               <h5>@sale.year.format("yyyy")</h5>
                               <h5>@formatter.format(sale.price)</h5>
                               <h5>@sale.mileage km</h5>
                             </div>
 	                     </div>
+	                     </a>
 	                  </li>
 	                    }
 	                }
-                  </ul>
-       
-  </div>
+                  </ul>    
+ 			  </div>
 	}       
 
 
