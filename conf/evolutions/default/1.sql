@@ -80,5 +80,5 @@ SET REFERENTIAL_INTEGRITY TRUE;
 drop sequence if exists make_seq;
 drop sequence if exists aspiration_seq;
 drop sequence if exists model_seq;
-drop sequence if exists image_seq
+drop sequence if exists image_seq;
 drop sequence if exists sales_seq;

@@ -3,8 +3,8 @@
 # --- !Ups
 
 
-insert into user (email, name, password) values ('bob@gmail.com', 'Bob Sacamano', 'admin')
-insert into user (email, name, password) values ('john@gmail.com', 'John Sacamano', 'admin')
+insert into user (email, name, password) values ('bob@gmail.com', 'Bob Sacamano', 'admin');
+insert into user (email, name, password) values ('john@gmail.com', 'John Sacamano', 'admin');
 
 insert into make (id,name) values (1, 'Renault');
 insert into make (id,name) values (2, 'Nissan');
