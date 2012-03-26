@@ -25,6 +25,10 @@ object Sale {
     case sale ~ model ~ make => (sale, model, make)
   }
   
+  val withimagemodelmake = Sale.simple ~ (Image.simple ?) ~ (Model.simple ?) ~ (Make.simple ?) map {
+    case sale ~ image ~ model ~ make => (sale, image, model, make)
+  }
+  
   
   def listSalesById(id: Long): List[(Sale, Option[Model], Option[Make])] = {
     DB.withConnection { implicit connection =>
@@ -50,15 +54,16 @@ object Sale {
     }
   }
   
-  def showSaleById(id: Long): (Sale, Option[Model], Option[Make]) = {
+  def showSaleById(id: Long): (Sale, Option[Image], Option[Model], Option[Make]) = {
     DB.withConnection { implicit connection =>
       SQL(
         """
           select * from sales 
           left join model on sales.model_id = model.id
           left join make on model.make_id = make.id
+          left join image on sales.image_id = image.id
           where sales.id = {id}
-        """).on('id -> id).as(Sale.withmodelmake.single)
+        """).on('id -> id).as(Sale.withimagemodelmake.single)
     }
   }
   

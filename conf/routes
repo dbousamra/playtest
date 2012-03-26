@@ -5,6 +5,11 @@
 # Default path will just redirect to the model list
 GET     /                        controllers.Application.index
 
+GET     /login                   controllers.Authentication.login
+POST    /login                   controllers.Authentication.authenticate
+GET     /logout                  controllers.Authentication.logout
+
+
 GET     /sales                   controllers.Market.listSales()
 GET     /sales/:id               controllers.Market.listSalesById(id: Long)
 

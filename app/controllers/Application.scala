@@ -5,6 +5,7 @@ import play.api.mvc._
 import play.api.data._
 import play.api.data.Forms._
 import anorm._
+import controllers._
 import views._
 import models._
 import java.text.NumberFormat
@@ -19,6 +20,7 @@ object Application extends Controller {
    * This result directly redirect to the application home.
    */
   val Home = Redirect(routes.Application.listModels(0, 2, ""))
+  
   
   /**
    * Describe the model form (used in both edit and create screens).
