@@ -2,33 +2,13 @@
 
 @import helper._
 @import helper.twitterBootstrap._ 
-
-@helper.form(routes.Authentication.authenticate) {
-      
-      <fieldset class='textbox' style="padding:10px">
-          @inputText(
-              loginForm("email"), 
-              '_label -> "Username", 
-              '_error -> loginForm.globalError
-          ) 
-          
-          @inputPassword(
-              loginForm("password"), 
-              '_label -> "Password",
-              '_placeholder -> "Password"
-          )
-      </fieldset>
-      <div class="actions">
-          <input type="submit" class="btn primary" value="Login">
-      </div>
-      
-  }
   
-  <form style="margin: 0px" accept-charset="UTF-8" action="/sessions" method="post">
-    
+  <form style="margin: 0px" accept-charset="UTF-8" action="@routes.Authentication.authenticate" method="post" >
+  
      <fieldset class='textbox' style="padding:10px">
-       <input style="margin-top: 8px" type="text" placeholder="Username" />
-       <input style="margin-top: 8px" type="password" placeholder="Passsword" />
+       <legend>Login</legend> 
+       <input name="email" id="email" style="margin-top: 8px" type="text" placeholder="Email Address" />
+       <input name="password" id="password" style="margin-top: 8px" type="password" placeholder="Passsword" />
        <input class="btn-primary" name="commit" type="submit" value="Log In" />
      </fieldset>
   </form>
