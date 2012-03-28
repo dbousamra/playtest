@@ -23,12 +23,8 @@ object Authentication extends Controller {
     }
   }
 
-//  private def onUnauthorized(request: RequestHeader) = Results.Redirect(routes.Application.hom)
     private def onUnauthorized(request: RequestHeader) = {
-       println("sdfsf")
        Results.Redirect(routes.Authentication.login).withNewSession
-//       Results.Redirect(routes.Application.hom).withNewSession
-
     }
 
 

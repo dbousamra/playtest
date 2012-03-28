@@ -1,32 +1,34 @@
-@(form: Form[(String,String)])
-@import helper.twitterBootstrap._
+@(loginForm: Form[(String,String)])
 
+@import helper._
+@import helper.twitterBootstrap._ 
 
 @helper.form(routes.Authentication.authenticate) {
-	<h1>Sign in</h1>
+      
+      <fieldset class='textbox' style="padding:10px">
+          @inputText(
+              loginForm("email"), 
+              '_label -> "Username", 
+              '_error -> loginForm.globalError
+          ) 
           
-    @form.globalError.map { error =>
-        <p class="error">
-            @error.message
-        </p>
-    }
-
-    <p>
-      <input type="email" name="email" placeholder="Email" id="email" value="@form("email").value">
-    </p>
-    <p>
-      <input type="password" name="password" id="password" placeholder="Password">
-    </p>
-    <p>
-      <button type="submit" id="loginbutton">Login</button>
-    </p>
+          @inputPassword(
+              loginForm("password"), 
+              '_label -> "Password",
+              '_placeholder -> "Password"
+          )
+      </fieldset>
+      <div class="actions">
+          <input type="submit" class="btn primary" value="Login">
+      </div>
+      
+  }
+  
+  <form style="margin: 0px" accept-charset="UTF-8" action="/sessions" method="post">
     
-<form action="[YOUR ACTION]" method="post" accept-charset="UTF-8">
-  <input id="user_username" style="margin-bottom: 15px;" type="text" name="user[username]" size="30" />
-  <input id="user_password" style="margin-bottom: 15px;" type="password" name="user[password]" size="30" />
-  <input id="user_remember_me" style="float: left; margin-right: 10px;" type="checkbox" name="user[remember_me]" value="1" />
-  <label class="string optional" for="user_remember_me"> Remember me</label>
- 
-  <input class="btn btn-primary" style="clear: left; width: 100%; height: 32px; font-size: 13px;" type="submit" name="commit" value="Sign In" />
-</form>
-}
+     <fieldset class='textbox' style="padding:10px">
+       <input style="margin-top: 8px" type="text" placeholder="Username" />
+       <input style="margin-top: 8px" type="password" placeholder="Passsword" />
+       <input class="btn-primary" name="commit" type="submit" value="Log In" />
+     </fieldset>
+  </form>
