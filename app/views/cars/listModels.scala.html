@@ -1,4 +1,4 @@
-@(currentPage: Page[(models.cars.Model, Option[models.cars.Make], Option[models.cars.Aspiration])], currentOrderBy: Int, currentFilter: String)(implicit flash: play.api.mvc.Flash)
+@(currentPage: Page[(models.cars.Model, Option[models.cars.Make], Option[models.cars.Aspiration])], currentOrderBy: Int, currentFilter: String)(flash: play.api.mvc.Flash)(implicit request: AuthenticatedRequest)
 
 @****************************************
 * Helper generating navigation links    *
@@ -113,6 +113,6 @@
     }
 
         
-}
+}(Some(request))
 
             

@@ -1,4 +1,4 @@
-@(sale: (models.market.Sale, Option[models.market.Image], Option[models.cars.Model], Option[models.cars.Make]), formatter: java.text.NumberFormat)(implicit flash: play.api.mvc.Flash)
+@(sale: (models.market.Sale, Option[models.market.Image], Option[models.cars.Model], Option[models.cars.Make]), formatter: java.text.NumberFormat)(flash: play.api.mvc.Flash)(implicit request: AuthenticatedRequest)
 
 @main {
 
@@ -64,4 +64,4 @@
   		</div>
 	</div>
 
-}
+}(Some(request))

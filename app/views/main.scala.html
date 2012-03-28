@@ -1,4 +1,4 @@
-@(content: Html)
+@(content: Html)(implicit request: Option[AuthenticatedRequest])
 
 <!DOCTYPE html>
 <html>
@@ -7,28 +7,16 @@
         <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.min.css")"> 
         <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.css")"> 
         <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/main.css")"> 
+        <script src="@routes.Assets.at("js/jquery-1.7.2.js")"></script>
+        <script src="@routes.Assets.at("js/bootstrap.js")"></script>
     </head>
-    <body>    
-        <div class="navbar">
-  			<div class="navbar-inner">
-   				 <div class="container">
-      		     	<a class="brand" href="@routes.Application.index()">
-                   		App that probably won't be completed
-                	</a>	
-                	<ul class="nav">
-					  <li><a href="@routes.Cars.listModels()">Models</a></li>
-					  <li><a href="@routes.Market.listSales()">Sales</a></li>
-					</ul>
-    			 </div>
-  			</div>
-		</div>
+    <body>   
+        @navbar(request)
         
         <div class="container">
         	<section id="main">
          	   @content
         	</section>
        	</div>
-        <script src="@routes.Assets.at("js/jquery-1.7.2.js")"></script>
-        <script src="@routes.Assets.at("js/bootstrap.js")"></script>
     </body>
 </html>

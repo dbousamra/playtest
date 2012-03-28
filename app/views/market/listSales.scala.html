@@ -1,4 +1,4 @@
-@(sales: List[ (models.market.Sale, Option[models.cars.Model], Option[models.cars.Make])], formatter: java.text.NumberFormat)(implicit flash: play.api.mvc.Flash)
+@(sales: List[ (models.market.Sale, Option[models.cars.Model], Option[models.cars.Make])], formatter: java.text.NumberFormat)(flash: play.api.mvc.Flash)(implicit request: AuthenticatedRequest)
 
 	@main {
 	<div class="page-header"><h1>@Messages("sales.list.title", sales.size)</h1></div>
@@ -26,4 +26,4 @@
 	                }
                   </ul>    
  			  </div>
-	}
+	}(Some(request))

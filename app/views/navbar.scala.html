@@ -1,0 +1,17 @@
+@(request: Option[AuthenticatedRequest])
+
+<div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="@routes.Application.index()"> App that probably won't be completed </a>
+      <ul class="nav">
+        <li><a href="@routes.Cars.listModels()">Models</a></li>
+        <li><a href="@routes.Market.listSales()">Sales</a></li>
+        
+      </ul>
+      
+      @loginButton(request.get.user)
+
+    </div>
+  </div>
+</div>

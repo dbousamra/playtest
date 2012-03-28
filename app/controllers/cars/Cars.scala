@@ -7,6 +7,7 @@ import play.api.data.Forms._
 import anorm._
 import views._
 import Application._
+import Authentication._
 import models._
 import models.cars._
 import models.market._
@@ -17,6 +18,8 @@ import play.api.libs.iteratee.Enumerator
 
 object Cars extends Controller {
 
+  val modelsHome = Redirect(routes.Cars.listModels(0, 2, ""))
+  
   /**
    * Display the paginated list of models.
    *
@@ -24,10 +27,18 @@ object Cars extends Controller {
    * @param orderBy Column to be sorted
    * @param filter Filter applied on model names
    */
-  def listModels(page: Int, orderBy: Int, filter: String) = Action { implicit request =>
-    Ok(html.cars.listModels(
-      Model.list(page = page, orderBy = orderBy, filter = ("%" + filter + "%")),
-      orderBy, filter))
+  def listModels(page: Int, orderBy: Int, filter: String) = Authenticated { implicit request =>
+    Ok {
+      html.cars.listModels(
+        Model.list(page = page, orderBy = orderBy, filter = ("%" + filter + "%")), orderBy, filter)(new Flash)
+    }
+  }
+  
+  def listModelsUnauth(page: Int, orderBy: Int, filter: String) = Authenticated { implicit request =>
+    Ok {
+      html.cars.listModels(
+        Model.list(page = page, orderBy = orderBy, filter = ("%" + filter + "%")), orderBy, filter)(new Flash)
+    }
   }
 
   /**
@@ -35,10 +46,10 @@ object Cars extends Controller {
    *
    * @param id Id of the model to edit
    */
-  def edit(id: Long) = Action {
+  def edit(id: Long) = Authenticated { implicit request =>
     Model.findById(id).map { model =>
       Ok(html.cars.editForm(id, modelForm.fill(model)))
-    }.getOrElse(NotFound)
+    }.getOrElse(Unauthorized)
   }
 
   /**
@@ -46,31 +57,31 @@ object Cars extends Controller {
    *
    * @param id Id of the model to edit
    */
-  def update(id: Long) = Action { implicit request =>
+  def update(id: Long) = Authenticated { implicit request =>
     modelForm.bindFromRequest.fold(
       formWithErrors => BadRequest(html.cars.editForm(id, formWithErrors)),
       model => {
         Model.update(id, model)
-        Home.flashing("success" -> "Model %s has been updated".format(model.name))
+        modelsHome.flashing("success" -> "Model %s has been updated".format(model.name))
       })
   }
 
   /**
    * Display the 'new model form'.
    */
-  def create = Action {
+  def create = Authenticated { implicit request =>
     Ok(html.cars.createForm(modelForm))
   }
 
   /**
    * Handle the 'new model form' submission.
    */
-  def save = Action { implicit request =>
+  def save = Authenticated { implicit request =>
     modelForm.bindFromRequest.fold(
       formWithErrors => BadRequest(html.cars.createForm(formWithErrors)),
       model => {
         Model.insert(model)
-        Home.flashing("success" -> "Model %s has been created".format(model.name))
+        modelsHome.flashing("success" -> "Model %s has been created".format(model.name))
       })
   }
 
@@ -79,7 +90,7 @@ object Cars extends Controller {
    */
   def delete(id: Long) = Action {
     Model.delete(id)
-    Home.flashing("success" -> "Model has been deleted")
+    modelsHome.flashing("success" -> "Model has been deleted")
   }
 
   /**

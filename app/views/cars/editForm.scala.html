@@ -1,4 +1,4 @@
-@(id: Long, modelForm: Form[models.cars.Model])
+@(id: Long, modelForm: Form[models.cars.Model])(implicit request: AuthenticatedRequest)
 
 @import helper._
 
@@ -38,6 +38,6 @@
     
     @form(routes.Cars.delete(id), 'class -> "topRight") {
         <input type="submit" value="Delete this model" class="btn danger">
-    }
+    } (request)
     
-}
+}(Some(request))

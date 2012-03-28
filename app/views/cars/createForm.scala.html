@@ -1,8 +1,10 @@
-@(modelForm: Form[models.cars.Model])
+@(modelForm: Form[models.cars.Model])(implicit request: AuthenticatedRequest)
 
 @import helper._
 
 @implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) } 
+
+@request
 
 @main {
     
@@ -40,4 +42,4 @@
         
     }
     
-}
+}(Some(request))
