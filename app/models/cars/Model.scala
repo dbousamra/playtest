@@ -1,8 +1,9 @@
-package models
+package models.cars
 
 import java.util.{ Date }
 import play.api.db._
 import play.api.Play.current
+import models._
 import anorm._
 import anorm.SqlParser._
 
@@ -73,7 +74,6 @@ object Model {
           'filter -> filter,
           'orderBy -> orderBy).as(Model.withmakeaspiration *)
           
-          println(orderBy)
       val totalRows = SQL(
         """
           select count(*) from model 

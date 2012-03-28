@@ -1,10 +1,10 @@
-@(currentPage: Page[(Model, Option[Make], Option[Aspiration])], currentOrderBy: Int, currentFilter: String)(implicit flash: play.api.mvc.Flash)
+@(currentPage: Page[(models.cars.Model, Option[models.cars.Make], Option[models.cars.Aspiration])], currentOrderBy: Int, currentFilter: String)(implicit flash: play.api.mvc.Flash)
 
 @****************************************
 * Helper generating navigation links    *
 ****************************************@
 @link(newPage: Int, newOrderBy: Option[Int] = None) = @{
-    routes.Application.listModels(newPage, newOrderBy.map { orderBy =>
+    routes.Cars.listModels(newPage, newOrderBy.map { orderBy =>
         if(orderBy == scala.math.abs(currentOrderBy)) -currentOrderBy else orderBy
     }.getOrElse(currentOrderBy), currentFilter)
     
@@ -31,12 +31,12 @@
 
     <div id="actions">
         
-        @helper.form(action=routes.Application.listModels()) {
+        @helper.form(action=routes.Cars.listModels()) {
             <input type="search" id="searchbox" name="f" value="@currentFilter" placeholder="Filter by model name...">
             <input type="submit" id="searchsubmit" value="Filter by name" class="btn primary">
         }
         
-        <a class="btn success" id="add" href="@routes.Application.create()">Add a new model</a>
+        <a class="btn success" id="add" href="@routes.Cars.create()">Add a new model</a>
         
     </div>
     
@@ -57,7 +57,7 @@
                 @models.map { 
                     case (model, make, aspiration) => {
                         <tr>
-                            <td><a href="@routes.Application.edit(model.id.get)">@model.name</a></td>
+                            <td><a href="@routes.Cars.edit(model.id.get)">@model.name</a></td>
                             <td>
                                 @make.map(_.name).getOrElse { <em>-</em> }
                             </td>

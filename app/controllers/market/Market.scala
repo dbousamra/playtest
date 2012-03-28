@@ -19,26 +19,19 @@ object Market extends Controller {
   formatter.setMaximumFractionDigits(0)
 
   def listSalesById(id: Long) = Action { implicit request =>
-    Ok(html.listSales(
+    Ok(html.market.listSales(
       Sale.listSalesById(id), formatter))
   }
 
   def listSales = Action { implicit request =>
-    Ok(html.listSales(
+    Ok(html.market.listSales(
       Sale.listSales, formatter))
   }
 
   def showSaleById(id: Long) = Action { implicit request =>
-    Ok(html.showSale(
+    Ok(html.market.showSale(
       Sale.showSaleById(id), formatter))
   }
-
-  def showImageById(id: Long) = Action { implicit request =>
-    Ok(html.showImages(
-      Image.showImageById(id)))
-  }
-  
-  
   
   def getImageById(id: Long) = Action {
     val image = Image.showImageById(id).get.data

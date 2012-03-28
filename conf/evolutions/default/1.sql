@@ -32,6 +32,12 @@ create table model (
   constraint pk_model primary key (id))
 ;
 
+create table image (
+  id                        bigint not null,
+  data                 		blob,
+  constraint pk_image primary key (id))
+;
+
 create table sales (
   id                        bigint not null,
   model_id                  bigint,
@@ -42,11 +48,7 @@ create table sales (
   constraint pk_sales primary key (id))
 ;
 
-create table image (
-  id                        bigint not null,
-  data                 		blob,
-  constraint pk_image primary key (id))
-;
+
 
 create sequence make_seq start with 1000;
 create sequence aspiration_seq start with 1000;
@@ -54,10 +56,10 @@ create sequence model_seq start with 1000;
 create sequence sales_seq start with 1000;
 create sequence image_seq start with 1000;
 
-alter table model add constraint fk_model_make_1 foreign key (make_id) references make (id) on delete restrict on update restrict;
-alter table model add constraint fk_model_aspiration_1 foreign key (aspiration_id) references aspiration (id) on delete restrict on update restrict;
-alter table sales add constraint fk_sale_model_1 foreign key (model_id) references model (id) on delete restrict on update restrict;
-alter table sales add constraint fk_sale_model_1 foreign key (image_id) references image (id) on delete restrict on update restrict;
+alter table model add constraint fk_model_make_1 foreign key (make_id) references make (id) on delete cascade on update cascade;
+alter table model add constraint fk_model_aspiration_1 foreign key (aspiration_id) references aspiration (id) on delete cascade on update cascade;
+alter table sales add constraint fk_sale_model_1 foreign key (model_id) references model (id) on delete cascade on update cascade;
+alter table sales add constraint fk_sale_image_1 foreign key (image_id) references image (id) on delete cascade on update cascade;
 
 
 create index ix_model_make_1 on model (make_id);

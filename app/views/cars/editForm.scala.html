@@ -1,4 +1,4 @@
-@(id: Long, modelForm: Form[Model])
+@(id: Long, modelForm: Form[models.cars.Model])
 
 @import helper._
 
@@ -8,19 +8,19 @@
     
     <h1>Edit model</h1>
     
-    @form(routes.Application.update(id)) {
+    @form(routes.Cars.update(id)) {
         
         <fieldset>
             @inputText(modelForm("name"), '_label -> "Model name")
 	        @select(
 	                modelForm("make"), 
-	                Make.options, 
+	                models.cars.Make.options, 
 	                '_label -> "Make", '_default -> "-- Choose a make --",
 	                '_showConstraints -> false
 	            )
 	        @select(
                 modelForm("aspiration"), 
-                Aspiration.options, 
+                models.cars.Aspiration.options, 
                 '_label -> "Aspiration", '_default -> "-- Choose an aspiration type --",
                 '_showConstraints -> false
             )
@@ -31,12 +31,12 @@
         
         <div class="actions">
             <input type="submit" value="Save this model" class="btn primary"> or 
-            <a href="@routes.Application.listModels()" class="btn">Cancel</a> 
+            <a href="@routes.Cars.listModels()" class="btn">Cancel</a> 
         </div>
         
     }
     
-    @form(routes.Application.delete(id), 'class -> "topRight") {
+    @form(routes.Cars.delete(id), 'class -> "topRight") {
         <input type="submit" value="Delete this model" class="btn danger">
     }
     

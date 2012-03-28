@@ -1,9 +1,0 @@
-@(image: Option[models.market.Image])(implicit flash: play.api.mvc.Flash)
-
-@main {
-
-	@image.get.id
-	@image.get.data.length
-	<img height="100" width="200" src="@routes.Market.getImageById(image.get.id.get)" />
-	<img height="100" width="200" src="@{Market.getImageById(image.get.id.get)}" />
-}

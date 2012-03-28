@@ -11,7 +11,7 @@ import models._
 object Authentication extends Controller with Secured {
   def index = IsAuthenticated { username => _ =>
     User.findByEmail(username).map { user =>
-      Redirect(routes.Application.listModels(0, 2, "")
+      Redirect(routes.Cars.listModels(0, 2, "")
       )
     }.getOrElse(Forbidden)
   }
@@ -73,26 +73,10 @@ trait Secured {
   }
 
   /**
-   * Check if the connected user is a member of this project.
-   */
-  def IsMemberOf(project: Long)(f: => String => Request[AnyContent] => Result) = IsAuthenticated { user => request =>
-//    if(Project.isMember(project, user)) {
-//      f(user)(request)
-//    } else {
-//      Results.Forbidden
-//    }
-    f(user)(request)
-  }
-
-  /**
    * Check if the connected user is a owner of this task.
    */
   def IsOwnerOf(task: Long)(f: => String => Request[AnyContent] => Result) = IsAuthenticated { user => request =>
-//    if(Task.isOwner(task, user)) {
-//      f(user)(request)
-//    } else {
-//      Results.Forbidden
-//    }
+
     f(user)(request)
   
 

@@ -1,4 +1,4 @@
-@(modelForm: Form[Model])
+@(modelForm: Form[models.cars.Model])
 
 @import helper._
 
@@ -8,7 +8,7 @@
     
     <h1>Add a model</h1>
     
-    @form(routes.Application.save()) {
+    @form(routes.Cars.save()) {
         
         <fieldset>
         
@@ -18,14 +18,14 @@
 
             @select(
                 modelForm("make"), 
-                Make.options, 
+                models.cars.Make.options, 
                 '_label -> "Make", '_default -> "-- Choose a Make --",
                 '_showConstraints -> false
             )
             
             @select(
                 modelForm("aspiration"), 
-                Aspiration.options, 
+                models.cars.Aspiration.options, 
                 '_label -> "Aspiration", '_default -> "-- Choose an aspiration type --",
                 '_showConstraints -> false
             )
@@ -35,7 +35,7 @@
         
         <div class="actions">
             <input type="submit" value="Create this model" class="btn primary"> or 
-            <a href="@routes.Application.listModels()" class="btn">Cancel</a> 
+            <a href="@routes.Cars.listModels()" class="btn">Cancel</a> 
         </div>
         
     }

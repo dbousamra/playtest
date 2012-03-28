@@ -5,7 +5,7 @@ import play.api.db._
 import play.api.Play.current
 import anorm._
 import anorm.SqlParser._
-import models._
+import models.cars._
 
 case class Sale(id: Pk[Long] = NotAssigned, modelId: Long, year: Date, price: Int, mileage: Int)
 
@@ -65,9 +65,7 @@ object Sale {
           where sales.id = {id}
         """).on('id -> id).as(Sale.withimagemodelmake.single)
     }
-  }
-  
-  
+  }  
 }
 
 

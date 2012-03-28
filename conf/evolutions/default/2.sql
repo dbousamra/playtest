@@ -26,13 +26,6 @@ insert into model (id,name,introduced,discontinued,aspiration_id,make_id) values
 insert into model (id,name,introduced,discontinued,aspiration_id,make_id) values ( 6,'Impreza','1980-05-01','1984-04-01', 1, 4);
 insert into model (id,name,introduced,discontinued,aspiration_id,make_id) values ( 7,'Legacy','1980-05-01','1984-04-01', 1, 4);
 
-insert into sales (id,model_id, image_id, year, price, mileage) values ( 1, 1, 1, '2002-01-02', 10020, 202239);
-insert into sales (id,model_id, image_id, year, price, mileage) values ( 2, 2, 2, '2002-03-02', 12220, 129999);
-insert into sales (id,model_id, image_id, year, price, mileage) values ( 3, 2, 3, '2008-01-04', 10020, 38888);
-insert into sales (id,model_id, image_id, year, price, mileage) values ( 4, 3, 4, '2012-01-02', 12220, 93999);
-insert into sales (id,model_id, image_id, year, price, mileage) values ( 5, 3, 5, '2003-01-02', 10020, 45449);
-insert into sales (id,model_id, image_id, year, price, mileage) values ( 6, 3, 6, '2007-01-02', 12220, 98000);
-
 
 insert into image (id ,data) values(1, FILE_READ('conf/evolutions/default/images/DSC_0015.JPG'));
 insert into image (id ,data) values(2, FILE_READ('conf/evolutions/default/images/DSC_0015.JPG'));
@@ -40,6 +33,14 @@ insert into image (id ,data) values(3, FILE_READ('conf/evolutions/default/images
 insert into image (id ,data) values(4, FILE_READ('conf/evolutions/default/images/DSC_0015.JPG'));
 insert into image (id ,data) values(5, FILE_READ('conf/evolutions/default/images/DSC_0015.JPG'));
 insert into image (id ,data) values(6, FILE_READ('conf/evolutions/default/images/DSC_0015.JPG'));
+
+insert into sales (id,model_id, image_id, year, price, mileage) values ( 1, 1, 1, '2002-01-02', 10020, 202239);
+insert into sales (id,model_id, image_id, year, price, mileage) values ( 2, 2, 2, '2002-03-02', 12220, 129999);
+insert into sales (id,model_id, image_id, year, price, mileage) values ( 3, 2, 3, '2008-01-04', 10020, 38888);
+insert into sales (id,model_id, image_id, year, price, mileage) values ( 4, 3, 4, '2012-01-02', 12220, 93999);
+insert into sales (id,model_id, image_id, year, price, mileage) values ( 5, 3, 5, '2003-01-02', 10020, 45449);
+insert into sales (id,model_id, image_id, year, price, mileage) values ( 6, 3, 6, '2007-01-02', 12220, 98000);
+
 
 # --- !Downs
 

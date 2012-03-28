@@ -15,22 +15,21 @@ GET     /sales/:id               controllers.Market.listSalesById(id: Long)
 
 GET     /sale/:id                controllers.Market.showSaleById(id: Long)
 
-GET		/image/:id				 controllers.Market.showImageById(id: Long)
 GET		/sale/image/:id			 controllers.Market.getImageById(id: Long)
 
 # Models list (look at the default values for pagination parameters)
-GET     /models                  controllers.Application.listModels(p:Int ?= 0, s:Int ?= 2, f ?= "")
+GET     /models                  controllers.Cars.listModels(p:Int ?= 0, s:Int ?= 2, f ?= "")
 
 # Add car model
-GET     /models/new              controllers.Application.create
-POST    /models                  controllers.Application.save
+GET     /models/new              controllers.Cars.create
+POST    /models                  controllers.Cars.save
 
 # Edit existing car model
-GET     /models/:id              controllers.Application.edit(id:Long)
-POST    /models/:id              controllers.Application.update(id:Long)
+GET     /models/:id              controllers.Cars.edit(id:Long)
+POST    /models/:id              controllers.Cars.update(id:Long)
 
 # Delete a car model
-POST    /models/:id/delete       controllers.Application.delete(id:Long)
+POST    /models/:id/delete       controllers.Cars.delete(id:Long)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
