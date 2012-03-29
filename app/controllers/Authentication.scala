@@ -55,5 +55,4 @@ object Authentication extends Controller {
     Redirect(routes.Cars.listModels()).withNewSession.flashing(
       "success" -> "You've been logged out")
   }
-
 }

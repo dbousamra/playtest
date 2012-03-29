@@ -5,6 +5,10 @@
 # Default path will just redirect to the model list
 GET     /                        controllers.Application.index
 
+GET     /signup                  controllers.SignUp.form
+POST    /signup                  controllers.SignUp.submit
+GET     /users/fakeuser          controllers.SignUp.editForm
+
 GET     /login                   controllers.Authentication.login
 POST    /login                   controllers.Authentication.authenticate
 GET     /logout                  controllers.Authentication.logout

@@ -1,0 +1,62 @@
+@(signupForm: Form[User])(implicit request: AuthenticatedRequest)
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@title = {
+    Sign Up <small><a href="@routes.SignUp.editForm">Or edit an existing user</a></small>
+}
+
+@main {
+    
+    @helper.form(action = routes.SignUp.submit) {
+        
+        <fieldset>
+            <legend>Account informations</legend>
+            
+            @inputText(
+                signupForm("name"), 
+                '_label -> "Name", 
+                '_help -> "Your full name",
+                '_error -> signupForm.globalError
+            )
+            
+            @inputText(
+                signupForm("email"), '_label -> "Email",
+                '_help -> "Enter a valid email address."
+            )
+            
+            @inputPassword(
+                signupForm("password.main"), 
+                '_label -> "Password",
+                '_help -> "A password must be at least 6 characters. "
+            )
+            
+            @inputPassword(
+                signupForm("password.confirm"), 
+                '_label -> "Repeat password",
+                '_help -> "Please repeat your password again.",
+                '_error -> signupForm.error("password")
+            )
+            
+        </fieldset>
+        
+        
+        <fieldset>
+            
+            @checkbox(
+                signupForm("accept"), 
+                '_label -> None, '_text -> "You agree the Terms and conditions",
+                '_showConstraints -> false
+            )
+            
+        </fieldset>
+        
+        <div class="actions">
+            <input type="submit" class="btn primary" value="Sign Up">
+            <a href="@routes.Application.index" class="btn">Cancel</a>
+        </div>
+        
+    }
+    
+}(Some(request))
