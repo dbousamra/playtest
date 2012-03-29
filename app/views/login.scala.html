@@ -1,8 +1,10 @@
-@(loginForm: Form[(String,String)])
+@(loginForm: Form[(String,String)])(implicit request: AuthenticatedRequest)
 
 @import helper._
 @import helper.twitterBootstrap._ 
-  
+
+
+@main {
   <form style="margin: 0px" accept-charset="UTF-8" action="@routes.Authentication.authenticate" method="post" >
   
      <fieldset class='textbox' style="padding:10px">
@@ -12,3 +14,4 @@
        <input class="btn-primary" name="commit" type="submit" value="Log In" />
      </fieldset>
   </form>
+}(Some(request))

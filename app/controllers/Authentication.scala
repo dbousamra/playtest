@@ -17,7 +17,6 @@ object Authentication extends Controller {
       request.session.get("email").flatMap(u => User.findByEmail(u)).map { user =>
         f(new AuthenticatedRequest(Some(user), request))
       }.getOrElse{
-        println("ELSE")
         f(new AuthenticatedRequest(None, request))
         }
     }
@@ -38,21 +37,20 @@ object Authentication extends Controller {
   /**
    * Login page.
    */
-  def login = Action { implicit request =>
+  def login = Authenticated { implicit request =>
     Ok(html.login(loginForm))
   }
 
   /**
    * Handle login form submission.
    */
-  def authenticate = Action { implicit request =>
+  def authenticate = Authenticated { implicit request =>
     loginForm.bindFromRequest.fold(
       formWithErrors => BadRequest(html.login(formWithErrors)),
       user => Redirect(routes.Application.index).withSession("email" -> user._1))
   }
 
-  def logout = Action {
-    Redirect(routes.Cars.listModels()).withNewSession.flashing(
-      "success" -> "You've been logged out")
+  def logout = Authenticated { implicit request =>
+    Redirect(routes.Cars.listModels()).withNewSession
   }
 }

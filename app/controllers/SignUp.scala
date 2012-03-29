@@ -46,10 +46,9 @@ object SignUp extends Controller {
       // Unbinding: Create the mapping values from an existing User value
       user => Some(user.name, user.email, (user.password, ""), false)
     }.verifying(
-      // Add an additional constraint: The username must not be taken (you could do an SQL request here)
-      "This username is not available",
+      // Add an additional constraint: The email must not be taken (you could do an SQL request here)
+      "An account with this email already exists.",
       user => !User.findByEmail(user.email).isDefined
-      
     )
   )
   
