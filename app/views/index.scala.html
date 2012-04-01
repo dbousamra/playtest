@@ -1,6 +1,6 @@
-@(x: String)(implicit request: AuthenticatedRequest)
+@(message: String)(implicit request: AuthenticatedRequest)
 
 @main {
-index
+@message
 
 }(Some(request))

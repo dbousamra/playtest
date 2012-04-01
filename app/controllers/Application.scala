@@ -18,7 +18,7 @@ import java.util.Locale
 object Application extends Controller {
 
   def index = Authenticated { implicit request =>
-    Ok(html.index("hello"))
+    Ok(html.index("Front page"))
   }
 
 }

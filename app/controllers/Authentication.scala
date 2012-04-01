@@ -47,7 +47,7 @@ object Authentication extends Controller {
   def authenticate = Authenticated { implicit request =>
     loginForm.bindFromRequest.fold(
       formWithErrors => BadRequest(html.login(formWithErrors)),
-      user => Redirect(routes.Application.index).withSession("email" -> user._1))
+      user => Redirect(routes.Management.dashboard).withSession("email" -> user._1))
   }
 
   def logout = Authenticated { implicit request =>

@@ -80,3 +80,20 @@ table.computers .header a {
 }
 
 
+h1 {padding-bottom:0.2em;}
+
+.meta {color:#999; font-size:.9em; display:block;}
+.meta em {font-style:normal; font-weight:bold;}
+
+/* login */
+#login-page.container {width:320px;}
+
+/* dashboard */
+.summary {display:table; width:100%; padding:0; margin:0 0 20px 0;}
+.summary ul {margin:0; padding:0; overflow:hidden; display:table-row;}
+.summary li {margin:0; padding:19px; display:table-cell; border-right:1px solid #eee;}
+.summary li:last-child {border:none;}
+.summary a {display:block; font-size:1.2em; line-height:1.4em; text-transform:uppercase; color:#000;}
+.summary .count {display:block; font-size:1.75em; font-weight:bold;}
+
+

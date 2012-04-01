@@ -9,17 +9,20 @@ GET     /signup                  controllers.SignUp.form
 POST    /signup                  controllers.SignUp.submit
 GET     /users/fakeuser          controllers.SignUp.editForm
 
+GET     /dashboard               controllers.Management.dashboard
+GET     /profile                 controllers.Management.profile
+
 GET     /login                   controllers.Authentication.login
 POST    /login                   controllers.Authentication.authenticate
 GET     /logout                  controllers.Authentication.logout
 
 
-GET     /sales                   controllers.Market.listSales()
+GET     /sales                   controllers.Market.listSales
 GET     /sales/:id               controllers.Market.listSalesById(id: Long)
 GET     /sale/:id                controllers.Market.showSaleById(id: Long)
 GET		/sale/image/:id			 controllers.Market.getImageById(id: Long)
 
-GET		/cars					 controllers.Market.cars()
+GET		/cars					 controllers.Market.cars
 
 # Models list (look at the default values for pagination parameters)
 GET     /models                  controllers.Cars.listModels(p:Int ?= 0, s:Int ?= 2, f ?= "")

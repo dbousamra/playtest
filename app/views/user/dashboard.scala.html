@@ -1,0 +1,58 @@
+@(user: User)(implicit request: AuthenticatedRequest)
+
+@management(user) {
+  <h1>Dashboard</h1>
+    <div class="hero-unit">
+      <h1>Welcome @user.name!</h1>
+    </div>
+    <div class="well summary">
+      <ul>
+        <li><a href="#"><span class="count">3</span> Sales</a></li>
+        <li><a href="#"><span class="count">7</span> Messages</a></li>
+      </ul>
+    </div>
+    
+    <h2>Current Sales</h2>
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Project</th>
+          <th>Client</th>
+          <th>Type</th>
+          <th>Date</th>
+          <th>View</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Twitter Server Proposal</td>
+          <td>Bad Robot</td>
+          <td>Completed Project</td>
+          <td>20 days ago</td>
+          <td><a href="#" class="view-link">View</a></td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <h2>Past Sales</h2>
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Project</th>
+          <th>Client</th>
+          <th>Type</th>
+          <th>Date</th>
+          <th>View</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Twitter Server Proposal</td>
+          <td>Bad Robot</td>
+          <td>Completed Project</td>
+          <td>20 days ago</td>
+          <td><a href="#" class="view-link">View</a></td>
+        </tr>
+      </tbody>
+    </table>
+}(Some(request))

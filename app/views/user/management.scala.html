@@ -1,0 +1,27 @@
+@(user: User)(content: Html)(implicit request: Option[AuthenticatedRequest]) 
+
+@main {
+  <div class="row">
+    <div class="span3">
+      <div class="well" style="padding: 8px 0;">
+        <ul class="nav nav-list">
+          <li class="nav-header">Activity</li>
+          <li class="active"><a href="@routes.Management.dashboard"><i class="icon-white icon-home"></i> Dashboard</a></li>
+          <li><a href="projects.htm"><i class="icon-book"></i> Projects</a></li>
+          <li><a href="tasks.htm"><i class="icon-check"></i> Cars</a></li>
+          <li><a href="messages.htm"><i class="icon-envelope"></i> Messages</a></li>
+        
+          <li class="nav-header">Your Account</li>
+          <li><a href="@routes.Management.profile"><i class="icon-user"></i> Profile</a></li>
+          <li><a href="settings.htm"><i class="icon-cog"></i> Settings</a></li>
+          <li class="divider"></li>
+          <li><a href="help.htm"><i class="icon-info-sign"></i> Help</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="span9">
+      @content
+      
+    </div>
+  </div>
+}(request)
