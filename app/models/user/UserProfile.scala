@@ -15,18 +15,19 @@ case class UserProfile(
 
 object UserProfile {
   
-  // -- Parsers
-  
-  /**
-   * Parse a User from a ResultSet
-   */
-  val simple = {
-    get[String]("user.email") ~
-    get[String]("user.name") ~
-    get[String]("user.password") map {
-      case email~name~password => User(email, name, password)
-    }
-  }
+//  // -- Parsers
+//  
+//  /**
+//   * Parse a User from a ResultSet
+//   */
+//  val simple = {
+//    
+//    get[String]("user.email") ~
+//    get[String]("user.name") ~
+//    get[String]("user.password") map {
+//      case email~name~password => User(id, email, name, password)
+//    }
+//  }
   
 
 }

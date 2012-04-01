@@ -6,8 +6,8 @@ import play.api.data._
 import play.api.data.Forms._
 import controllers.Authentication._
 import views._
-
 import models._
+import anorm._
 
 object SignUp extends Controller {
   
@@ -21,6 +21,7 @@ object SignUp extends Controller {
     
     // Define a mapping that will handle User values
     mapping(
+      "id" -> ignored(NotAssigned: Pk[Long]),
       "name" -> text(minLength = 4),
       "email" -> email,
       
@@ -40,11 +41,11 @@ object SignUp extends Controller {
     // so we have to define custom binding/unbinding functions
     {
       // Binding: Create a User from the mapping result (ignore the second password and the accept field)
-      (name, email, passwords, _) => User(email,name, passwords._1) 
+      (id, name, email, passwords, _) => User(id, email,name, passwords._1) 
     }
     {
       // Unbinding: Create the mapping values from an existing User value
-      user => Some(user.name, user.email, (user.password, ""), false)
+      user => Some(user.id, user.name, user.email, (user.password, ""), false)
     }.verifying(
       // Add an additional constraint: The email must not be taken (you could do an SQL request here)
       "An account with this email already exists.",
@@ -59,13 +60,6 @@ object SignUp extends Controller {
     Ok(html.user.signup.form(signupForm));
   }
   
-   /**
-   * Display a form pre-filled with an existing User.
-   */
-  def editForm = Authenticated { implicit request =>
-    val existingUser = User("fake@gmail.com", "fakeUserName", "secret")
-    Ok(html.user.signup.form(signupForm.fill(existingUser)))
-  }
   
   /**	
    * Handle form submission.
@@ -76,7 +70,6 @@ object SignUp extends Controller {
       errors => {
         println("Bad request")
         BadRequest(html.user.signup.form(errors))
-        
       }
       ,
       user => {

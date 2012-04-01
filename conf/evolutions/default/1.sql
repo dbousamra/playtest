@@ -5,6 +5,7 @@
 set ignorecase true;
 
 create table user (
+  id                        bigint not null,
   email                     varchar(255) not null primary key,
   name                      varchar(255) not null,
   password                  varchar(255) not null

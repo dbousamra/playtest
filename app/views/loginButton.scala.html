@@ -21,12 +21,7 @@
     }
     
     case Some(x) => {
-      <li class="dropdown" id="menu1">
-      	<a class="dropdown-toggle" data-toggle="dropdown" href="#menu1">@x.name<b class="caret"></b> </a>
-      		<ul class="dropdown-menu">
-	            <li><a href="@routes.Management.dashboard">Dashboard</a></li>
-            </ul>
-      </li>
+      <li><a href="@routes.Management.dashboard">Dashboard</a></li>
       <li><a href="@routes.Authentication.logout()">Logout</a>
       </li>
     }

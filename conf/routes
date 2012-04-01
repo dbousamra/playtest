@@ -7,7 +7,7 @@ GET     /                        controllers.Application.index
 
 GET     /signup                  controllers.SignUp.form
 POST    /signup                  controllers.SignUp.submit
-GET     /users/fakeuser          controllers.SignUp.editForm
+POST    /editUser                controllers.Management.update
 
 GET     /dashboard               controllers.Management.dashboard
 GET     /profile                 controllers.Management.profile

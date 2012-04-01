@@ -3,8 +3,8 @@
 # --- !Ups
 
 
-insert into user (email, name, password) values ('bob@gmail.com', 'Bob Sacamano', 'admin');
-insert into user (email, name, password) values ('john@gmail.com', 'John Sacamano', 'admin');
+insert into user (id, email, name, password) values (1, 'bob@gmail.com', 'Bob Sacamano', 'admin');
+insert into user (id, email, name, password) values (2, 'john@gmail.com', 'John Sacamano', 'admin');
 
 insert into make (id,name) values (1, 'Renault');
 insert into make (id,name) values (2, 'Nissan');
@@ -44,6 +44,7 @@ insert into sales (id,model_id, image_id, year, price, mileage) values ( 6, 3, 6
 
 # --- !Downs
 
+delete from user;
 delete from aspiration;
 delete from model;
 delete from make;

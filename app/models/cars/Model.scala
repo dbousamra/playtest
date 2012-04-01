@@ -73,7 +73,7 @@ object Model {
           'offset -> offest,
           'filter -> filter,
           'orderBy -> orderBy).as(Model.withmakeaspiration *)
-          
+
       val totalRows = SQL(
         """
           select count(*) from model 
@@ -129,7 +129,7 @@ object Model {
           'discontinued -> model.discontinued,
           'make_id -> model.makeId,
           'aspiration_id -> model.aspirationId)
-          .executeUpdate()
+        .executeUpdate()
     }
   }
 
