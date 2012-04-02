@@ -88,7 +88,6 @@ object User {
   }
 
   def update(id: Long, user: User) = {
-    println(user)
     DB.withConnection { implicit connection =>
       SQL(
         """
