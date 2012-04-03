@@ -8,8 +8,7 @@
     </div>
     <div class="well summary">
       <ul>
-        <li><a href="#"><span class="count">3</span> Sales</a></li>
-        <li><a href="#"><span class="count">7</span> Messages</a></li>
+        <li><a href="#"><span class="count">@sales.length</span> Sales</a></li>
       </ul>
     </div>
     
@@ -32,32 +31,11 @@
 	          <td>@model.get.name</td>
 	          <td>@sale.price</td>
 	          <td>@sale.mileage</td>
-	          <td><a href="#" class="view-link">View</a></td>
+	          <td><a href="@routes.Market.showSaleById(sale.id.get)" class="view-link">View</a></td>
 	        </tr>
             }
         }
       </tbody>
     </table>
     
-    <h2>Past Sales</h2>
-    <table class="table table-bordered table-striped">
-      <thead>
-        <tr>
-          <th>Project</th>
-          <th>Client</th>
-          <th>Type</th>
-          <th>Date</th>
-          <th>View</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Twitter Server Proposal</td>
-          <td>Bad Robot</td>
-          <td>Completed Project</td>
-          <td>20 days ago</td>
-          <td><a href="#" class="view-link">View</a></td>
-        </tr>
-      </tbody>
-    </table>
 }(Some(request))
