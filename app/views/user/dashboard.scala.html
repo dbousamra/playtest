@@ -1,4 +1,4 @@
-@(user: User)(implicit request: AuthenticatedRequest)
+@(user: User, sales: List[(models.market.Sale, Option[models.cars.Model], Option[models.cars.Make])])(implicit request: AuthenticatedRequest)
 
 @management(user) {
   <h1>Dashboard</h1>
@@ -17,21 +17,25 @@
     <table class="table table-bordered table-striped">
       <thead>
         <tr>
-          <th>Project</th>
-          <th>Client</th>
-          <th>Type</th>
-          <th>Date</th>
-          <th>View</th>
+          <th>Make</th>
+          <th>Model</th>
+          <th>Price</th>
+          <th>Mileage</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Twitter Server Proposal</td>
-          <td>Bad Robot</td>
-          <td>Completed Project</td>
-          <td>20 days ago</td>
-          <td><a href="#" class="view-link">View</a></td>
-        </tr>
+      
+      @sales.map { 
+        case (sale, model, make) => {
+	        <tr>
+	          <td>@make.get.name</td>
+	          <td>@model.get.name</td>
+	          <td>@sale.price</td>
+	          <td>@sale.mileage</td>
+	          <td><a href="#" class="view-link">View</a></td>
+	        </tr>
+            }
+        }
       </tbody>
     </table>
     

@@ -41,6 +41,7 @@ create table image (
 
 create table sales (
   id                        bigint not null,
+  user_id                   bigint,
   model_id                  bigint,
   image_id					bigint,
   year                      timestamp,
@@ -59,6 +60,7 @@ create sequence image_seq start with 1000;
 
 alter table model add constraint fk_model_make_1 foreign key (make_id) references make (id) on delete cascade on update cascade;
 alter table model add constraint fk_model_aspiration_1 foreign key (aspiration_id) references aspiration (id) on delete cascade on update cascade;
+alter table sales add constraint fk_sale_user_1 foreign key (user_id) references user (id) on delete cascade on update cascade;
 alter table sales add constraint fk_sale_model_1 foreign key (model_id) references model (id) on delete cascade on update cascade;
 alter table sales add constraint fk_sale_image_1 foreign key (image_id) references image (id) on delete cascade on update cascade;
 

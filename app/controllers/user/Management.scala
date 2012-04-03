@@ -5,6 +5,7 @@ import play.api.mvc._
 import controllers.Authentication._
 import views._
 import models.User
+import models.market._
 import play.api.data.Forms._
 import play.api.data._
 import anorm._
@@ -25,7 +26,10 @@ object Management {
   }
 
   def dashboard() = WithUser { implicit request =>
-    Ok(html.user.dashboard(request.user.get))
+    val user = request.user.get
+    
+    val sales = Sale.listSalesByUserId(user.id.get)
+    Ok(html.user.dashboard(request.user.get, sales))
   }
 
   def profile() = WithUser { implicit request =>
