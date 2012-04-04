@@ -21,6 +21,7 @@ GET     /sales                   controllers.Market.listSales
 GET     /sales/:id               controllers.Market.listSalesById(id: Long)
 GET     /sale/:id                controllers.Market.showSaleById(id: Long)
 GET		/sale/image/:id			 controllers.Market.getImageById(id: Long)
+GET     /sale/user/:id           controllers.Market.listSalesByUserId(id: Long)
 
 GET		/cars					 controllers.Market.cars
 

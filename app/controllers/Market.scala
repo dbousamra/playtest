@@ -23,6 +23,11 @@ object Market extends Controller {
     Ok(html.market.listSales(
       Sale.listSalesById(id), formatter)(new Flash))
   }
+  
+  def listSalesByUserId(id: Long) = Authenticated { implicit request =>
+    Ok(html.market.listSales(
+      Sale.listSalesByUserId(id), formatter)(new Flash))
+  }
 
   def listSales = Authenticated { implicit request =>
     Ok(html.market.listSales(
@@ -31,7 +36,9 @@ object Market extends Controller {
 
   def showSaleById(id: Long) = Authenticated { implicit request =>
     Ok(html.market.showSale(
-      Sale.showSaleById(id), formatter)(new Flash))
+      Sale.showSaleById(id),
+      SaleComment.findBySaleId(id),
+      formatter)(new Flash))
   }
 
   def getImageById(id: Long) = Action {

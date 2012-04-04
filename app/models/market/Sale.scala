@@ -13,12 +13,12 @@ case class Sale(id: Pk[Long] = NotAssigned, userId: Long, modelId: Long, year: D
 object Sale {
   
   val simple = {
-    get[Pk[Long]]("sales.id") ~
-      get[Long]("sales.user_id") ~
-      get[Long]("sales.model_id") ~
-      get[Date]("sales.year") ~
-      get[Int]("sales.price") ~
-      get[Int]("sales.mileage") map {
+    get[Pk[Long]]("sale.id") ~
+      get[Long]("sale.user_id") ~
+      get[Long]("sale.model_id") ~
+      get[Date]("sale.year") ~
+      get[Int]("sale.price") ~
+      get[Int]("sale.mileage") map {
         case id ~ userId~ modelId ~ year ~ price ~ mileage => Sale(id, userId, modelId, year, price, mileage)
       }
   }
@@ -41,8 +41,8 @@ object Sale {
     DB.withConnection { implicit connection =>
       SQL(
         """
-          select * from sales 
-          left join model on sales.model_id = model.id
+          select * from sale 
+          left join model on sale.model_id = model.id
           left join make on model.make_id = make.id
           where model_id = {id}
         """).on('id -> id).as(Sale.withModelMake *)
@@ -54,8 +54,8 @@ object Sale {
     DB.withConnection { implicit connection =>   	
       SQL(
         """
-          select * from sales 
-          left join model on sales.model_id = model.id
+          select * from sale 
+          left join model on sale.model_id = model.id
           left join make on model.make_id = make.id
         """).as(Sale.withModelMake *) 
     }
@@ -66,10 +66,10 @@ object Sale {
     DB.withConnection( { implicit connection =>
       SQL (
     	  """
-          select * from sales
-          left join model on sales.model_id = model.id
+          select * from sale
+          left join model on sale.model_id = model.id
           left join make on model.make_id = make.id
-          left join user on sales.user_id = user.id
+          left join user on sale.user_id = user.id
           where user.id = {id}
           """
           
@@ -82,11 +82,11 @@ object Sale {
     DB.withConnection { implicit connection =>
       SQL(
         """
-          select * from sales 
-          left join model on sales.model_id = model.id
+          select * from sale 
+          left join model on sale.model_id = model.id
           left join make on model.make_id = make.id
-          left join image on sales.image_id = image.id
-          where sales.id = {id}
+          left join image on sale.image_id = image.id
+          where sale.id = {id}
         """).on('id -> id).as(Sale.withImageModelMake.single)
     }
   }  

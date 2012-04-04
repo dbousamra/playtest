@@ -17,7 +17,6 @@ object Management {
   def WithUser(f: AuthenticatedRequest => Result): Action[AnyContent] = {
     Authenticated { request =>
       val user = request.user
-      println("WITHUSER" + user)
       user match {
         case Some(x) => f(request)
         case None => Ok("no user")

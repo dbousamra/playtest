@@ -1,4 +1,4 @@
-@(sale: (models.market.Sale, Option[models.market.Image], Option[models.cars.Model], Option[models.cars.Make]), formatter: java.text.NumberFormat)(flash: play.api.mvc.Flash)(implicit request: AuthenticatedRequest)
+@(sale: (models.market.Sale, Option[models.market.Image], Option[models.cars.Model], Option[models.cars.Make]), comments: List[(SaleComment, User)], formatter: java.text.NumberFormat)(flash: play.api.mvc.Flash)(implicit request: AuthenticatedRequest)
 
 @main {
 
@@ -49,6 +49,17 @@
 								<p>
 								Mauris ipsum. Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh. Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec ante. Sed lacinia, urna non tincidunt mattis, tortor neque adipiscing diam, a cursus ipsum ante quis turpis. Nulla facilisi. Ut fringilla. Suspendisse potenti. Nunc feugiat mi a tellus consequat imperdiet. Vestibulum sapien. 
                         		</p>
+                        		</dl>
+                        	</div>
+                        <h3>Comments</h3>
+                        	<div class="comment-description">
+                        		<dl class="dl-horizontal">
+                        		@comments.map { 
+        							case (saleComment, user) => {
+        								<h6>@user.name</h6>
+	                        			<p>@saleComment.text</p>
+	                        		}
+	                        	}
                         		</dl>
                         	</div>
                         

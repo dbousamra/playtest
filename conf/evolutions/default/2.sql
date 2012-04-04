@@ -3,7 +3,7 @@
 # --- !Ups
 
 
-insert into user (id, email, name, password) values (1, 'bob@gmail.com', 'Bob Sacamano', 'admin');
+insert into user (id, email, name, password) values (1, 'bob@gmail.com', 'Test User', 'admin');
 insert into user (id, email, name, password) values (2, 'john@gmail.com', 'John Sacamano', 'admin');
 
 insert into make (id,name) values (1, 'Renault');
@@ -34,12 +34,19 @@ insert into image (id ,data) values(4, FILE_READ('conf/evolutions/default/images
 insert into image (id ,data) values(5, FILE_READ('conf/evolutions/default/images/DSC_0015.JPG'));
 insert into image (id ,data) values(6, FILE_READ('conf/evolutions/default/images/DSC_0015.JPG'));
 
-insert into sales (id,user_id,model_id, image_id, year, price, mileage) values ( 1, 1, 1, 1, '2002-01-02', 10020, 202239);
-insert into sales (id,user_id,model_id, image_id, year, price, mileage) values ( 2, 1, 2, 2, '2002-03-02', 12220, 129999);
-insert into sales (id,user_id,model_id, image_id, year, price, mileage) values ( 3, 1, 2, 3, '2008-01-04', 10020, 38888);
-insert into sales (id,user_id,model_id, image_id, year, price, mileage) values ( 4, 2, 3, 4, '2012-01-02', 12220, 93999);
-insert into sales (id,user_id,model_id, image_id, year, price, mileage) values ( 5, 2, 3, 5, '2003-01-02', 10020, 45449);
-insert into sales (id,user_id,model_id, image_id, year, price, mileage) values ( 6, 1, 3, 6, '2007-01-02', 12220, 98000);
+insert into sale (id,user_id,model_id, image_id, year, price, mileage) values ( 1, 1, 1, 1, '2002-01-02', 10020, 202239);
+insert into sale (id,user_id,model_id, image_id, year, price, mileage) values ( 2, 1, 2, 2, '2002-03-02', 12220, 129999);
+insert into sale (id,user_id,model_id, image_id, year, price, mileage) values ( 3, 1, 2, 3, '2008-01-04', 10020, 38888);
+insert into sale (id,user_id,model_id, image_id, year, price, mileage) values ( 4, 2, 3, 4, '2012-01-02', 12220, 93999);
+insert into sale (id,user_id,model_id, image_id, year, price, mileage) values ( 5, 2, 3, 5, '2003-01-02', 10020, 45449);
+insert into sale (id,user_id,model_id, image_id, year, price, mileage) values ( 6, 1, 3, 6, '2007-01-02', 12220, 98000);
+
+insert into sale_comment (id, user_id, sale_id, text, accepted) values (1, 1, 1, 'Test comment', true);
+insert into sale_comment (id, user_id, sale_id, text, accepted) values (2, 2, 1, 'Test comment', true);
+insert into sale_comment (id, user_id, sale_id, text, accepted) values (3, 1, 1, 'Test comment', true);
+insert into sale_comment (id, user_id, sale_id, text, accepted) values (4, 2, 1, 'Test comment', true);
+insert into sale_comment (id, user_id, sale_id, text, accepted) values (5, 1, 1, 'Test comment', true);
+
 
 
 # --- !Downs
@@ -48,5 +55,5 @@ delete from user;
 delete from aspiration;
 delete from model;
 delete from make;
-delete from sales;
+delete from sale;
 delete from image;
