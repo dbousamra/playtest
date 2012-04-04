@@ -51,4 +51,25 @@ object Market extends Controller {
   def cars = Authenticated { implicit request =>
     Ok("Hello " + request.user)
   }
+  
+  
+  def createSaleForm(user: User) = Form[Sale](
+        mapping(    
+            "id" -> ignored(NotAssigned: Pk[Long]),
+            "model" -> longNumber,
+            "year" -> date("yyyy"),
+            "price" -> number,
+            "mileage" -> number
+        )
+        {
+          (id, model, year, price, mileage) => Sale(id, user.id.get, model, year, price, mileage) 
+        }
+        {
+          (sale:Sale) => Some(sale.id, sale.modelId, sale.year, sale.price, sale.mileage)
+        }
+    )
+  
+  def sell = Authenticated { implicit request => 
+    Ok(html.market.createSale(createSaleForm(request.user.get)))
+  }
 }

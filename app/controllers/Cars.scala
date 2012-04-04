@@ -96,7 +96,7 @@ object Cars extends Controller {
       "introduced" -> optional(date("yyyy-MM-dd")),
       "discontinued" -> optional(date("yyyy-MM-dd")),
       "aspiration" -> optional(longNumber),
-      "make" -> optional(longNumber))(cars.Model.apply)(cars.Model.unapply))
+      "make" -> optional(longNumber))(Model.apply)(Model.unapply))
 
   // -- Actions
 }
