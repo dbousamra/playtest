@@ -1,0 +1,19 @@
+@(sidebar: Html)(body: Html)(implicit request: Option[AuthenticatedRequest])
+
+<!DOCTYPE html>
+<html>
+   @head("App")
+    <body>   
+        @navbar(request)
+        <div class="container-fluid">
+		  <div class="row-fluid">
+		    <div class="span2">
+				@sidebar
+		    </div>
+		    <div class="span10">
+		    	@body
+		    </div>
+		  </div>
+		</div>
+    </body>
+</html>
