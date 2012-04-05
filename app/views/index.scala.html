@@ -1,24 +1,35 @@
 @(message: String)(implicit request: AuthenticatedRequest)
 
 @main {
-<form class="form-horizontal" action="@routes.Authentication.authenticate" method="post" >
+<form class="form-horizontal pull-left" action="@routes.Authentication.authenticate" method="post" >
 	<ul class="nav nav-tabs">
 			
 		  <li class="dropdown">
 		  	<a class="dropdown-toggle" data-toggle="dropdown"href="#">Make and Model<b class="caret"></b></a>
 		  	<ul class="dropdown-menu">
-		  		<div class="filterForm">
-				        <fieldset>
-          <legend>Choose a Make and Model</legend>
-          <div class="control-group">
-            <label class="control-label" for="input01">Make</label>
-            <div class="controls">
-              <input type="text" class="input-medium" id="input01">
-              <p class="help-block">Enter the first few letters of the Make</p>
-            </div>
-          </div>
-
-        </fieldset>
+		  		
+		  		<div class="span6">
+					<fieldset>
+					
+			          <legend>Choose a Make and Model</legend>
+			          
+			          <div class="control-group">
+			            <label class="control-label" for="input01">Make</label>
+			            <div class="controls">
+			              <input type="text" class="input-medium" id="input01">
+			              <p class="help-block">Enter the first few letters of the Make</p>
+			           	</div>
+		          	  </div>
+		          	  
+		          	  <div class="control-group">
+			            <label class="control-label" for="input01">Model</label>
+			            <div class="controls">
+			              <input type="text" class="input-medium" id="input01">
+			              <p class="help-block">Enter the first few letters of the Model</p>
+			           	</div>
+		          	  </div>
+        			</fieldset>
+        			
 		        </div>
 			</ul>
 		  </li>
