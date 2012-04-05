@@ -9,6 +9,7 @@ import anorm._
 import controllers._
 import views._
 import models._
+import models.market.Sale
 import java.text.NumberFormat
 import java.util.Locale
 
@@ -18,7 +19,7 @@ import java.util.Locale
 object Application extends Controller {
 
   def index = Authenticated { implicit request =>
-    Ok(html.index("Front page"))
+    Ok(html.index(Filter.filterForm, Sale.listSales))
   }
 
 }

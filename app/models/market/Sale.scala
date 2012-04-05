@@ -34,8 +34,7 @@ object Sale {
   
   val withModelMakeUser = Sale.simple ~ (Model.simple ?) ~ (Make.simple ?) ~ (User.simple ?) map {
     case sale ~ model ~ make ~ user => (sale, model, make, user)
-  }
-  
+  }  
   
   def listSalesById(id: Long): List[(Sale, Option[Model], Option[Make])] = {
     DB.withConnection { implicit connection =>

@@ -30,7 +30,11 @@ object Cars extends Controller {
   def listModels(page: Int, orderBy: Int, filter: String) = Authenticated { implicit request =>
     Ok {
       html.cars.listModels(
-        Model.list(page = page, orderBy = orderBy, filter = ("%" + filter + "%")), orderBy, filter)
+        Model.list(page = page, 
+            	   orderBy = orderBy,
+            	   filter = ("%" + filter + "%")), 
+            	   orderBy, 
+            	   filter)
     }
   }
 
