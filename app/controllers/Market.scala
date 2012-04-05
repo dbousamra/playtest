@@ -67,9 +67,5 @@ object Market extends Controller {
         {
           (sale:Sale) => Some(sale.id, sale.modelId, sale.year, sale.price, sale.mileage)
         }
-    )
-  
-  def sell = Authenticated { implicit request => 
-    Ok(html.market.createSale(createSaleForm(request.user.get)))
-  }
+    )	
 }

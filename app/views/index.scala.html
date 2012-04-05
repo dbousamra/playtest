@@ -1,6 +1,61 @@
 @(message: String)(implicit request: AuthenticatedRequest)
 
 @main {
-@message
+<form class="form-horizontal" action="@routes.Authentication.authenticate" method="post" >
+	<ul class="nav nav-tabs">
+			
+		  <li class="dropdown">
+		  	<a class="dropdown-toggle" data-toggle="dropdown"href="#">Make and Model<b class="caret"></b></a>
+		  	<ul class="dropdown-menu">
+		  		<div class="filterForm">
+				        <fieldset>
+          <legend>Choose a Make and Model</legend>
+          <div class="control-group">
+            <label class="control-label" for="input01">Make</label>
+            <div class="controls">
+              <input type="text" class="input-medium" id="input01">
+              <p class="help-block">Enter the first few letters of the Make</p>
+            </div>
+          </div>
+
+        </fieldset>
+		        </div>
+			</ul>
+		  </li>
+		  <li class="dropdown">
+		  	<a class="dropdown-toggle" data-toggle="dropdown"href="#">Engine<b class="caret"></b></a>
+		  	<ul class="dropdown-menu">
+				      <!-- links -->
+			</ul>
+		  </li>
+		  <li class="dropdown">
+		  	<a class="dropdown-toggle" data-toggle="dropdown"href="#">Fuel and Economy<b class="caret"></b></a>
+		  	<ul class="dropdown-menu">
+				      <!-- links -->
+			</ul>
+		  </li>  
+		  
+		  <li class="dropdown">
+		  	<a class="dropdown-toggle" data-toggle="dropdown"href="#">Safety<b class="caret"></b></a>
+		  	<ul class="dropdown-menu">
+				      <!-- links -->
+			</ul>
+		  </li>
+		  
+		  <li class="dropdown">
+		  	<a class="dropdown-toggle" data-toggle="dropdown"href="#">Price<b class="caret"></b></a>
+		  	<ul class="dropdown-menu">
+				      <!-- links -->
+			</ul>
+		  </li>
+		  
+		  <li class="dropdown">
+		  	<a class="dropdown-toggle" data-toggle="dropdown"href="#">Year and Mileage<b class="caret"></b></a>
+		  	<ul class="dropdown-menu">
+				      <!-- links -->
+			</ul>
+		</li>
+	</ul>
+</form>
 
 }(Some(request))

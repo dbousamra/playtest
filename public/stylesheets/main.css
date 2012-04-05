@@ -96,4 +96,7 @@ h1 {padding-bottom:0.2em;}
 .summary a {display:block; font-size:1.2em; line-height:1.4em; text-transform:uppercase; color:#000;}
 .summary .count {display:block; font-size:1.75em; font-weight:bold;}
 
-
+.filterForm {
+	padding: 20px;
+	
+}
