@@ -1,4 +1,4 @@
-@(user: User, sales: List[(models.market.Sale, Option[models.cars.Model], Option[models.cars.Make])])(implicit request: AuthenticatedRequest)
+@(user: User, sales: List[(Sale, Option[Model], Option[Make])])(implicit request: AuthenticatedRequest)
 
 @management(user) {
   <h1>Dashboard</h1>

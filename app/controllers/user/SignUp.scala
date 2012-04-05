@@ -57,7 +57,7 @@ object SignUp extends Controller {
    * Display an empty form.
    */
   def form = Authenticated { implicit request =>
-    Ok(html.user.signup.form(signupForm));
+    Ok(html.user.signUpForm(signupForm));
   }
   
   
@@ -69,13 +69,12 @@ object SignUp extends Controller {
       // Form has errors, redisplay it
       errors => {
         println("Bad request")
-        BadRequest(html.user.signup.form(errors))
+        BadRequest(html.user.signUpForm(errors))
       }
       ,
       user => {
         User.create(user)
-        Ok(html.user.signup.summary(user))
-      
+        Ok(html.user.signUpSummary(user))
       }
     )
   }

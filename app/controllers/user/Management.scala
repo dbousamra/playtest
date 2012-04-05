@@ -4,11 +4,11 @@ import play.api._
 import play.api.mvc._
 import controllers.Authentication._
 import views._
-import models.User
-import models.market._
+import models._
 import play.api.data.Forms._
 import play.api.data._
 import anorm._
+import controllers._
 
 object Management {
 
@@ -39,12 +39,13 @@ object Management {
 
   def update() = WithUser { implicit request =>
     val user = request.user.get
+    println(user)
     editProfileForm.bindFromRequest.fold(
       formWithErrors => BadRequest(html.user.profile(request.user.get, formWithErrors, changePasswordForm)),
         data => {
-        val user2 = User(user.id, data._1, data._2, user.password)
-        User.update(user.id.get, user2)
-        managementHome.flashing("success" -> "Your profile %s has been updated")
+        val newUser = User(user.id, data._2, data._1, user.password)
+        User.update(user.id.get, newUser)
+        Redirect(routes.Management.profile).withSession("email" -> newUser.email).flashing("success" -> "Your profile has been updated.")
       })
   }
 

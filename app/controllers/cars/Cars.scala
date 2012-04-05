@@ -6,11 +6,9 @@ import play.api.data._
 import play.api.data.Forms._
 import anorm._
 import views._
-import Application._
-import Authentication._
+import controllers._
+import controllers.Authentication._
 import models._
-import models.cars._
-import models.market._
 import java.text.NumberFormat
 import java.util.Locale
 import java.sql.Blob

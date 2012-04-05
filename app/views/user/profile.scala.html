@@ -1,10 +1,15 @@
-@(user: User, signupForm: Form[(String, String)], changePasswordForm: Form[(String, String)])(implicit request: AuthenticatedRequest)
+@(user: User, signupForm: Form[(String, String)], changePasswordForm: Form[(String, String)])(implicit request: AuthenticatedRequest, flash: play.api.mvc.Flash)
 
 @import helper._
 @import helper.twitterBootstrap._
 
 @management(user) {
     <h1>Edit Your Profile</h1>
+    
+    @flash.get("success").map { message =>
+    	<div class="alert alert-success">Done! @message </div>
+    }
+    
     @helper.form(action = routes.Management.update) {
         
         <fieldset>

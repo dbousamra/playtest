@@ -1,4 +1,4 @@
-package models.market;
+package models
 
 import java.util.{ Date }
 import play.api.db._

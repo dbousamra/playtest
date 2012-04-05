@@ -4,8 +4,7 @@ import play.api.Play.current
 
 import anorm._
 import anorm.SqlParser._
-
-import models.market._
+import models._
 
 case class SaleComment(id: Pk[Long], user_id: Long, sale_id: Long, text: String, accepted: Boolean)
 

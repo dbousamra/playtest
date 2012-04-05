@@ -1,0 +1,17 @@
+@(modelForm: Form[Sale])(implicit request: AuthenticatedRequest)
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) } 
+
+@request
+
+@main {
+    <h1>Create a new sale</h1>
+    
+    @form(routes.Market.save()) {
+        
+        
+    }
+    
+}(Some(request))
