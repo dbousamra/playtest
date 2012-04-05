@@ -6,9 +6,10 @@ import play.api.data._
 import play.api.data.Forms._
 import anorm._
 import views._
+import controllers._
 import models._
 import controllers.Authentication._
-import models.market._
+import models._
 import java.text.NumberFormat
 import java.util.Locale
 import java.sql.Blob
@@ -23,7 +24,7 @@ object Market extends Controller {
     Ok(html.market.listSales(
       Sale.listSalesById(id), formatter)(new Flash))
   }
-  
+
   def listSalesByUserId(id: Long) = Authenticated { implicit request =>
     Ok(html.market.listSales(
       Sale.listSalesByUserId(id), formatter)(new Flash))
@@ -51,25 +52,30 @@ object Market extends Controller {
   def cars = Authenticated { implicit request =>
     Ok("Hello " + request.user)
   }
-  
-  
+
   def createSaleForm(user: User) = Form[Sale](
-        mapping(    
-            "id" -> ignored(NotAssigned: Pk[Long]),
-            "model" -> longNumber,
-            "year" -> date("yyyy"),
-            "price" -> number,
-            "mileage" -> number
-        )
-        {
-          (id, model, year, price, mileage) => Sale(id, user.id.get, model, year, price, mileage) 
-        }
-        {
-          (sale:Sale) => Some(sale.id, sale.modelId, sale.year, sale.price, sale.mileage)
-        }
+    mapping(
+      "id" -> ignored(NotAssigned: Pk[Long]),
+      "model" -> longNumber,
+      "year" -> date("yyyy"),
+      "price" -> number,
+      "mileage" -> number) {
+        (id, model, year, price, mileage) => Sale(id, user.id.get, model, year, price, mileage)
+      } {
+        (sale: Sale) => Some(sale.id, sale.modelId, sale.year, sale.price, sale.mileage)
+      })
+
+  def save = Authenticated { implicit request =>
+    createSaleForm(request.user.get).bindFromRequest.fold(
+      formWithErrors => BadRequest(html.market.createSale(formWithErrors)),
+      sale => {
+        Sale.insert(sale)
+        Management.managementHome.flashing("success" -> "Sale %s has been created")
+      }
     )
-  
-  def sell = Authenticated { implicit request => 
+  }
+
+  def sell = Authenticated { implicit request =>
     Ok(html.market.createSale(createSaleForm(request.user.get)))
   }
 }

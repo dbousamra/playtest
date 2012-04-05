@@ -26,6 +26,7 @@ GET     /sale/user/:id           controllers.Market.listSalesByUserId(id: Long)
 GET		/cars					 controllers.Market.cars
 
 GET		/createsale              controllers.Market.sell
+POST	/createsale				 controllers.Market.save
 
 # Models list (look at the default values for pagination parameters)
 GET     /models                  controllers.Cars.listModels(p:Int ?= 0, s:Int ?= 2, f ?= "")
@@ -33,6 +34,7 @@ GET     /models                  controllers.Cars.listModels(p:Int ?= 0, s:Int ?
 # Add car model
 GET     /models/new              controllers.Cars.create
 POST    /models                  controllers.Cars.save
+
 
 # Edit existing car model
 GET     /models/:id              controllers.Cars.edit(id:Long)

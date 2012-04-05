@@ -1,4 +1,4 @@
-package models.cars
+package models
 
 import java.util.{ Date }
 import play.api.db._

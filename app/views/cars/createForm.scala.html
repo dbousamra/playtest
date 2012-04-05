@@ -1,4 +1,4 @@
-@(modelForm: Form[models.cars.Model])(implicit request: AuthenticatedRequest)
+@(modelForm: Form[Model])(implicit request: AuthenticatedRequest)
 
 @import helper._
 
@@ -20,14 +20,14 @@
 
             @select(
                 modelForm("make"), 
-                models.cars.Make.options, 
+                Make.options, 
                 '_label -> "Make", '_default -> "-- Choose a Make --",
                 '_showConstraints -> false
             )
             
             @select(
                 modelForm("aspiration"), 
-                models.cars.Aspiration.options, 
+                Aspiration.options, 
                 '_label -> "Aspiration", '_default -> "-- Choose an aspiration type --",
                 '_showConstraints -> false
             )

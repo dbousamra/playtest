@@ -5,8 +5,8 @@ import play.api.data._
 import play.api.data.Forms._
 import anorm._
 import views._
+import controllers._
 import models._
-import models.cars._
 
 case class AuthenticatedRequest(user: Option[User], request: Request[AnyContent]) extends WrappedRequest(request) 
 
