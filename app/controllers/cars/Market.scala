@@ -9,6 +9,7 @@ import views._
 import controllers._
 import models._
 import controllers.Authentication._
+import controllers.Management._
 import models._
 import java.text.NumberFormat
 import java.util.Locale
@@ -20,22 +21,22 @@ object Market extends Controller {
   val formatter = NumberFormat.getCurrencyInstance(Locale.US)
   formatter.setMaximumFractionDigits(0)
 
-  def listSalesById(id: Long) = Authenticated { implicit request =>
+  def listSalesById(id: Long) = UnAuthenticated { implicit request =>
     Ok(html.market.listSales(
       Sale.listSalesById(id), formatter)(new Flash))
   }
 
-  def listSalesByUserId(id: Long) = Authenticated { implicit request =>
+  def listSalesByUserId(id: Long) = UnAuthenticated { implicit request =>
     Ok(html.market.listSales(
       Sale.listSalesByUserId(id), formatter)(new Flash))
   }
 
-  def listSales = Authenticated { implicit request =>
+  def listSales = UnAuthenticated { implicit request =>
     Ok(html.market.listSales(
       Sale.listSales, formatter)(new Flash))
   }
 
-  def showSaleById(id: Long) = Authenticated { implicit request =>
+  def showSaleById(id: Long) = UnAuthenticated { implicit request =>
     Ok(html.market.showSale(
       Sale.showSaleById(id),
       SaleComment.findBySaleId(id),
@@ -75,7 +76,7 @@ object Market extends Controller {
     )
   }
 
-  def sell = Authenticated { implicit request =>
+  def sell = WithUser { implicit request =>
     Ok(html.market.createSale(createSaleForm(request.user.get)))
   }
 }

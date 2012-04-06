@@ -10,19 +10,19 @@ import Application._
 
 case class Filter(modelId: Long)
 
-case class FilteredRequest(user: Option[User], request: Request[AnyContent]) extends WrappedRequest(request) 
+case class FilteredRequest(request: Request[AnyContent]) extends WrappedRequest(request) 
 
 object Filter {
   
-  def Filtered(f: FilteredRequest => Result) = {
-    Action { request =>
-      request.session.get("email").flatMap(u => User.findByEmail(u)).map { user =>
-        f(new AuthenticatedRequest(Some(user), request))
-      }.getOrElse{
-        f(new AuthenticatedRequest(None, request))
-        }
-    }
-  }
+//  def Filtered(f: FilteredRequest => Result) = {
+//    Action { request =>
+//      request.session.get("email").flatMap(u => User.findByEmail(u)).map { user =>
+//        f(new AuthenticatedRequest(Some(user), request))
+//      }.getOrElse{
+//        f(new AuthenticatedRequest(None, request))
+//        }
+//    }
+//  }
   
   
 

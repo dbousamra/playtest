@@ -8,24 +8,29 @@ import views._
 import controllers._
 import models._
 
-case class AuthenticatedRequest(user: Option[User], request: Request[AnyContent]) extends WrappedRequest(request) 
+case class AuthenticatedRequest(user: Option[User], request: Request[AnyContent]) extends WrappedRequest(request)
 
 object Authentication extends Controller {
-  
+
   def Authenticated(f: AuthenticatedRequest => Result) = {
     Action { request =>
       request.session.get("email").flatMap(u => User.findByEmail(u)).map { user =>
-        f(new AuthenticatedRequest(Some(user), request))
-      }.getOrElse{
-        f(new AuthenticatedRequest(None, request))
-        }
+        f(AuthenticatedRequest(Some(user), request))
+      }.getOrElse {
+        Redirect(routes.Authentication.login()).withNewSession
+      }
     }
   }
 
-    private def onUnauthorized(request: RequestHeader) = {
-       Results.Redirect(routes.Authentication.login).withNewSession
+  def UnAuthenticated(f: AuthenticatedRequest => Result) = {
+    Action { request =>
+      request.session.get("email").flatMap(u => User.findByEmail(u)).map { user =>
+        f(AuthenticatedRequest(Some(user), request))
+      }.getOrElse {
+        f(AuthenticatedRequest(None, request))
+      }
     }
-
+  }
 
   val loginForm = Form(
     tuple(
@@ -37,14 +42,16 @@ object Authentication extends Controller {
   /**
    * Login page.
    */
-  def login = Authenticated { implicit request =>
+  def login = Action { implicit request =>
+    implicit val authRequest = new AuthenticatedRequest(None, request)
     Ok(html.login(loginForm))
   }
 
   /**
    * Handle login form submission.
    */
-  def authenticate = Authenticated { implicit request =>
+  def authenticate = Action { implicit request =>
+    implicit val authRequest = new AuthenticatedRequest(None, request)
     loginForm.bindFromRequest.fold(
       formWithErrors => BadRequest(html.login(formWithErrors)),
       user => Redirect(routes.Management.dashboard).withSession("email" -> user._1))

@@ -72,6 +72,19 @@ object Sale {
     })
 
   }
+  
+  def listSalesFilter() = {
+    DB.withConnection({ implicit connection =>
+      SQL(
+        """
+          select * from sale
+          left join model on sale.model_id = model.id
+          left join make on model.make_id = make.id
+          left join user on sale.user_id = user.id
+          """).as(withModelMake *)
+    
+    })
+  }
 
   def showSaleById(id: Long): (Sale, Option[Image], Option[Model], Option[Make]) = {
     DB.withConnection { implicit connection =>

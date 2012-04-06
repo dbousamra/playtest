@@ -25,7 +25,7 @@ object Cars extends Controller {
    * @param orderBy Column to be sorted
    * @param filter Filter applied on model names
    */
-  def listModels(page: Int, orderBy: Int, filter: String) = Authenticated { implicit request =>
+  def listModels(page: Int, orderBy: Int, filter: String) = UnAuthenticated { implicit request =>
     Ok {
       html.cars.listModels(
         Model.list(page = page, 
@@ -41,7 +41,7 @@ object Cars extends Controller {
    *
    * @param id Id of the model to edit
    */
-  def edit(id: Long) = Authenticated { implicit request =>
+  def edit(id: Long) = UnAuthenticated { implicit request =>
     Model.findById(id).map { model =>
       Ok(html.cars.editForm(id, modelForm.fill(model)))
     }.getOrElse(Unauthorized)
@@ -52,7 +52,7 @@ object Cars extends Controller {
    *
    * @param id Id of the model to edit
    */
-  def update(id: Long) = Authenticated { implicit request =>
+  def update(id: Long) = UnAuthenticated { implicit request =>
     modelForm.bindFromRequest.fold(
       formWithErrors => BadRequest(html.cars.editForm(id, formWithErrors)),
       model => {
@@ -64,7 +64,7 @@ object Cars extends Controller {
   /**
    * Display the 'new model form'.
    */
-  def create = Authenticated { implicit request =>
+  def create = UnAuthenticated { implicit request =>
     Ok(html.cars.createForm(modelForm))
   }
 

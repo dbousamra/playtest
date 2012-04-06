@@ -56,6 +56,8 @@ object Model {
    */
   def list(page: Int = 0, pageSize: Int = 10, orderBy: Int = 1, filter: String = "%"): Page[(Model, Option[Make], Option[Aspiration])] = {
 
+    println(filter)
+    
     val offest = pageSize * page
 
     DB.withConnection { implicit connection =>

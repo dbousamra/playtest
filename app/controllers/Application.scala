@@ -9,7 +9,6 @@ import anorm._
 import controllers._
 import views._
 import models._
-import models.market.Sale
 import java.text.NumberFormat
 import java.util.Locale
 
@@ -18,7 +17,17 @@ import java.util.Locale
  */
 object Application extends Controller {
 
-  def index = Authenticated { implicit request =>
+  def index = UnAuthenticated { implicit request =>
+//    val y = Sale.listSalesFilter().filter {
+//      case (sale, model, make) => sale.price > 11000
+//    }
+//    val z = y.filter {
+//      case (sale, model, make) => sale.mileage < 95000;
+//    }
+//    println(z)
+    
+//    val x = Sale.listSalesFilter()
+//    println(x)
     Ok(html.index(Filter.filterForm, Sale.listSales))
   }
 

@@ -15,18 +15,17 @@ object Management {
   val managementHome = Redirect(routes.Management.dashboard)
 
   def WithUser(f: AuthenticatedRequest => Result): Action[AnyContent] = {
-    Authenticated { request =>
+    Authenticated { implicit request =>
       val user = request.user
       user match {
         case Some(x) => f(request)
-        case None => Ok("no user")
+        case None => Ok(html.login(loginForm))
       }
     }
   }
 
   def dashboard() = WithUser { implicit request =>
     val user = request.user.get
-    
     val sales = Sale.listSalesByUserId(user.id.get)
     Ok(html.user.dashboard(request.user.get, sales))
   }
