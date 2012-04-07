@@ -6,10 +6,11 @@ set ignorecase true;
 
 create table user (
   id                        bigint not null,
-  email                     varchar(255) not null primary key,
+  email                     varchar(255) not null,
   name                      varchar(255) not null,
-  password                  varchar(255) not null
-);
+  password                  varchar(255) not null,
+  constraint pk_user primary key (id))
+;
 
 create table make (
   id                        bigint not null,
@@ -60,6 +61,7 @@ create table sale_comment (
 ;
 
 
+create sequence user_seq start with 1000;
 create sequence make_seq start with 1000;
 create sequence aspiration_seq start with 1000;
 create sequence model_seq start with 1000;
@@ -83,7 +85,6 @@ create index ix_model_aspiration_1 on model (aspiration_id);
 # --- !Downs
 
 SET REFERENTIAL_INTEGRITY FALSE;
-
 drop table if exists make;
 drop table if exists aspiration;
 drop table if exists model;
@@ -100,3 +101,4 @@ drop sequence if exists model_seq;
 drop sequence if exists image_seq;
 drop sequence if exists sale_seq;
 drop sequence if exists sale_comment_seq;
+drop sequence if exists user_seq;

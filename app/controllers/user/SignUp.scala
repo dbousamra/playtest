@@ -56,7 +56,7 @@ object SignUp extends Controller {
   /**
    * Display an empty form.
    */
-  def form = Authenticated { implicit request =>
+  def form = UnAuthenticated { implicit request =>
     Ok(html.user.signUpForm(signupForm));
   }
   
@@ -64,7 +64,7 @@ object SignUp extends Controller {
   /**	
    * Handle form submission.
    */
-  def submit = Authenticated { implicit request =>
+  def submit = UnAuthenticated { implicit request =>
     signupForm.bindFromRequest.fold(
       // Form has errors, redisplay it
       errors => {

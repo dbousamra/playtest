@@ -74,10 +74,9 @@ object User {
       SQL(
         """
           insert into user values (
-          {id}, {email}, {name}, {password}
+          (select next value for user_seq), {email}, {name}, {password}
           )
         """).on(
-          'id -> user.id,
           'email -> user.email,
           'name -> user.name,
           'password -> user.password).executeUpdate()
