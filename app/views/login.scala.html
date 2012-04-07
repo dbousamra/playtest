@@ -5,13 +5,56 @@
 
 
 @main {
-  <form style="margin: 0px" accept-charset="UTF-8" action="@routes.Authentication.authenticate" method="post" >
+    <div class="hero-unit">
+      <div class="row">
+        <div class="span7">
+          <h1>Please login</h1>
+            <p>To access the great features, analytics and the ability to sell your car with us, please login.</p>
+            <p>
+              <a class="btn btn-primary btn-large">
+                Learn more
+              </a>
+            </p>
+        
+        </div>
+        <div class="span5">
+        <br>
+        <br>
+        <br>
+        <form class="form-horizontal" accept-charset="UTF-8" action="@routes.Authentication.authenticate" method="post" >
+           <fieldset>
+             <div class="control-group">
+                <label class="control-label" for="email">Email address</label>
+                <div class="controls">
+                  <input name="email" id="email" type="text" />
+                </div>
+              </div>
+              
+               <div class="control-group">
+                <label class="control-label" for="password">Password</label>
+                <div class="controls">
+                 <input name="password" id="password" type="password"/>
+                </div>
+              </div>
+              
+               <div class="form-actions">
+                <input class="btn-primary" name="commit" type="submit" value="Log In" />
+                <button class="btn btn-info" href="#">Sign up</button>
+              </div>
+             
+             
+           </fieldset>
+         </form>
+            
+        </div>
+      </div>
+    
+    
+      
+    </div>
+      
+
+     
+     
   
-     <fieldset class='textbox' style="padding:10px">
-       <legend>Login</legend> 
-       <input name="email" id="email" style="margin-top: 8px" type="text" placeholder="Email Address" />
-       <input name="password" id="password" style="margin-top: 8px" type="password" placeholder="Passsword" />
-       <input class="btn-primary" name="commit" type="submit" value="Log In" />
-     </fieldset>
-  </form>
 }(Some(request))
