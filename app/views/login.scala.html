@@ -1,4 +1,4 @@
-@(loginForm: Form[(String,String)])(implicit request: AuthenticatedRequest)
+@(loginForm: Form[(String,String)])(implicit request: AuthenticatedRequest, flash: play.api.mvc.Flash)
 
 @import helper._
 @import helper.twitterBootstrap._ 
@@ -36,7 +36,9 @@
                  <input name="password" id="password" type="password"/>
                 </div>
               </div>
-              
+              @flash.get("error").map { message =>
+          <div class="alert alert-error">Error! @message </div>
+        }
                <div class="form-actions">
                 <input class="btn-primary" name="commit" type="submit" value="Log In" />
                 <button class="btn btn-info" href="#">Sign up</button>

@@ -35,7 +35,8 @@ object Authentication extends Controller {
   val loginForm = Form(
     tuple(
       "email" -> text,
-      "password" -> text) verifying ("Invalid email or password", result => result match {
+      "password" -> text) 
+      verifying ("Invalid email or password", result => result match {
         case (email, password) => User.authenticate(email, password).isDefined
       }))
 
@@ -53,7 +54,9 @@ object Authentication extends Controller {
   def authenticate = Action { implicit request =>
     implicit val authRequest = new AuthenticatedRequest(None, request)
     loginForm.bindFromRequest.fold(
-      formWithErrors => BadRequest(html.login(formWithErrors)),
+      formWithErrors => {
+        Redirect(routes.Authentication.login).flashing("error" -> "Your email or password was incorrect.")    
+      },
       user => Redirect(routes.Management.dashboard).withSession("email" -> user._1))
   }
 
