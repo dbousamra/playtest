@@ -18,25 +18,30 @@ create table make (
   constraint pk_make primary key (id))
 ;
 
-create table aspiration (
+create table engine (
   id                        bigint not null,
-  type                      char(12) not null,
-  constraint pk_aspiration primary key (id))
+  aspiration                varchar(127),
+  position                  varchar(127),
+  cc                        int,
+  cylinders                 int,
+  type                      varchar(127),
+  valves                    int,
+  constraint pk_engine primary key (id))
 ;
+
 
 create table model (
   id                        bigint not null,
   name                      varchar(255) not null,
-  introduced                timestamp,
-  discontinued              timestamp,
+  year                      timestamp,
+  engine_id                 bigint,
   make_id                   bigint,
-  aspiration_id				bigint,
   constraint pk_model primary key (id))
 ;
 
 create table image (
   id                        bigint not null,
-  data                 		blob,
+  data                 		  blob,
   constraint pk_image primary key (id))
 ;
 
@@ -44,10 +49,10 @@ create table sale (
   id                        bigint not null,
   user_id                   bigint,
   model_id                  bigint,
-  image_id					bigint,
+  image_id					        bigint,
   year                      timestamp,
-  price						int,
-  mileage					int,
+  price						          int,
+  mileage					          int,
   constraint pk_sale primary key (id))
 ;
 
@@ -63,6 +68,7 @@ create table sale_comment (
 
 create sequence user_seq start with 1000;
 create sequence make_seq start with 1000;
+create sequence engine_seq start with 1000;
 create sequence aspiration_seq start with 1000;
 create sequence model_seq start with 1000;
 create sequence sale_seq start with 1000;
@@ -70,16 +76,17 @@ create sequence image_seq start with 1000;
 create sequence sale_comment_seq start with 1000;
 
 alter table model add constraint fk_model_make_1 foreign key (make_id) references make (id) on delete cascade on update cascade;
-alter table model add constraint fk_model_aspiration_1 foreign key (aspiration_id) references aspiration (id) on delete cascade on update cascade;
+alter table model add constraint fk_model_engine_1 foreign key (engine_id) references engine (id) on delete cascade on update cascade;
+
 alter table sale add constraint fk_sale_user_1 foreign key (user_id) references user (id) on delete cascade on update cascade;
 alter table sale add constraint fk_sale_model_1 foreign key (model_id) references model (id) on delete cascade on update cascade;
 alter table sale add constraint fk_sale_image_1 foreign key (image_id) references image (id) on delete cascade on update cascade;
+
 alter table sale_comment add constraint fk_sale_comment_sale foreign key (sale_id) references sale (id) on delete cascade on update cascade;
 alter table sale_comment add constraint fk_sale_comment_user foreign key (user_id) references user (id) on delete cascade on update cascade;
 
 
 create index ix_model_make_1 on model (make_id);
-create index ix_model_aspiration_1 on model (aspiration_id);
 
 
 # --- !Downs
@@ -87,6 +94,7 @@ create index ix_model_aspiration_1 on model (aspiration_id);
 SET REFERENTIAL_INTEGRITY FALSE;
 drop table if exists make;
 drop table if exists aspiration;
+drop table if exists engine;
 drop table if exists model;
 drop table if exists image;
 drop table if exists sale;
@@ -97,6 +105,7 @@ SET REFERENTIAL_INTEGRITY TRUE;
 
 drop sequence if exists make_seq;
 drop sequence if exists aspiration_seq;
+drop sequence if exists engine_seq;
 drop sequence if exists model_seq;
 drop sequence if exists image_seq;
 drop sequence if exists sale_seq;

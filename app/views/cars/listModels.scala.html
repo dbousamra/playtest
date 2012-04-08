@@ -1,4 +1,4 @@
-@(currentPage: Page[(Model, Option[Make], Option[Aspiration])], currentOrderBy: Int, currentFilter: String)(implicit request: AuthenticatedRequest, flash: play.api.mvc.Flash)
+@(currentPage: Page[(Model, Option[Make], Option[Engine])], currentOrderBy: Int, currentFilter: String)(implicit request: AuthenticatedRequest, flash: play.api.mvc.Flash)
 
 @****************************************
 * Helper generating navigation links    *
@@ -48,28 +48,25 @@
                 	@header(2, "Make")
                     @header(8, "Model name")
                     @header(6, "Aspiration")
-                    @header(3, "Introduced")
-                    @header(4, "Discontinued")
+                    @header(3, "Year")
                 </tr>
             </thead>
             <tbody>
 				
                 @models.map { 
-                    case (model, make, aspiration) => {
+                    case (model, make, engine) => {
                         <tr>
                             <td><a href="@routes.Cars.edit(model.id.get)">@model.name</a></td>
                             <td>
                                 @make.map(_.name).getOrElse { <em>-</em> }
                             </td>
                             <td>
-                                @aspiration.map(_.aspType).getOrElse { <em>-</em> }
+                                @engine.map(_.cc).getOrElse { <em>-</em> }
                             </td>
                             <td>
-                                @model.introduced.map(_.format("dd MMM yyyy")).getOrElse { <em>-</em> }
+                                @model.year.map(_.format("dd MMM yyyy")).getOrElse { <em>-</em> }
                             </td>
-                            <td>
-                                @model.discontinued.map(_.format("dd MMM yyyy")).getOrElse { <em>-</em> }
-                            </td>                            
+                                                    
                             
                         </tr>
                     }

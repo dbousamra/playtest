@@ -95,9 +95,8 @@ object Cars extends Controller {
     mapping(
       "id" -> ignored(NotAssigned: Pk[Long]),
       "name" -> nonEmptyText,
-      "introduced" -> optional(date("yyyy-MM-dd")),
-      "discontinued" -> optional(date("yyyy-MM-dd")),
-      "aspiration" -> optional(longNumber),
+      "year" -> optional(date("yyyy-MM-dd")),
+      "engine" -> optional(longNumber),
       "make" -> optional(longNumber))(Model.apply)(Model.unapply))
 
   // -- Actions

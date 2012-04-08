@@ -7,7 +7,7 @@ import models._
 import anorm._
 import anorm.SqlParser._
 
-case class Model(id: Pk[Long] = NotAssigned, name: String, introduced: Option[Date], discontinued: Option[Date], aspirationId: Option[Long], makeId: Option[Long])
+case class Model(id: Pk[Long] = NotAssigned, name: String, year: Option[Date],  engineId: Option[Long], makeId: Option[Long])
 
 object Model {
 
@@ -19,26 +19,22 @@ object Model {
   val simple = {
     get[Pk[Long]]("model.id") ~
       get[String]("model.name") ~
-      get[Option[Date]]("model.introduced") ~
-      get[Option[Date]]("model.discontinued") ~
-      get[Option[Long]]("model.aspiration_id") ~
+      get[Option[Date]]("model.year") ~
+      get[Option[Long]]("model.engine_id") ~
       get[Option[Long]]("model.make_id") map {
-        case id ~ name ~ introduced ~ discontinued ~ aspirationId ~ makeId => Model(id, name, introduced, discontinued, aspirationId, makeId)
+        case id ~ name ~ year ~ engineId ~ makeId => Model(id, name, year, engineId, makeId)
       }
   }
 
   /**
    * Parse a (model,make) from a ResultSet
    */
-  val withmakeaspiration = Model.simple ~ (Make.simple ?) ~ (Aspiration.simple ?) map {
-    case model ~ make ~ aspiration => (model, make, aspiration)
+  val withmakeaspiration = Model.simple ~ (Make.simple ?) ~ (Engine.simple ?) map {
+    case model ~ make ~ engine => (model, make, engine)
   }
 
   // -- Queries
 
-  /**
-   * Retrieve a model from the id.
-   */
   def findById(id: Long): Option[Model] = {
     DB.withConnection {
       (implicit connection =>
@@ -54,7 +50,7 @@ object Model {
    * @param orderBy model property used for sorting
    * @param filter Filter applied on the name column
    */
-  def list(page: Int = 0, pageSize: Int = 10, orderBy: Int = 1, filter: String = "%"): Page[(Model, Option[Make], Option[Aspiration])] = {
+  def list(page: Int = 0, pageSize: Int = 10, orderBy: Int = 1, filter: String = "%"): Page[(Model, Option[Make], Option[Engine])] = {
 
     println(filter)
     
@@ -66,7 +62,7 @@ object Model {
         """
           select * from model 
           left join make on model.make_id = make.id
-          left join aspiration on model.aspiration_id = aspiration.id
+          left join engine on model.engine_id = engine.id
           where model.name like {filter}
           order by {orderBy} nulls last
           limit {pageSize} offset {offset}
@@ -100,14 +96,13 @@ object Model {
       SQL(
         """
           update model
-          set name = {name}, introduced = {introduced}, discontinued = {discontinued}, make_id = {make_id}, aspiration_id = {aspiration_id}
+          set name = {name}, year = {year}, make_id = {make_id}, engine_id = {engine_id}
           where id = {id}
         """).on(
           'id -> id,
           'name -> model.name,
-          'introduced -> model.introduced,
-          'discontinued -> model.discontinued,
-          'aspiration_id -> model.aspirationId,
+          'year -> model.year,
+          'engine_id -> model.engineId,
           'make_id -> model.makeId).executeUpdate()
     }
   }
@@ -127,10 +122,9 @@ object Model {
           )
         """).on(
           'name -> model.name,
-          'introduced -> model.introduced,
-          'discontinued -> model.discontinued,
+          'year -> model.year,
           'make_id -> model.makeId,
-          'aspiration_id -> model.aspirationId)
+          'engine_id -> model.engineId)
         .executeUpdate()
     }
   }

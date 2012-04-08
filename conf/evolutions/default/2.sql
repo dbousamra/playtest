@@ -3,7 +3,7 @@
 # --- !Ups
 
 
-insert into user (id, email, name, password) values (1, 'bob@gmail.com', 'Test User', 'admin');
+insert into user (id, email, name, password) values (1, 'bob@gmail.com', 'Bob Sacamano', 'admin');
 insert into user (id, email, name, password) values (2, 'john@gmail.com', 'John Sacamano', 'admin');
 
 insert into make (id,name) values (1, 'Renault');
@@ -11,20 +11,17 @@ insert into make (id,name) values (2, 'Nissan');
 insert into make (id,name) values (3, 'Porsche');
 insert into make (id,name) values (4, 'Subaru');
 
-insert into aspiration (id, type) values ( 1, 'Turbocharged' );
-insert into aspiration (id, type) values ( 2, 'N/A' );
-insert into aspiration (id, type) values ( 3, 'Supercharged' );
+insert into engine (id, aspiration, position, cc, cylinders, type, valves) values (1, 'Supercharged', 'Front', '1998', 4, 'Inline', 16);
 
-insert into model (id,name,introduced,discontinued,aspiration_id,make_id) values ( 1,'Clio','1980-05-01','1984-04-01', 2, 1);
+insert into model (id,name,year,engine_id,make_id) values ( 1,'Clio','1980-05-01', 1, 1);
+insert into model (id,name,year,engine_id,make_id) values ( 2,'Skyline','1980-05-01', 1, 2);
+insert into model (id,name,year,engine_id,make_id) values ( 3,'370Z','1980-05-01',1, 2);
+insert into model (id,name,year,engine_id,make_id) values ( 4,'Cayman','1980-05-01',1, 3);
+insert into model (id,name,year,engine_id,make_id) values ( 5,'911','1980-05-01',1, 3);
+insert into model (id,name,year,engine_id,make_id) values ( 6,'Impreza','1980-05-01',1, 4);
+insert into model (id,name,year,engine_id,make_id) values ( 7,'Legacy','1980-05-01',1, 4);
 
-insert into model (id,name,introduced,discontinued,aspiration_id,make_id) values ( 2,'Skyline','1980-05-01','1984-04-01', 1, 2);
-insert into model (id,name,introduced,discontinued,aspiration_id,make_id) values ( 3,'370Z','1980-05-01','1984-04-01', 2, 2);
 
-insert into model (id,name,introduced,discontinued,aspiration_id,make_id) values ( 4,'Cayman','1980-05-01','1984-04-01', 2, 3);
-insert into model (id,name,introduced,discontinued,aspiration_id,make_id) values ( 5,'911','1980-05-01','1984-04-01', 2, 3);
-
-insert into model (id,name,introduced,discontinued,aspiration_id,make_id) values ( 6,'Impreza','1980-05-01','1984-04-01', 1, 4);
-insert into model (id,name,introduced,discontinued,aspiration_id,make_id) values ( 7,'Legacy','1980-05-01','1984-04-01', 1, 4);
 
 
 insert into image (id ,data) values(1, FILE_READ('conf/evolutions/default/images/DSC_0015.JPG'));
