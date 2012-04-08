@@ -41,44 +41,44 @@ object Cars extends Controller {
    *
    * @param id Id of the model to edit
    */
-  def edit(id: Long) = UnAuthenticated { implicit request =>
-    Model.findById(id).map { model =>
-      Ok(html.cars.editForm(id, modelForm.fill(model)))
-    }.getOrElse(Unauthorized)
-  }
+//  def edit(id: Long) = UnAuthenticated { implicit request =>
+//    Model.findById(id).map { model =>
+//      Ok(html.cars.editForm(id, modelForm.fill(model)))
+//    }.getOrElse(Unauthorized)
+//  }
 
   /**
    * Handle the 'edit form' submission
    *
    * @param id Id of the model to edit
    */
-  def update(id: Long) = UnAuthenticated { implicit request =>
-    modelForm.bindFromRequest.fold(
-      formWithErrors => BadRequest(html.cars.editForm(id, formWithErrors)),
-      model => {
-        Model.update(id, model)
-        modelsHome.flashing("success" -> "Model %s has been updated".format(model.name))
-      })
-  }
+//  def update(id: Long) = UnAuthenticated { implicit request =>
+//    modelForm.bindFromRequest.fold(
+//      formWithErrors => BadRequest(html.cars.editForm(id, formWithErrors)),
+//      model => {
+//        Model.update(id, model)
+//        modelsHome.flashing("success" -> "Model %s has been updated".format(model.name))
+//      })
+//  }
 
   /**
    * Display the 'new model form'.
    */
-  def create = UnAuthenticated { implicit request =>
-    Ok(html.cars.createForm(modelForm))
-  }
+//  def create = UnAuthenticated { implicit request =>
+//    Ok(html.cars.createForm(modelForm))
+//  }
 
   /**
    * Handle the 'new model form' submission.
    */
-  def save = Authenticated { implicit request =>
-    modelForm.bindFromRequest.fold(
-      formWithErrors => BadRequest(html.cars.createForm(formWithErrors)),
-      model => {
-        Model.insert(model)
-        modelsHome.flashing("success" -> "Model %s has been created".format(model.name))
-      })
-  }
+//  def save = Authenticated { implicit request =>
+//    modelForm.bindFromRequest.fold(
+//      formWithErrors => BadRequest(html.cars.createForm(formWithErrors)),
+//      model => {
+//        Model.insert(model)
+//        modelsHome.flashing("success" -> "Model %s has been created".format(model.name))
+//      })
+//  }
 
   /**
    * Handle model deletion.
@@ -91,13 +91,5 @@ object Cars extends Controller {
   /**
    * Describe the model form (used in both edit and create screens).
    */
-  val modelForm = Form(
-    mapping(
-      "id" -> ignored(NotAssigned: Pk[Long]),
-      "name" -> nonEmptyText,
-      "year" -> optional(date("yyyy-MM-dd")),
-      "engine" -> optional(longNumber),
-      "make" -> optional(longNumber))(Model.apply)(Model.unapply))
-
   // -- Actions
 }

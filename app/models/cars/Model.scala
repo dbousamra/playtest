@@ -7,12 +7,38 @@ import models._
 import anorm._
 import anorm.SqlParser._
 
-case class Model(id: Pk[Long] = NotAssigned, name: String, year: Option[Date],  engineId: Option[Long], makeId: Option[Long])
+case class ModelUnified(
+  id: Pk[Long] = NotAssigned,
+  name: String,
+  year: Option[Date],
+  trim: Option[String],
+  seats: Option[Int],
+  doors: Option[Int],
+  body: Option[String],
+  make: Make,
+  engine: Engine,
+  driveTrain: Drivetrain,
+  dimensions: Dimensions,
+  economy: Economy,
+  performance: Performance)
+  
+
+case class Model(
+  id: Pk[Long] = NotAssigned,
+  name: String,
+  year: Option[Date],
+  trim: Option[String],
+  seats: Option[Int],
+  doors: Option[Int],
+  body: Option[String],
+  makeId: Long,
+  engineId: Long,
+  drivetrainId: Long,
+  dimensionsId: Long,
+  economyId: Long,
+  performanceId: Long)
 
 object Model {
-
-  // -- Parsers
-
   /**
    * Parse a model from a ResultSet
    */
@@ -20,40 +46,70 @@ object Model {
     get[Pk[Long]]("model.id") ~
       get[String]("model.name") ~
       get[Option[Date]]("model.year") ~
-      get[Option[Long]]("model.engine_id") ~
-      get[Option[Long]]("model.make_id") map {
-        case id ~ name ~ year ~ engineId ~ makeId => Model(id, name, year, engineId, makeId)
+      get[Option[String]]("model.trim") ~
+      get[Option[Int]]("model.seats") ~
+      get[Option[Int]]("model.doors") ~
+      get[Option[String]]("model.body") ~
+      get[Long]("model.make_id") ~
+      get[Long]("model.engine_id") ~
+      get[Long]("model.drivetrain_id") ~
+      get[Long]("model.dimensions_id") ~
+      get[Long]("model.economy_id") ~
+      get[Long]("model.performance_id") map {
+        case id ~ name ~ year ~ trim ~ seats ~ doors ~ body ~ makeId ~ engineId ~ drivetrainId ~ dimensionsId ~ economyId ~ performanceId =>
+          Model(id, name, year, trim, seats, doors, body, makeId, engineId, drivetrainId, dimensionsId, economyId, performanceId)
       }
   }
 
-  /**
-   * Parse a (model,make) from a ResultSet
-   */
-  val withmakeaspiration = Model.simple ~ (Make.simple ?) ~ (Engine.simple ?) map {
-    case model ~ make ~ engine => (model, make, engine)
+  val unified = Model.simple ~ (Make.simple) ~ (Engine.simple) ~ (Drivetrain.simple) ~ (Dimensions.simple) ~ (Economy.simple) ~ (Performance.simple) map {
+    case model ~ make ~ engine ~ drivetrain ~ dimensions ~ economy ~ performance => ModelUnified(
+      model.id,
+      model.name,
+      model.year,
+      model.trim,
+      model.seats,
+      model.doors,
+      model.body,
+      make,
+      engine,
+      drivetrain,
+      dimensions,
+      economy,
+      performance)
   }
 
   // -- Queries
 
-  def findById(id: Long): Option[Model] = {
-    DB.withConnection {
-      (implicit connection =>
-        SQL("select * from model where id = {id}").on('id -> id).as(Model.simple.singleOpt))
+  def findById(id: Long): Option[ModelUnified] = {
+    DB.withConnection { implicit connection =>
+      SQL("""
+          select * from model 
+          
+          left join make on model.make_id = make.id
+          left join engine on model.engine_id = engine.id
+          left join drivetrain on model.drivetrain_id = drivetrain.id
+          left join dimensions on model.dimensions_id = dimensions.id
+          left join economy on model.economy_id = economy.id
+          left join performance on model.performance_id = performance.id
+          
+          where model.id = {id}""").on('id -> id).as(Model.unified.singleOpt)
+
     }
+
   }
 
   /**
-   * Return a page of (model,make).
+   * Return a page of (model unified).
    *
    * @param page Page to display
    * @param pageSize Number of models per page
    * @param orderBy model property used for sorting
    * @param filter Filter applied on the name column
    */
-  def list(page: Int = 0, pageSize: Int = 10, orderBy: Int = 1, filter: String = "%"): Page[(Model, Option[Make], Option[Engine])] = {
+  def list(page: Int = 0, pageSize: Int = 10, orderBy: Int = 1, filter: String = "%"): Page[ModelUnified] = {
 
     println(filter)
-    
+
     val offest = pageSize * page
 
     DB.withConnection { implicit connection =>
@@ -61,8 +117,14 @@ object Model {
       val models = SQL(
         """
           select * from model 
+          
           left join make on model.make_id = make.id
           left join engine on model.engine_id = engine.id
+          left join drivetrain on model.drivetrain_id = drivetrain.id
+          left join dimensions on model.engine_id = dimensions.id
+          left join economy on model.economy_id = economy.id
+          left join performance on model.performance_id = performance.id
+          
           where model.name like {filter}
           order by {orderBy} nulls last
           limit {pageSize} offset {offset}
@@ -70,12 +132,19 @@ object Model {
           'pageSize -> pageSize,
           'offset -> offest,
           'filter -> filter,
-          'orderBy -> orderBy).as(Model.withmakeaspiration *)
+          'orderBy -> orderBy).as(Model.unified *)
 
       val totalRows = SQL(
         """
           select count(*) from model 
+          
           left join make on model.make_id = make.id
+          left join engine on model.engine_id = engine.id
+          left join drivetrain on model.drivetrain_id = drivetrain.id
+          left join dimensions on model.engine_id = dimensions.id
+          left join economy on model.economy_id = economy.id
+          left join performance on model.performance_id = performance.id
+          
           where model.name like {filter}
         """).on(
           'filter -> filter).as(scalar[Long].single)

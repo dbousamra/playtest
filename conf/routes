@@ -21,7 +21,6 @@ GET     /logout                  controllers.Authentication.logout
 
 
 GET     /sales                   controllers.Market.listSales
-GET     /sales/:id               controllers.Market.listSalesById(id: Long)
 GET     /sale/:id                controllers.Market.showSaleById(id: Long)
 GET		/sale/image/:id			 controllers.Market.getImageById(id: Long)
 GET     /sale/user/:id           controllers.Market.listSalesByUserId(id: Long)
@@ -35,16 +34,16 @@ POST	/createsale				 controllers.Market.save
 GET     /models                  controllers.Cars.listModels(p:Int ?= 0, s:Int ?= 2, f ?= "")
 
 # Add car model
-GET     /models/new              controllers.Cars.create
-POST    /models                  controllers.Cars.save
+#GET     /models/new              controllers.Cars.create
+#POST    /models                  controllers.Cars.save
 
 
 # Edit existing car model
-GET     /models/:id              controllers.Cars.edit(id:Long)
-POST    /models/:id              controllers.Cars.update(id:Long)
+#GET     /models/:id              controllers.Cars.edit(id:Long)
+#POST    /models/:id              controllers.Cars.update(id:Long)
 
 # Delete a car model
-POST    /models/:id/delete       controllers.Cars.delete(id:Long)
+#POST    /models/:id/delete       controllers.Cars.delete(id:Long)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

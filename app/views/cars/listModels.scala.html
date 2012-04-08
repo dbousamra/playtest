@@ -1,4 +1,4 @@
-@(currentPage: Page[(Model, Option[Make], Option[Engine])], currentOrderBy: Int, currentFilter: String)(implicit request: AuthenticatedRequest, flash: play.api.mvc.Flash)
+@(currentPage: Page[ModelUnified], currentOrderBy: Int, currentFilter: String)(implicit request: AuthenticatedRequest, flash: play.api.mvc.Flash)
 
 @****************************************
 * Helper generating navigation links    *
@@ -36,7 +36,7 @@
             <input type="submit" id="searchsubmit" value="Filter by name" class="btn primary">
         }
         
-        <a class="btn success" id="add" href="@routes.Cars.create()">Add a new model</a>
+        <a class="btn success" id="add" href="">Add a new model</a>
         
     </div>
     
@@ -54,18 +54,9 @@
             <tbody>
 				
                 @models.map { 
-                    case (model, make, engine) => {
+                    case model => {
                         <tr>
-                            <td><a href="@routes.Cars.edit(model.id.get)">@model.name</a></td>
-                            <td>
-                                @make.map(_.name).getOrElse { <em>-</em> }
-                            </td>
-                            <td>
-                                @engine.map(_.cc).getOrElse { <em>-</em> }
-                            </td>
-                            <td>
-                                @model.year.map(_.format("dd MMM yyyy")).getOrElse { <em>-</em> }
-                            </td>
+                           
                                                     
                             
                         </tr>

@@ -1,30 +1,31 @@
-@(sale: (Sale, Option[Image], Option[Model], Option[Make]), comments: List[(SaleComment, User)], formatter: java.text.NumberFormat)(flash: play.api.mvc.Flash)(implicit request: AuthenticatedRequest)
+@(sale: (Sale, Option[Image], Option[ModelUnified]), comments: List[(SaleComment, User)], formatter: java.text.NumberFormat)(flash: play.api.mvc.Flash)(implicit request: AuthenticatedRequest)
 
 @main {
 
 	<div class="row">
 	@sale match { 
-  	case (sale, image, model, make) => {
+  	case (sale, image, model) => {
   		<div class="span4">
   			<img width="300" height="240" src="@routes.Market.getImageById(image.get.id.get)" />
         </div>
         
   		<div class="span8">
         	<h1>
-        		@make.get.name
+        		@model.get.make.name
                 @model.get.name
             </h1>
+            <h3>@model.get.trim</h3>
             <br>
             <div class="tabbable">
 				<ul class="nav nav-tabs">
 					<li class="active"><a href="#1" data-toggle="tab">@Messages("sales.show.overview")</a></li>
-					<li><a href="#2" data-toggle="tab">@Messages("sales.show.contactseller")</a></li>
+					<li><a href="#2" data-toggle="tab">Vehicle Details</a></li>
 				</ul>
 				<div class="tab-content">
 				
 					<div class="tab-pane active" id="1">
 					
-						<h3>Details</h3>
+						<h3>Sale Details</h3>
 						
        					<dl class="dl-horizontal">
        						<dt>Year</dt> 
@@ -34,6 +35,9 @@
                           	<dt>Mileage</dt>
                           		<dd>@sale.mileage km</dd>
                         </dl>
+                        
+                       
+                     
                         
                         <br>
                         
@@ -66,7 +70,51 @@
                 	</div>
                 	
                 	<div class="tab-pane" id="2">
-				    	<p>Howdy, I'm in Section 2.</p>
+				    	<h3>Model Details</h3>
+                        
+                        <dl class="dl-horizontal">
+                        	<dt>Make</dt>
+                          		<dd>@model.get.make.name</dd>
+                          	<dt>Model</dt>
+                          		<dd>@model.get.name</dd>
+                          	<dt>Seats</dt>
+                          		<dd>@model.get.seats</dd>
+                          	<dt>Doors</dt>
+                          		<dd>@model.get.doors</dd>
+                          	<dt>Body</dt>
+                          		<dd>@model.get.body</dd>
+                        </dl>
+                        
+                        <h3>Engine Details</h3>
+                        
+                        <dl class="dl-horizontal">
+                        	<dt>Position</dt>
+                          		<dd>@model.get.engine.position</dd>
+                          	<dt>Capacity</dt>
+                          		<dd>@model.get.engine.cc</dd>
+                          	<dt>Cylinders</dt>
+                          		<dd>@model.get.engine.cylinders</dd>
+                          	<dt>Type</dt>
+                          		<dd>@model.get.engine.engineType</dd>
+                          	<dt>Valves</dt>
+                          		<dd>@model.get.engine.valves</dd>
+                        </dl>
+                        
+                        <h3>Performance Details</h3>
+                        
+                        <dl class="dl-horizontal">
+                        	<dt>Make</dt>
+                          		<dd>@model.get.make.name</dd>
+                          	<dt>Model</dt>
+                          		<dd>@model.get.name</dd>
+                          	<dt>Seats</dt>
+                          		<dd>@model.get.seats</dd>
+                          	<dt>Doors</dt>
+                          		<dd>@model.get.doors</dd>
+                          	<dt>Body</dt>
+                          		<dd>@model.get.body</dd>
+                        </dl>
+                        
 				    </div>
 				</div>
                 }

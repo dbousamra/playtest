@@ -21,11 +21,6 @@ object Market extends Controller {
   val formatter = NumberFormat.getCurrencyInstance(Locale.US)
   formatter.setMaximumFractionDigits(0)
 
-  def listSalesById(id: Long) = UnAuthenticated { implicit request =>
-    Ok(html.market.listSales(
-      Sale.listSalesById(id), formatter)(new Flash))
-  }
-
   def listSalesByUserId(id: Long) = UnAuthenticated { implicit request =>
     Ok(html.market.listSales(
       Sale.listSalesByUserId(id), formatter)(new Flash))
