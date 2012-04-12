@@ -73,16 +73,20 @@ object Models extends Schema {
 
     val mods =
       from(models, makes, modelDetails)((model, make, modelDetail) => (
-        where((model.makeId === make.id) and (model.name like filter))
+        where((model.makeId === make.id) 
+            and (model.name like filter)
+            and (model.modelDetailId === modelDetail.id))
         select (asModelUnified(model, make, modelDetail))
-        orderBy (orderBy))).page(offset, pageSize).toSeq
+        orderBy (orderBy))).page(offset, pageSize)
+        
+    println(mods.statement)
 
     val totalRows =
-      from(models, makes)((model, make) => (
-        where((model.makeId === make.id) and (model.name like filter))
+      from(models, makes, modelDetails)((model, make, modelDetail) => (
+        where((model.makeId === make.id) and (model.name like filter) and (model.modelDetailId === modelDetail.id))
         compute (count)))
 
-    Page(mods, page, offset, totalRows)
+    Page(mods.toList, page, offset, totalRows)
   }
 
   def update(id: Long, newModel: Model) = inTransaction {
