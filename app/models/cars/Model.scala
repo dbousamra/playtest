@@ -24,7 +24,7 @@ case class ModelUnified(
 case class Model(
   val id: Long,
   val makeId: Long,
-  val modelDetailsId: Long,
+  val modelDetailId: Long,
   val name: String,
 
   val year: Option[Date],
@@ -49,7 +49,7 @@ object Models extends Schema {
   implicit def model2ModelUnified(model: Model): ModelUnified = {
     ModelUnified(model.id, model.name, model.year, model.trim, model.seats, model.doors, model.body, 
         Makes.findById(model.makeId), 
-        ModelDetails.findById(model.modelDetailsId) 
+        ModelDetails.findById(model.modelDetailId) 
     )
   }
 
@@ -62,7 +62,7 @@ object Models extends Schema {
     from(models, makes, modelDetails)((model, make, modelDetail) => (
       where(model.makeId === make.id
         and model.id === id
-        and model.modelDetailsId === modelDetail.id)
+        and model.modelDetailId === modelDetail.id)
       select (asModelUnified(model, make, modelDetail)))).headOption
   }
 
@@ -75,7 +75,7 @@ object Models extends Schema {
       from(models, makes, modelDetails)((model, make, modelDetail) => (
         where((model.makeId === make.id) and (model.name like filter))
         select (asModelUnified(model, make, modelDetail))
-        orderBy (orderBy))).page(offset, pageSize).toList
+        orderBy (orderBy))).page(offset, pageSize).toSeq
 
     val totalRows =
       from(models, makes)((model, make) => (

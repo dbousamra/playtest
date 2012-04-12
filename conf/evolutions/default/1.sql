@@ -18,7 +18,7 @@ create table make (
   constraint pk_make primary key (id))
 ;
 
-create table modelDetails (
+create table modelDetail (
   id                        bigint not null,
   position                  varchar(127),
   cc                        int,
@@ -44,14 +44,14 @@ create table modelDetails (
   power_rpm                 int,
   torque                    int,
   torque_rpm                int,
-  constraint pk_model_details primary key (id))
+  constraint pk_model_detail primary key (id))
 ;
 
 create table model (
   id                        bigint not null,
   
   makeId                    bigint,
-  modelDetailsId			bigint,
+  modelDetailId			bigint,
   
   name                      varchar(255) not null,
   year                      timestamp,
@@ -99,7 +99,7 @@ create sequence image_seq start with 1000;
 create sequence salecomment_seq start with 1000;
 
 alter table model add constraint fk_model_make_1 foreign key (makeId) references make (id) on delete cascade on update cascade;
-alter table model add constraint fk_model_model_details_1 foreign key (modelDetailsId) references modelDetails (id) on delete cascade on update cascade;
+alter table model add constraint fk_model_model_detail_1 foreign key (modelDetailId) references modelDetail (id) on delete cascade on update cascade;
 
 alter table sale add constraint fk_sale_user_1 foreign key (userId) references user (id) on delete cascade on update cascade;
 alter table sale add constraint fk_sale_model_1 foreign key (modelId) references model (id) on delete cascade on update cascade;

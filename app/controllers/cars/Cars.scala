@@ -82,6 +82,6 @@ object Cars extends Controller {
       } {
         model =>
           Some(
-            ignored(model.id), model.makeId, model.modelDetailsId, model.name, new java.util.Date(), model.trim, model.seats, model.doors, model.body)
+            ignored(model.id), model.makeId, model.modelDetailId, model.name, new java.util.Date(), model.trim, model.seats, model.doors, model.body)
       })
 }
