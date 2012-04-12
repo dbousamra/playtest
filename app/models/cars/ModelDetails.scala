@@ -6,6 +6,7 @@ import org.squeryl.annotations.Column
 
 class ModelDetail(
   val id: Long,
+
   val position: Option[String],
   val cc: Option[Int],
   val cylinders: Option[Int],
@@ -14,6 +15,12 @@ class ModelDetail(
 
   val drivetype: Option[String],
   val transmission: Option[String],
+
+  val weight: Option[Int],
+  val length: Option[Int],
+  val width: Option[Int],
+  val height: Option[Int],
+  val wheelbase: Option[Int],
 
   val highway: Option[Int],
   val mixed: Option[Int],

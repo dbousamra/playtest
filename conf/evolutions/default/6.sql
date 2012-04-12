@@ -2,8 +2,13 @@
 
 # --- !Ups
 
-insert into sale (id,userId,modelId, imageId, year, price, mileage) values ( 1, 1, 1, 1, '2002-01-02', 10020, 202239);
+insert into image (id ,data) values(1, FILE_READ('conf/evolutions/default/images/DSC_0015.JPG'));
+insert into image (id ,data) values(2, FILE_READ('conf/evolutions/default/images/DSC_0015.JPG'));
+insert into image (id ,data) values(3, FILE_READ('conf/evolutions/default/images/DSC_0015.JPG'));
+insert into image (id ,data) values(4, FILE_READ('conf/evolutions/default/images/DSC_0015.JPG'));
+insert into image (id ,data) values(5, FILE_READ('conf/evolutions/default/images/DSC_0015.JPG'));
+insert into image (id ,data) values(6, FILE_READ('conf/evolutions/default/images/DSC_0015.JPG'));
 
 # --- !Downs
 
-delete from sale;
+delete from image;

@@ -18,18 +18,8 @@ create table make (
   constraint pk_make primary key (id))
 ;
 
-create table model (
+create table modelDetails (
   id                        bigint not null,
-  
-  makeId                    bigint,
-  
-  name                      varchar(255) not null,
-  year                      timestamp,
-  trim                      varchar(127),
-  seats                     int,
-  doors                     int,
-  body                      varchar(127),
-  
   position                  varchar(127),
   cc                        int,
   cylinders                 int,
@@ -54,6 +44,21 @@ create table model (
   power_rpm                 int,
   torque                    int,
   torque_rpm                int,
+  constraint pk_model_details primary key (id))
+;
+
+create table model (
+  id                        bigint not null,
+  
+  makeId                    bigint,
+  modelDetailsId			bigint,
+  
+  name                      varchar(255) not null,
+  year                      timestamp,
+  trim                      varchar(127),
+  seats                     int,
+  doors                     int,
+  body                      varchar(127),
   
   constraint pk_model primary key (id))
 ;
@@ -94,6 +99,7 @@ create sequence image_seq start with 1000;
 create sequence salecomment_seq start with 1000;
 
 alter table model add constraint fk_model_make_1 foreign key (makeId) references make (id) on delete cascade on update cascade;
+alter table model add constraint fk_model_model_details_1 foreign key (modelDetailsId) references modelDetails (id) on delete cascade on update cascade;
 
 alter table sale add constraint fk_sale_user_1 foreign key (userId) references user (id) on delete cascade on update cascade;
 alter table sale add constraint fk_sale_model_1 foreign key (modelId) references model (id) on delete cascade on update cascade;
@@ -109,6 +115,7 @@ create index ix_model_make_1 on model (makeId);
 
 SET REFERENTIAL_INTEGRITY FALSE;
 drop table if exists make;
+drop table if exists modelDetails;
 drop table if exists model;
 drop table if exists image;
 drop table if exists sale;
