@@ -17,7 +17,8 @@ case class ModelUnified(
   seats: Option[Int],
   doors: Option[Int],
   body: Option[String],
-  make: Make)
+  make: Make,
+  engine: Engine)
 
 case class Model(
   val id: Long,
@@ -28,12 +29,13 @@ case class Model(
   val trim: Option[String],
   val seats: Option[Int],
   val doors: Option[Int],
-  val body: Option[String] //  val position: Option[String],
-  //  val cc: Option[Int],
-  //  val cylinders: Option[Int],
-  //  val engine_type: Option[String],
-  //  val valves: Option[Int],
-  //
+  val body: Option[String],
+
+  val position: Option[String],
+  val cc: Option[Int],
+  val cylinders: Option[Int],
+  val engine_type: Option[String],
+  val valves: Option[Int] //
   //  val drivetype: Option[String],
   //  val transmission: Option[String],
   //
@@ -53,7 +55,7 @@ case class Model(
   //  val torque: Option[Int],
   //  val torque_rpm: Option[Int]) {
   ) {
-  def this() = this(0, 0, "", Some(Date.valueOf("2004-01-01")), Some(""), Some(0), Some(0), Some(""))
+  def this() = this(0, 0, "", Some(Date.valueOf("2004-01-01")), Some(""), Some(0), Some(0), Some(""), Some(""), Some(0), Some(0), Some(""), Some(0))
 }
 
 object Models extends Schema {
@@ -63,15 +65,21 @@ object Models extends Schema {
   val models = table[Model]
 
   implicit def modelUnified2Model(model: ModelUnified): Model = {
-    Model(model.id, model.make.id, model.name, model.year, model.trim, model.seats, model.doors, model.body)
+    Model(model.id, model.make.id, model.name, model.year, model.trim, model.seats, model.doors, model.body, 
+        model.position, model.cc, model.cylinders, model.engine_type, model.valves
+        
+    )
   }
 
   implicit def model2ModelUnified(model: Model): ModelUnified = {
-    ModelUnified(model.id, model.name, model.year, model.trim, model.seats, model.doors, model.body, Makes.findById(model.makeId))
+    ModelUnified(model.id, model.name, model.year, model.trim, model.seats, model.doors, model.body, Makes.findById(model.makeId),
+      Engine(model.position, model.cc, model.cylinders, model.engine_type, model.valves))
   }
 
   def asModelUnified(model: Model, make: Make): ModelUnified = {
-    ModelUnified(model.id, model.name, model.year, model.trim, model.seats, model.doors, model.body, make)
+    ModelUnified(model.id, model.name, model.year, model.trim, model.seats, model.doors, model.body,
+      make,
+      Engine(model.position, model.cc, model.cylinders, model.engine_type, model.valves))
   }
 
   def findById(id: Long) = inTransaction {
