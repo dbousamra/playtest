@@ -42,7 +42,6 @@ object Cars extends Controller {
       model => {
         Models.update(id, model)
         Redirect(routes.Cars.edit(id)).flashing("success" -> "Model %s has been updated".format(model.name))
-        // modelsHome.flashing("success" -> "Model %s has been updated".format(model.name))
       })
   }
 
@@ -52,9 +51,8 @@ object Cars extends Controller {
 
   def save = Authenticated { implicit request =>
     modelForm.bindFromRequest.fold(
-      formWithErrors => BadRequest(html.cars.createForm(formWithErrors)).flashing("error" -> 
-      "Model %s has not been correctly updated. Check form and try again"
-      ),
+      formWithErrors => BadRequest(html.cars.createForm(formWithErrors)).flashing("error" ->
+        "Model %s has not been correctly updated. Check form and try again"),
       model => {
         Models.insert(model)
         modelsHome.flashing("success" -> "Model %s has been created".format(model.name))
@@ -69,14 +67,21 @@ object Cars extends Controller {
     mapping(
       "id" -> ignored(longNumber),
       "make" -> longNumber,
+      "modelDetails" -> longNumber,
       "name" -> nonEmptyText,
       "year" -> date("yyyy-MM-dd"),
       "trim" -> optional(nonEmptyText),
       "seats" -> optional(number),
       "doors" -> optional(number),
-      "body" -> optional(nonEmptyText)) {
-        (id, make, name, year, trim, seats, doors, body) => (new Model(0, make, name, Some(new Date(year.getTime())), trim, seats, doors, body))
+      "body" -> optional(nonEmptyText)) 
+      {
+        (id, make, modelDetails, name, year, trim, seats, doors, body) =>
+          (new Model(
+            0, make, modelDetails, 
+            name, Some(new Date(year.getTime())), trim, seats, doors, body))
       } {
-        model => Some(ignored(model.id), model.makeId, model.name, new java.util.Date(), model.trim, model.seats, model.doors, model.body)
+        model =>
+          Some(
+            ignored(model.id), model.makeId, model.modelDetailsId, model.name, new java.util.Date(), model.trim, model.seats, model.doors, model.body)
       })
 }
