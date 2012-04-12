@@ -41,15 +41,15 @@ object SignUp extends Controller {
     // so we have to define custom binding/unbinding functions
     {
       // Binding: Create a User from the mapping result (ignore the second password and the accept field)
-      (id, name, email, passwords, _) => User(id, email,name, passwords._1) 
+      (id, name, email, passwords, _) => new User(0, email,name, passwords._1) 
     }
     {
       // Unbinding: Create the mapping values from an existing User value
-      user => Some(user.id, user.name, user.email, (user.password, ""), false)
+      user => Some(Id(user.id), user.name, user.email, (user.password, ""), false)
     }.verifying(
       // Add an additional constraint: The email must not be taken (you could do an SQL request here)
       "An account with this email already exists.",
-      user => !User.findByEmail(user.email).isDefined
+      user => !Users.findByEmail(user.email).isDefined
     )
   )
   
@@ -73,7 +73,7 @@ object SignUp extends Controller {
       }
       ,
       user => {
-        User.create(user)
+        Users.create(user)
         Ok(html.user.signUpSummary(user))
       }
     )

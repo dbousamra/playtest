@@ -23,55 +23,56 @@ object Market extends Controller {
 
   def listSalesByUserId(id: Long) = UnAuthenticated { implicit request =>
     Ok(html.market.listSales(
-      Sale.listSalesByUserId(id), formatter)(new Flash))
+      Sales.listSalesByUserId(id), formatter)(new Flash))
   }
 
   def listSales = UnAuthenticated { implicit request =>
     Ok(html.market.listSales(
-      Sale.listSales, formatter)(new Flash))
+      Sales.listSales, formatter)(new Flash))
   }
 
   def showSaleById(id: Long) = UnAuthenticated { implicit request =>
     Ok(html.market.showSale(
-      Sale.showSaleById(id),
+      Sales.getSaleById(id),
       SaleComment.findBySaleId(id),
       formatter)(new Flash))
   }
 
-  def getImageById(id: Long) = Action {
-    val image = Image.showImageById(id).get.data
-    val binary = image.getBytes(1, image.length().asInstanceOf[Int])
-    Ok(binary).as("image/jpeg")
-
+  def getImageBySaleId(id: Long) = Action {
+    val image = Images.getImageBySaleId(id).get.data
+    println(image)
+    Ok(image).as("image/jpeg")
   }
 
   def cars = Authenticated { implicit request =>
     Ok("Hello " + request.user)
   }
 
-  def createSaleForm(user: User) = Form[Sale](
-    mapping(
-      "id" -> ignored(NotAssigned: Pk[Long]),
-      "model" -> longNumber,
-      "year" -> date("yyyy"),
-      "price" -> number,
-      "mileage" -> number) {
-        (id, model, year, price, mileage) => Sale(id, user.id.get, model, year, price, mileage)
-      } {
-        (sale: Sale) => Some(sale.id, sale.modelId, sale.year, sale.price, sale.mileage)
-      })
+//  def createSaleForm(user: User) = Form[Sale](
+//    mapping(
+//      "id" -> ignored(NotAssigned: Pk[Long]),
+//      "model" -> longNumber,
+//      "year" -> date("yyyy"),
+//      "price" -> number,
+//      "mileage" -> number) {
+//        (id, model, year, price, mileage) => new Sale(id.get, user.id, model, 0, year, price, mileage)
+//      } {
+//        (sale: Sale) => Some(sale.id, sale.modelId, sale.year, sale.price, sale.mileage)
+//      })
 
   def save = Authenticated { implicit request =>
-    createSaleForm(request.user.get).bindFromRequest.fold(
-      formWithErrors => BadRequest(html.market.createSale(formWithErrors)),
-      sale => {
-        Sale.insert(sale)
-        Management.managementHome.flashing("success" -> "Sale %s has been created")
-      }
-    )
+//    createSaleForm(request.user.get).bindFromRequest.fold(
+//      formWithErrors => BadRequest(html.market.createSale(formWithErrors)),
+//      sale => {
+//        Sales.insert(sale)
+//        Management.managementHome.flashing("success" -> "Sale %s has been created")
+//      }
+//    )
+    Management.managementHome.flashing("success" -> "Sale %s has been created")
   }
 
   def sell = WithUser { implicit request =>
-    Ok(html.market.createSale(createSaleForm(request.user.get)))
+    //Ok(html.market.createSale(createSaleForm(request.user.get)))
+    Ok("SELL")
   }
 }

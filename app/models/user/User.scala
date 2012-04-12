@@ -1,104 +1,51 @@
 package models
 import play.api.db._
 import play.api.Play.current
+import org.squeryl.PrimitiveTypeMode._
+import org.squeryl.Schema
+import org.squeryl.KeyedEntity
 
-import anorm._
-import anorm.SqlParser._
+class User (
+  val id: Long = 0,
+  val email: String,
+  val name: String,
+  val password: String) extends KeyedEntity[Long] {
+  def this() = this(0, "", "", "")
+}
 
-case class User(id: Pk[Long], email: String, name: String, password: String)
+object Users extends Schema {
 
-object User {
-
-  // -- Parsers
-
-  /**
-   * Parse a User from a ResultSet
-   */
-  val simple = {
-    get[Pk[Long]]("user.id") ~
-      get[String]("user.email") ~
-      get[String]("user.name") ~
-      get[String]("user.password") map {
-        case id ~ email ~ name ~ password => User(id, email, name, password)
-      }
-  }
-
-  // -- Queries
-
-  /**
-   * Retrieve a User from email.
-   */
-  def findByEmail(email: String): Option[User] = {
-    DB.withConnection { implicit connection =>
-      SQL("select * from user where email = {email}").on(
-        'email -> email).as(User.simple.singleOpt)
-    }
-  }
+  val users = table[User]
   
-  def findById(id: Long): Option[User] = {
-    DB.withConnection { implicit connection =>
-      SQL("select * from user where id = {id}").on(
-        'id -> id).as(User.simple.singleOpt)
-    }
+  on(users)(user => declare(
+      user.id is (autoIncremented),
+      user.email is (unique)
+    ))
+
+  def findByEmail(email: String) = inTransaction {
+    from(users)(u => where(u.email === email) select u).headOption
   }
 
-  /**
-   * Retrieve all users.
-   */
-  def findAll: Seq[User] = {
-    DB.withConnection { implicit connection =>
-      SQL("select * from user").as(User.simple *)
-    }
+  def findById(id: Long) = inTransaction {
+    from(users)(u => where(u.id === id) select u).headOption
+  }
+  def findAll = inTransaction {
+    from(users)(select(_)).toList
   }
 
-  /**
-   * Authenticate a User.
-   */
-  def authenticate(email: String, password: String): Option[User] = {
-    DB.withConnection { implicit connection =>
-      SQL(
-        """
-         select * from user where 
-         email = {email} and password = {password}
-        """).on(
-          'email -> email,
-          'password -> password).as(User.simple.singleOpt)
-    }
+  def authenticate(email: String, password: String): Option[User] = inTransaction {
+    from(users) ( u =>
+      where(u.email === email and u.password === password)
+      select(u)
+    ).headOption
   }
 
-  /**
-   * Create a User.
-   */
-  def create(user: User): User = {
-    DB.withConnection { implicit connection =>
-      SQL(
-        """
-          insert into user values (
-          (select next value for user_seq), {email}, {name}, {password}
-          )
-        """).on(
-          'email -> user.email,
-          'name -> user.name,
-          'password -> user.password).executeUpdate()
-
-      user
-
-    }
+  def create(user: User) = inTransaction {
+    users.insert(user)
   }
 
-  def update(id: Long, user: User) = {
-    DB.withConnection { implicit connection =>
-      SQL(
-        """
-          update user
-          set email = {email}, name = {name}, password = {password}
-          where id = {id}
-        """).on(
-          'id -> id,
-          'email -> user.email,
-          'name -> user.name,
-          'password -> user.password)
-          .executeUpdate()
-    }
+  def update(id: Long, newUser: User) = inTransaction {
+    users.update ( u => 
+      where(u.id === id) set (u.password := newUser.password, u.name := newUser.name, u.email := newUser.email))
   }
 }

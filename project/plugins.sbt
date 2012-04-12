@@ -9,6 +9,7 @@ resolvers ++= Seq(Resolver.url("Play Ivy Repo", new java.net.URL("http://downloa
 resolvers += "Anorm" at "http://download.playframework.org/ivy-releases/"
 
 libraryDependencies ++= Seq(
+"org.squeryl" %% "squeryl" % "0.9.5-RC1",
 "junit" % "junit" % "4.7",
 "play" %% "anorm" % "2.0-RC1-SNAPSHOT")
 

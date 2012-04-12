@@ -26,7 +26,7 @@ object Management {
 
   def dashboard() = WithUser { implicit request =>
     val user = request.user.get
-    val sales = Sale.listSalesByUserId(user.id.get)
+    val sales = Sales.listSalesByUserId(user.id)
     Ok(html.user.dashboard(request.user.get, sales))
   }
 
@@ -42,8 +42,8 @@ object Management {
     editProfileForm.bindFromRequest.fold(
       formWithErrors => BadRequest(html.user.profile(request.user.get, formWithErrors, changePasswordForm)),
         data => {
-        val newUser = User(user.id, data._2, data._1, user.password)
-        User.update(user.id.get, newUser)
+        val newUser = new User(user.id, data._2, data._1, user.password)
+        Users.update(user.id, newUser)
         Redirect(routes.Management.profile).withSession("email" -> newUser.email).flashing("success" -> "Your profile has been updated.")
       })
   }

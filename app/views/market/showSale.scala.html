@@ -1,12 +1,12 @@
-@(sale: (Sale, Option[Image], Option[ModelUnified]), comments: List[(SaleComment, User)], formatter: java.text.NumberFormat)(flash: play.api.mvc.Flash)(implicit request: AuthenticatedRequest)
+@(sale: (Sale, Option[ModelUnified]), comments: List[(SaleComment, User)], formatter: java.text.NumberFormat)(flash: play.api.mvc.Flash)(implicit request: AuthenticatedRequest)
 
 @main {
 
 	<div class="row">
 	@sale match { 
-  	case (sale, image, model) => {
+  	case (sale, model) => {
   		<div class="span4">
-  			<img width="300" height="240" src="@routes.Market.getImageById(image.get.id.get)" />
+  			<img width="300" height="240" src="@routes.Market.getImageBySaleId(sale.id)" />
         </div>
         
   		<div class="span8">
@@ -72,48 +72,7 @@
                 	<div class="tab-pane" id="2">
 				    	<h3>Model Details</h3>
                         
-                        <dl class="dl-horizontal">
-                        	<dt>Make</dt>
-                          		<dd>@model.get.make.name</dd>
-                          	<dt>Model</dt>
-                          		<dd>@model.get.name</dd>
-                          	<dt>Seats</dt>
-                          		<dd>@model.get.seats</dd>
-                          	<dt>Doors</dt>
-                          		<dd>@model.get.doors</dd>
-                          	<dt>Body</dt>
-                          		<dd>@model.get.body</dd>
-                        </dl>
                         
-                        <h3>Engine Details</h3>
-                        
-                        <dl class="dl-horizontal">
-                        	<dt>Position</dt>
-                          		<dd>@model.get.engine.position</dd>
-                          	<dt>Capacity</dt>
-                          		<dd>@model.get.engine.cc</dd>
-                          	<dt>Cylinders</dt>
-                          		<dd>@model.get.engine.cylinders</dd>
-                          	<dt>Type</dt>
-                          		<dd>@model.get.engine.engineType</dd>
-                          	<dt>Valves</dt>
-                          		<dd>@model.get.engine.valves</dd>
-                        </dl>
-                        
-                        <h3>Performance Details</h3>
-                        
-                        <dl class="dl-horizontal">
-                        	<dt>Make</dt>
-                          		<dd>@model.get.make.name</dd>
-                          	<dt>Model</dt>
-                          		<dd>@model.get.name</dd>
-                          	<dt>Seats</dt>
-                          		<dd>@model.get.seats</dd>
-                          	<dt>Doors</dt>
-                          		<dd>@model.get.doors</dd>
-                          	<dt>Body</dt>
-                          		<dd>@model.get.body</dd>
-                        </dl>
                         
 				    </div>
 				</div>

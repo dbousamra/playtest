@@ -1,0 +1,38 @@
+@(modelForm: Form[Model])(implicit request: AuthenticatedRequest, flash: play.api.mvc.Flash)
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@main {
+    
+    <h1>Add a model</h1>
+    
+    @form(routes.Cars.save()) {
+        
+        <fieldset>
+            @inputText(modelForm("name"), '_label -> "Model name")
+	        @select(
+	                modelForm("make"), 
+	                Makes.options, 
+	                '_label -> "Make",
+	                '_showConstraints -> false
+	            )
+
+        
+            @inputText(modelForm("year"), '_label -> "Year")
+            @inputText(modelForm("trim"), '_label -> "Trim")
+            @inputText(modelForm("seats"), '_label -> "Seats")
+            @inputText(modelForm("doors"), '_label -> "Doors")
+            @inputText(modelForm("body"), '_label -> "Body")
+            
+        </fieldset>
+        
+        <div class="actions">
+            <input type="submit" value="Create this model" class="btn primary"> or 
+            <a href="@routes.Cars.listModels()" class="btn">Cancel</a> 
+        </div>
+        
+    }
+    
+}(Some(request))

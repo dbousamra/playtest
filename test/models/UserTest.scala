@@ -12,16 +12,16 @@ class UserTest extends SpecificationWithJUnit {
     "be retrieved by id" in {
       running(FakeApplication()) {
         val id = 1
-        val Some(user) = User.findById(id)
+        val Some(user) = Users.findById(id)
         user.name must equalTo("Bob Sacamano")
-        user.id.get must equalTo(id)
+        user.id must equalTo(id)
       }
     }
 
     "be retrieved by email" in {
       running(FakeApplication()) {
         val email = "bob@gmail.com"
-        val Some(user) = User.findByEmail(email)
+        val Some(user) = Users.findByEmail(email)
         user.name must equalTo("Bob Sacamano")
         user.email must equalTo(email)
       }
@@ -29,9 +29,10 @@ class UserTest extends SpecificationWithJUnit {
 
     "using findAll method contain" in {
       running(FakeApplication()) {
-        val users = User.findAll
-        val userOne = User.findById(1).get
-        val userTwo = User.findById(2).get
+        val users = Users.findAll
+        val userOne = Users.findById(1).get
+        val userTwo = Users.findById(2).get
+        println(users)
         users must contain(userOne)
         users must contain(userTwo)
       }
@@ -39,8 +40,8 @@ class UserTest extends SpecificationWithJUnit {
 
     "be authenticated" in {
       running(FakeApplication()) {
-        val userOne = User.findById(1).get
-        val returnedUser = User.authenticate(userOne.email, userOne.password).get
+        val userOne = Users.findById(1).get
+        val returnedUser = Users.authenticate(userOne.email, userOne.password).get
         returnedUser.email must equalTo(userOne.email)
         returnedUser.password must equalTo(userOne.password)
       }
@@ -48,9 +49,9 @@ class UserTest extends SpecificationWithJUnit {
 
     "be created" in {
       running(FakeApplication()) {
-        val userToBeCreated = User(Id(1), "Foo@bar.com", "Foo", "Pass")
-        User.create(userToBeCreated)
-        val userAfterCreated = User.findByEmail("Foo@bar.com").get
+        val userToBeCreated = new User(111, "Foo@bar.com", "Foo", "Pass")
+        Users.create(userToBeCreated)
+        val userAfterCreated = Users.findByEmail("Foo@bar.com").get
         userAfterCreated.email must equalTo("Foo@bar.com")
         userAfterCreated.password must equalTo("Pass")
         userAfterCreated.name must equalTo("Foo")
@@ -60,14 +61,13 @@ class UserTest extends SpecificationWithJUnit {
     "be updated" in {
       running(FakeApplication()) {
         val id = 1
-        val oldUser = User.findById(id).get
-        val newUser = User(Id(id), "Foo@bar.com", "Foo", "Pass")
-        User.update(id, newUser)
-        val changedUser = User.findById(id).get
+        val oldUser = Users.findById(id).get
+        val newUser = new User(id, "Foo@bar.com", "Foo", "Pass")
+        Users.update(id, newUser)
+        val changedUser = Users.findById(id).get
         changedUser.name must equalTo(newUser.name)
         changedUser.password must equalTo(newUser.password)
       }
-
     }
 
   }

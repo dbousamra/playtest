@@ -1,0 +1,46 @@
+@(id: Long, modelForm: Form[Model])(implicit request: AuthenticatedRequest, flash: play.api.mvc.Flash)
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@main {
+    
+    <h1>Edit model</h1>
+    
+    @flash.get("success").map { message =>
+    	<div class="alert alert-success">Done! @message </div>
+    }
+    
+    @form(routes.Cars.update(id)) {
+        
+        <fieldset>
+            @inputText(modelForm("name"), '_label -> "Model name")
+	        @select(
+	                modelForm("make"), 
+	                Makes.options, 
+	                '_label -> "Make",
+	                '_showConstraints -> false
+	            )
+
+        
+            @inputText(modelForm("year"), '_label -> "Year")
+            @inputText(modelForm("trim"), '_label -> "Trim")
+            @inputText(modelForm("seats"), '_label -> "Seats")
+            @inputText(modelForm("doors"), '_label -> "Doors")
+            @inputText(modelForm("body"), '_label -> "Body")
+            
+        </fieldset>
+        
+        <div class="actions">
+            <input type="submit" value="Save this model" class="btn primary"> or 
+            <a href="@routes.Cars.listModels()" class="btn">Cancel</a> 
+        </div>
+        
+    }
+    
+    @form(routes.Cars.delete(id), 'class -> "topRight") {
+        <input type="submit" value="Delete this model" class="btn danger">
+    } 
+    
+}(Some(request))

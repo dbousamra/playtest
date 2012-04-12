@@ -14,7 +14,7 @@ object Authentication extends Controller {
 
   def Authenticated(f: AuthenticatedRequest => Result) = {
     Action { request =>
-      request.session.get("email").flatMap(u => User.findByEmail(u)).map { user =>
+      request.session.get("email").flatMap(u => Users.findByEmail(u)).map { user =>
         f(AuthenticatedRequest(Some(user), request))
       }.getOrElse {
         Redirect(routes.Authentication.login()).withNewSession
@@ -24,7 +24,7 @@ object Authentication extends Controller {
 
   def UnAuthenticated(f: AuthenticatedRequest => Result) = {
     Action { request =>
-      request.session.get("email").flatMap(u => User.findByEmail(u)).map { user =>
+      request.session.get("email").flatMap(u => Users.findByEmail(u)).map { user =>
         f(AuthenticatedRequest(Some(user), request))
       }.getOrElse {
         f(AuthenticatedRequest(None, request))
@@ -37,7 +37,7 @@ object Authentication extends Controller {
       "email" -> text,
       "password" -> text) 
       verifying ("Invalid email or password", result => result match {
-        case (email, password) => User.authenticate(email, password).isDefined
+        case (email, password) => Users.authenticate(email, password).isDefined
       }))
 
   /**

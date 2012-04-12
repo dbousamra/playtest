@@ -4,92 +4,79 @@ import play.api._
 import play.api.mvc._
 import play.api.data._
 import play.api.data.Forms._
-import anorm._
 import views._
 import controllers._
 import controllers.Authentication._
 import models._
+import models.Models._
 import java.text.NumberFormat
 import java.util.Locale
 import java.sql.Blob
 import play.api.libs.iteratee.Enumerator
+import java.sql.Date
 
 object Cars extends Controller {
 
   val modelsHome = Redirect(routes.Cars.listModels(0, 2, ""))
-  
-  /**
-   * Display the paginated list of models.
-   *
-   * @param page Current page number (starts from 0)
-   * @param orderBy Column to be sorted
-   * @param filter Filter applied on model names
-   */
+
   def listModels(page: Int, orderBy: Int, filter: String) = UnAuthenticated { implicit request =>
     Ok {
       html.cars.listModels(
-        Model.list(page = page, 
-            	   orderBy = orderBy,
-            	   filter = ("%" + filter + "%")), 
-            	   orderBy, 
-            	   filter)
+        Models.list(page = page,
+          orderBy = orderBy,
+          filter = ("%" + filter + "%")),
+        orderBy,
+        filter)
     }
   }
 
-  /**
-   * Display the 'edit form' of a existing Model.
-   *
-   * @param id Id of the model to edit
-   */
-//  def edit(id: Long) = UnAuthenticated { implicit request =>
-//    Model.findById(id).map { model =>
-//      Ok(html.cars.editForm(id, modelForm.fill(model)))
-//    }.getOrElse(Unauthorized)
-//  }
+  def edit(id: Long) = UnAuthenticated { implicit request =>
+    Models.findById(id).map { model =>
+      Ok(html.cars.editForm(id, modelForm.fill(model)))
+    }.getOrElse(Unauthorized)
+  }
 
-  /**
-   * Handle the 'edit form' submission
-   *
-   * @param id Id of the model to edit
-   */
-//  def update(id: Long) = UnAuthenticated { implicit request =>
-//    modelForm.bindFromRequest.fold(
-//      formWithErrors => BadRequest(html.cars.editForm(id, formWithErrors)),
-//      model => {
-//        Model.update(id, model)
-//        modelsHome.flashing("success" -> "Model %s has been updated".format(model.name))
-//      })
-//  }
+  def update(id: Long) = UnAuthenticated { implicit request =>
+    modelForm.bindFromRequest.fold(
+      formWithErrors => BadRequest(html.cars.editForm(id, formWithErrors)),
+      model => {
+        Models.update(id, model)
+        Redirect(routes.Cars.edit(id)).flashing("success" -> "Model %s has been updated".format(model.name))
+        // modelsHome.flashing("success" -> "Model %s has been updated".format(model.name))
+      })
+  }
 
-  /**
-   * Display the 'new model form'.
-   */
-//  def create = UnAuthenticated { implicit request =>
-//    Ok(html.cars.createForm(modelForm))
-//  }
+  def create = UnAuthenticated { implicit request =>
+    Ok(html.cars.createForm(modelForm))
+  }
 
-  /**
-   * Handle the 'new model form' submission.
-   */
-//  def save = Authenticated { implicit request =>
-//    modelForm.bindFromRequest.fold(
-//      formWithErrors => BadRequest(html.cars.createForm(formWithErrors)),
-//      model => {
-//        Model.insert(model)
-//        modelsHome.flashing("success" -> "Model %s has been created".format(model.name))
-//      })
-//  }
-
-  /**
-   * Handle model deletion.
-   */
+  def save = Authenticated { implicit request =>
+    modelForm.bindFromRequest.fold(
+      formWithErrors => BadRequest(html.cars.createForm(formWithErrors)).flashing("error" -> 
+      "Model %s has not been correctly updated. Check form and try again"
+      ),
+      model => {
+        Models.insert(model)
+        modelsHome.flashing("success" -> "Model %s has been created".format(model.name))
+      })
+  }
   def delete(id: Long) = Action {
-    Model.delete(id)
+    Models.delete(id)
     modelsHome.flashing("success" -> "Model has been deleted")
   }
 
-  /**
-   * Describe the model form (used in both edit and create screens).
-   */
-  // -- Actions
+  val modelForm = Form(
+    mapping(
+      "id" -> ignored(longNumber),
+      "make" -> longNumber,
+      "name" -> nonEmptyText,
+      "year" -> date("yyyy-MM-dd"),
+      "trim" -> optional(nonEmptyText),
+      "seats" -> optional(number),
+      "doors" -> optional(number),
+      "body" -> optional(nonEmptyText)) {
+        (id, make, name, year, trim, seats, doors, body) => (new Model(0, make, name, Some(new Date(year.getTime())), trim, seats, doors, body))
+      } {
+        model => Some(ignored(model.id), model.makeId, model.name, new java.util.Date(), model.trim, model.seats, model.doors, model.body)
+      })
 }

@@ -24,9 +24,7 @@
     
 
     @flash.get("success").map { message =>
-        <div class="alert-message warning">
-            <strong>Done!</strong> @message
-        </div>
+    	<div class="alert alert-success">Done! @message </div>
     }
 
     <div id="actions">
@@ -36,7 +34,7 @@
             <input type="submit" id="searchsubmit" value="Filter by name" class="btn primary">
         }
         
-        <a class="btn success" id="add" href="">Add a new model</a>
+        <a class="btn success" id="add" href="@routes.Cars.create">Add a new model</a>
         
     </div>
     
@@ -47,17 +45,39 @@
                 <tr>
                 	@header(2, "Make")
                     @header(8, "Model name")
-                    @header(6, "Aspiration")
-                    @header(3, "Year")
+                    @header(6, "Year")
+                    @header(3, "Trim")
+                    @header(3, "Seats")
+                    @header(3, "Doors")
+                    @header(3, "Body Type")
                 </tr>
             </thead>
             <tbody>
 				
                 @models.map { 
                     case model => {
-                        <tr>
-                           
-                                                    
+                         <tr>
+                            <td>
+                            	<a href="@routes.Cars.edit(model.id)">@model.make.name</a>
+                            </td>
+                            <td>
+                                @model.name
+                            </td>
+                            <td>
+                            	@model.year
+                            </td>
+                            <td>
+                            	@model.trim
+                            </td>
+                            <td>
+                            	@model.seats
+                            </td>
+                            <td>
+                            	@model.doors
+                            </td>      
+                            <td>
+                            	@model.body
+                            </td>               
                             
                         </tr>
                     }

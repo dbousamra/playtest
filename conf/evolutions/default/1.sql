@@ -5,7 +5,7 @@
 set ignorecase true;
 
 create table user (
-  id                        bigint not null,
+  id bigint not null primary key auto_increment,
   email                     varchar(255) not null,
   name                      varchar(255) not null,
   password                  varchar(255) not null,
@@ -21,7 +21,7 @@ create table make (
 create table model (
   id                        bigint not null,
   
-  make_id                   bigint,
+  makeId                    bigint,
   
   name                      varchar(255) not null,
   year                      timestamp,
@@ -66,19 +66,19 @@ create table image (
 
 create table sale (
   id                        bigint not null,
-  user_id                   bigint,
-  model_id                  bigint,
-  image_id					bigint,
+  userId                   bigint,
+  modelId                  bigint,
+  imageId					bigint,
   year                      timestamp,
   price						int,
   mileage					int,
   constraint pk_sale primary key (id))
 ;
 
-create table sale_comment (
+create table salecomment (
   id                        bigint not null,
-  user_id                   bigint,
-  sale_id                   bigint,
+  userId                   bigint,
+  saleId                   bigint,
   text                      varchar,
   accepted                  boolean,
   constraint pk_sale_comment primary key (id))
@@ -91,19 +91,19 @@ create sequence engine_seq start with 1000;
 create sequence model_seq start with 1000;
 create sequence sale_seq start with 1000;
 create sequence image_seq start with 1000;
-create sequence sale_comment_seq start with 1000;
+create sequence salecomment_seq start with 1000;
 
-alter table model add constraint fk_model_make_1 foreign key (make_id) references make (id) on delete cascade on update cascade;
+alter table model add constraint fk_model_make_1 foreign key (makeId) references make (id) on delete cascade on update cascade;
 
-alter table sale add constraint fk_sale_user_1 foreign key (user_id) references user (id) on delete cascade on update cascade;
-alter table sale add constraint fk_sale_model_1 foreign key (model_id) references model (id) on delete cascade on update cascade;
-alter table sale add constraint fk_sale_image_1 foreign key (image_id) references image (id) on delete cascade on update cascade;
+alter table sale add constraint fk_sale_user_1 foreign key (userId) references user (id) on delete cascade on update cascade;
+alter table sale add constraint fk_sale_model_1 foreign key (modelId) references model (id) on delete cascade on update cascade;
+alter table sale add constraint fk_sale_image_1 foreign key (imageId) references image (id) on delete cascade on update cascade;
 
-alter table sale_comment add constraint fk_sale_comment_sale foreign key (sale_id) references sale (id) on delete cascade on update cascade;
-alter table sale_comment add constraint fk_sale_comment_user foreign key (user_id) references user (id) on delete cascade on update cascade;
+alter table salecomment add constraint fk_sale_comment_sale foreign key (saleId) references sale (id) on delete cascade on update cascade;
+alter table salecomment add constraint fk_sale_comment_user foreign key (userId) references user (id) on delete cascade on update cascade;
 
 
-create index ix_model_make_1 on model (make_id);
+create index ix_model_make_1 on model (makeId);
 
 # --- !Downs
 
@@ -113,7 +113,7 @@ drop table if exists model;
 drop table if exists image;
 drop table if exists sale;
 drop table if exists user;
-drop table if exists sale_comment;
+drop table if exists salecomment;
 
 SET REFERENTIAL_INTEGRITY TRUE;
 
@@ -122,5 +122,5 @@ drop sequence if exists engine_seq;
 drop sequence if exists model_seq;
 drop sequence if exists image_seq;
 drop sequence if exists sale_seq;
-drop sequence if exists sale_comment_seq;
+drop sequence if exists salecomment_seq;
 drop sequence if exists user_seq;
