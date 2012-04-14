@@ -8,7 +8,6 @@ import views._
 import controllers._
 import controllers.Authentication._
 import models._
-import models.Models._
 import java.text.NumberFormat
 import java.util.Locale
 import java.sql.Blob
@@ -63,25 +62,54 @@ object Cars extends Controller {
     modelsHome.flashing("success" -> "Model has been deleted")
   }
 
-  val modelForm = Form(
+  val modelFor = Form(
     mapping(
       "id" -> ignored(longNumber),
       "make" -> longNumber,
-      "modelDetails" -> longNumber,
       "name" -> nonEmptyText,
       "year" -> date("yyyy-MM-dd"),
-      "trim" -> optional(nonEmptyText),
+      "trim" -> optional(text),
       "seats" -> optional(number),
       "doors" -> optional(number),
-      "body" -> optional(nonEmptyText)) 
-      {
-        (id, make, modelDetails, name, year, trim, seats, doors, body) =>
-          (new Model(
-            0, make, modelDetails, 
-            name, Some(new Date(year.getTime())), trim, seats, doors, body))
-      } {
-        model =>
-          Some(
-            ignored(model.id), model.makeId, model.modelDetailId, model.name, new java.util.Date(), model.trim, model.seats, model.doors, model.body)
-      })
+      "body" -> optional(nonEmptyText),
+      
+      "modelDetails" -> mapping (
+      
+      "position" -> optional(text),
+	  "cc" -> optional(number),
+	  "cylinders" -> optional(number),
+	   "engine_type" -> optional(text),
+	  "valves" -> optional(number),
+	
+	  "drivetype" -> optional(text),
+	  "transmission" -> optional(text),
+	
+	   "weight" -> optional(number),
+	  "length" -> optional(number),
+	   "width" -> optional(number),
+	   "height" -> optional(number),
+	  "wheelbase" -> optional(number),
+	
+	   "highway" -> optional(number),
+	   "mixed" -> optional(number),
+	   "city" -> optional(number),
+	   "tank_size" -> optional(number),
+	
+	  "power" -> optional(number),
+	  "power_rpm" -> optional(number),
+	  "torque" -> optional(number),
+	  "torque_rpm" -> optional(number)
+	  )(ModelDetail.apply)(ModelDetail.unapply)
+      
+      
+      
+      )
+	  (
+	     (id, makeId, name, year, trim, seats, doors, body, user) => 
+	       new ModelUnified(0, name, Some(new Date(year.getTime())), trim, seats, doors, body, Makes.findById(makeId), user)
+	  )
+      (
+         (model) => Some(model.id, model.makeId, model.name, model.year, model.trim, model.seats, model.doors, model.body, model.modelDetail)
+      )     
+   )
 }

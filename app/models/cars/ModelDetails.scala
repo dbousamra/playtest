@@ -3,9 +3,10 @@ package models
 import org.squeryl.PrimitiveTypeMode._
 import org.squeryl.Schema
 import org.squeryl.annotations.Column
+import org.squeryl.KeyedEntity
 
-class ModelDetail(
-  val id: Long,
+case class ModelDetail(
+  val id: Long = 0,
 
   val position: Option[String],
   val cc: Option[Int],
@@ -30,7 +31,7 @@ class ModelDetail(
   val power: Option[Int],
   val power_rpm: Option[Int],
   val torque: Option[Int],
-  val torque_rpm: Option[Int]) {
+  val torque_rpm: Option[Int]) extends KeyedEntity[Long] {
 
   def this() = this(
     0,

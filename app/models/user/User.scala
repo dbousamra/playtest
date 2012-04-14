@@ -5,7 +5,7 @@ import org.squeryl.PrimitiveTypeMode._
 import org.squeryl.Schema
 import org.squeryl.KeyedEntity
 
-class User (
+case class User (
   val id: Long = 0,
   val email: String,
   val name: String,
