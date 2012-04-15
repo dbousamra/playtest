@@ -1,4 +1,4 @@
-@(modelForm: Form[Model])(implicit request: AuthenticatedRequest, flash: play.api.mvc.Flash)
+@(modelForm: Form[ModelUnified])(implicit request: AuthenticatedRequest, flash: play.api.mvc.Flash)
 
 @import helper._
 
@@ -7,6 +7,13 @@
 @main {
     
     <h1>Add a model</h1>
+    
+    @flash.get("success").map { message =>
+      <div class="alert alert-success">Done! @message </div>
+    }
+    @flash.get("error").map { message =>
+      <div class="alert alert-success">Error! @message </div>
+    }
     
     @form(routes.Cars.save()) {
         
@@ -20,11 +27,30 @@
 	            )
 
         
-            @inputText(modelForm("year"), '_label -> "Year")
-            @inputText(modelForm("trim"), '_label -> "Trim")
-            @inputText(modelForm("seats"), '_label -> "Seats")
-            @inputText(modelForm("doors"), '_label -> "Doors")
-            @inputText(modelForm("body"), '_label -> "Body")
+            @inputText(
+              modelForm("year"), '_label -> "Year",
+              '_error -> modelForm.error("year")
+            )
+            
+            @inputText(
+              modelForm("trim"), '_label -> "Trim",
+              '_error -> modelForm.error("trim")
+            )
+            
+            @inputText(
+              modelForm("seats"), '_label -> "Seats",
+              '_error -> modelForm.error("seats")
+            )
+            
+            @inputText(
+              modelForm("doors"), '_label -> "Doors",
+              '_error -> modelForm.error("doors")
+            )
+            
+            @inputText(
+              modelForm("body"), '_label -> "Body",
+              '_error -> modelForm.error("body")
+            )
             
         </fieldset>
         

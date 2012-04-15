@@ -18,7 +18,7 @@ case class ModelUnified(
   doors: Option[Int],
   body: Option[String],
   make: Make,
-  details: ModelDetail
+  details: ModelDetailUnified
   )
 
 case class Model(
@@ -78,8 +78,6 @@ object Models extends Schema {
             and (model.modelDetailId === modelDetail.id))
         select (asModelUnified(model, make, modelDetail))
         orderBy (orderBy))).page(offset, pageSize)
-        
-    println(mods.statement)
 
     val totalRows =
       from(models, makes, modelDetails)((model, make, modelDetail) => (

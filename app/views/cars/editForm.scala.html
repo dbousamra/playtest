@@ -1,4 +1,4 @@
-@(id: Long, modelForm: Form[Model])(implicit request: AuthenticatedRequest, flash: play.api.mvc.Flash)
+@(id: Long, modelForm: Form[ModelUnified])(implicit request: AuthenticatedRequest, flash: play.api.mvc.Flash)
 
 @import helper._
 
@@ -10,6 +10,9 @@
     
     @flash.get("success").map { message =>
     	<div class="alert alert-success">Done! @message </div>
+    }
+    @flash.get("error").map { message =>
+      <div class="alert alert-success">Error! @message </div>
     }
     
     @form(routes.Cars.update(id)) {
