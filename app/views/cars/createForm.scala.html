@@ -14,51 +14,93 @@
     @flash.get("error").map { message =>
       <div class="alert alert-success">Error! @message </div>
     }
-    
-    @form(routes.Cars.save()) {
+    <div class="tabbable" style="margin-bottom: 9px;">
+    @form(routes.Cars.save(), 'class -> "form-horizontal") {
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#1" data-toggle="tab">Basic</a></li>
+          <li class=""><a href="#2" data-toggle="tab">Engine</a></li>
+          <li class=""><a href="#3" data-toggle="tab">Drivetrain</a></li>
+          <li class=""><a href="#4" data-toggle="tab">Dimensions</a></li>
+          <li class=""><a href="#5" data-toggle="tab">Economy</a></li>
+          <li class=""><a href="#6" data-toggle="tab">Performance</a></li>
+        </ul>
         
-        <fieldset>
-            @inputText(modelForm("name"), '_label -> "Model name")
-	        @select(
-	                modelForm("make"), 
-	                Makes.options, 
-	                '_label -> "Make",
-	                '_showConstraints -> false
-	            )
+        <div class="tab-content">
+          <div class="tab-pane active" id="1">
+            <h3>Basic Details</h3>
+            <hr>
+            <fieldset>
+              @inputText(modelForm("name"), '_label -> "Model name")
+  	            @select(
+  	                modelForm("make"), 
+  	                Makes.options, 
+  	                '_label -> "Make",
+  	                '_showConstraints -> false
+  	            )
+  
+          
+              @inputText(
+                modelForm("year"), '_label -> "Year",
+                '_error -> modelForm.error("year")
+              )
+              
+              @inputText(
+                modelForm("trim"), '_label -> "Trim",
+                '_error -> modelForm.error("trim")
+              )
+              
+              @inputText(
+                modelForm("seats"), '_label -> "Seats",
+                '_error -> modelForm.error("seats")
+              )
+              
+              @inputText(
+                modelForm("doors"), '_label -> "Doors",
+                '_error -> modelForm.error("doors")
+              )
+              
+              @inputText(
+                modelForm("body"), '_label -> "Body",
+                '_error -> modelForm.error("body")
+              )
+              
+            </fieldset>
 
-        
-            @inputText(
-              modelForm("year"), '_label -> "Year",
-              '_error -> modelForm.error("year")
-            )
+            <div class="actions">
+              <input type="submit" value="Create this model" class="btn primary"> or <a href="@routes.Cars.listModels()" class="btn">Cancel</a> 
+            </div>
             
-            @inputText(
-              modelForm("trim"), '_label -> "Trim",
-              '_error -> modelForm.error("trim")
-            )
-            
-            @inputText(
-              modelForm("seats"), '_label -> "Seats",
-              '_error -> modelForm.error("seats")
-            )
-            
-            @inputText(
-              modelForm("doors"), '_label -> "Doors",
-              '_error -> modelForm.error("doors")
-            )
-            
-            @inputText(
-              modelForm("body"), '_label -> "Body",
-              '_error -> modelForm.error("body")
-            )
-            
-        </fieldset>
-        
-        <div class="actions">
-            <input type="submit" value="Create this model" class="btn primary"> or 
-            <a href="@routes.Cars.listModels()" class="btn">Cancel</a> 
+          </div>
+          
+          <div class="tab-pane" id="2">
+            <h3>Engine Details</h3>
+            <hr>
+          </div>
+          
+          <div class="tab-pane" id="3">
+            <h3>Drivetrain Details</h3>
+            <hr>
+          </div>
+          
+          <div class="tab-pane" id="4">
+            <h3>Dimensions Details</h3>
+            <hr>
+          </div>
+          
+          <div class="tab-pane" id="5">
+            <h3>Economy Details</h3>
+            <hr>
+          </div>
+          
+          <div class="tab-pane" id="6">
+            <h3>Performance Details</h3>
+            <hr>
+          </div>
+          
         </div>
-        
+      </div>        
     }
+    
+     
     
 }(Some(request))

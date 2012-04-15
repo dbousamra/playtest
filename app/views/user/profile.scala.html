@@ -2,6 +2,8 @@
 
 @import helper._
 @import helper.twitterBootstrap._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
 
 @management(user) {
     <h1>Edit Your Profile</h1>
@@ -10,27 +12,24 @@
     	<div class="alert alert-success">Done! @message </div>
     }
     
-    @helper.form(action = routes.Management.update) {
+    @helper.form(action = routes.Management.update, 'class -> "form-horizontal") {
         
         <fieldset>
             <legend>Account informations</legend>
             
             @inputText(
                 signupForm("name"), 
-                '_label -> "Name", 
-                '_help -> "Your full name",
-                '_error -> signupForm.globalError
+                '_label -> "Name"
             )
             
             @inputText(
-                signupForm("email"), '_label -> "Email",
-                '_help -> "Enter a valid email address."
+                signupForm("email"), '_label -> "Email"
             )
             
         </fieldset>
      
         
-        <div class="actions">
+        <div class="form-actions">
             <input type="submit" class="btn primary" value="Apply">
             <a href="@routes.Application.index" class="btn">Cancel</a>
         </div>
