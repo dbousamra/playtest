@@ -19,7 +19,7 @@ create table make (
 ;
 
 create table modelDetail (
-  id                        bigint not null,
+  id bigint not null primary key auto_increment,
   position                  varchar(127),
   cc                        int,
   cylinders                 int,
@@ -48,7 +48,7 @@ create table modelDetail (
 ;
 
 create table model (
-  id                        bigint not null,
+  id bigint not null primary key auto_increment, 
   
   makeId                    bigint,
   modelDetailId			bigint,

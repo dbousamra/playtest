@@ -8,6 +8,7 @@ import models._
 import org.squeryl.PrimitiveTypeMode._
 import org.squeryl.Schema
 import org.squeryl.annotations.Column
+import org.squeryl.KeyedEntity
 
 case class ModelUnified(
   id: Long,
@@ -22,7 +23,7 @@ case class ModelUnified(
   )
 
 case class Model(
-  val id: Long,
+  val id: Long = 0,
   val makeId: Long,
   val modelDetailId: Long,
   val name: String,
@@ -31,7 +32,7 @@ case class Model(
   val trim: Option[String],
   val seats: Option[Int],
   val doors: Option[Int],
-  val body: Option[String]) {
+  val body: Option[String]) extends KeyedEntity[Long]  {
   def this() = this(0, 0, 0, "", Some(Date.valueOf("2004-01-01")), Some(""), Some(0), Some(0), Some("")) 
 }
 
@@ -41,6 +42,12 @@ object Models extends Schema {
   import ModelDetails._
 
   val models = table[Model]
+  
+  on(models)(model => declare(
+      model.id is (autoIncremented),
+      model.id is (unique)
+    ))
+
 
   implicit def modelUnified2Model(modelUnified: ModelUnified): Model = {
     Model(modelUnified.id, modelUnified.make.id, modelUnified.details.id, modelUnified.name, modelUnified.year, modelUnified.trim, modelUnified.seats, modelUnified.doors, modelUnified.body)

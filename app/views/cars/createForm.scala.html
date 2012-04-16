@@ -74,27 +74,138 @@
           
           <div class="tab-pane" id="2">
             <h3>Engine Details</h3>
+            
+            <fieldset>
+           
+  			  @inputText(
+                modelForm("modelDetails.engine.position"), '_label -> "Position",
+                '_error -> modelForm.error("modelDetails.engine.position")
+              )
+              
+              @inputText(
+                modelForm("modelDetails.engine.cc"), '_label -> "Cylinders",
+                '_error -> modelForm.error("modelDetails.engine.cc")
+              )
+              
+              @inputText(
+                modelForm("modelDetails.engine.engine_type"), '_label -> "Type",
+                '_error -> modelForm.error("modelDetails.engine.engine_type")
+              )
+              
+              @inputText(
+                modelForm("modelDetails.engine.valves"), '_label -> "Valves per cylinder",
+                '_error -> modelForm.error("modelDetails.engine.valves")
+              )
+            </fieldset>
+            
             <hr>
           </div>
           
           <div class="tab-pane" id="3">
             <h3>Drivetrain Details</h3>
             <hr>
+            <fieldset>
+           
+  			  @inputText(
+                modelForm("modelDetails.drivetrain.drivetype"), '_label -> "Drive type",
+                '_error -> modelForm.error("modelDetails.drivetrain.drivetype")
+              )
+              
+              @inputText(
+                modelForm("modelDetails.drivetrain.transmission"), '_label -> "Transmission",
+                '_error -> modelForm.error("modelDetails.drivetrain.transmission")
+              )
+            </fieldset>
           </div>
           
           <div class="tab-pane" id="4">
             <h3>Dimensions Details</h3>
             <hr>
+            <fieldset>
+           
+  			  @inputText(
+                modelForm("modelDetails.dimensions.weight"), '_label -> "Weight",
+                '_error -> modelForm.error("modelDetails.dimensions.weight")
+              )
+              
+              @inputText(
+                modelForm("modelDetails.dimensions.length"), '_label -> "Length",
+                '_error -> modelForm.error("modelDetails.dimensions.length")
+              )
+              
+              @inputText(
+                modelForm("modelDetails.dimensions.width"), '_label -> "Width",
+                '_error -> modelForm.error("modelDetails.dimensions.width")
+              )
+              
+              @inputText(
+                modelForm("modelDetails.dimensions.height"), '_label -> "Height",
+                '_error -> modelForm.error("modelDetails.dimensions.height")
+              )
+              
+              @inputText(
+                modelForm("modelDetails.dimensions.wheelbase"), '_label -> "Wheelbase",
+                '_error -> modelForm.error("modelDetails.dimensions.wheelbase")
+              )
+            </fieldset>
+            
           </div>
           
           <div class="tab-pane" id="5">
             <h3>Economy Details</h3>
             <hr>
+            
+             <fieldset>
+           
+  			  @inputText(
+                modelForm("modelDetails.economy.highway"), '_label -> "Highway",
+                '_error -> modelForm.error("modelDetails.economy.highway")
+              )
+              
+              @inputText(
+                modelForm("modelDetails.economy.mixed"), '_label -> "Mixed",
+                '_error -> modelForm.error("modelDetails.economy.mixed")
+              )
+              
+              @inputText(
+                modelForm("modelDetails.economy.city"), '_label -> "City",
+                '_error -> modelForm.error("modelDetails.economy.city")
+              )
+              
+              @inputText(
+                modelForm("modelDetails.economy.tank_size"), '_label -> "Tank Size",
+                '_error -> modelForm.error("modelDetails.economy.tank_size")
+              )
+              
+            </fieldset>
           </div>
           
           <div class="tab-pane" id="6">
             <h3>Performance Details</h3>
             <hr>
+            <fieldset>
+           
+  			  @inputText(
+                modelForm("modelDetails.performance.power"), '_label -> "Power",
+                '_error -> modelForm.error("modelDetails.performance.power")
+              )
+              
+              @inputText(
+                modelForm("modelDetails.performance.power_rpm"), '_label -> "Power Rpm",
+                '_error -> modelForm.error("modelDetails.performance.power_rpm")
+              )
+              
+              @inputText(
+                modelForm("modelDetails.performance.torque"), '_label -> "Torque",
+                '_error -> modelForm.error("modelDetails.performance.torque")
+              )
+              
+              @inputText(
+                modelForm("modelDetails.performance.torque_rpm"), '_label -> "Torque Rpm",
+                '_error -> modelForm.error("modelDetails.performance.torque_rpm")
+              )
+              
+            </fieldset>
           </div>
           
         </div>

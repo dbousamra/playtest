@@ -41,17 +41,13 @@ object Authentication extends Controller {
         case (email, password) => Users.authenticate(email, password).isDefined
       }))
 
-  /**
-   * Login page.
-   */
-  def login = Action { implicit request =>
-    implicit val authRequest = new AuthenticatedRequest(None, request)
-    Ok(html.login(loginForm))
+  def login = UnAuthenticated { implicit request =>
+    request.user match {
+      case Some(x) => Redirect(routes.Management.dashboard())
+      case None => Ok(html.login(loginForm))
+    }    
   }
 
-  /**
-   * Handle login form submission.
-   */
   def authenticate = Action { implicit request =>
     implicit val authRequest = new AuthenticatedRequest(None, request)
     loginForm.bindFromRequest.fold(

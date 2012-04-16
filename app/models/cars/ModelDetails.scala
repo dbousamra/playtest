@@ -45,6 +45,11 @@ case class ModelDetail(
 object ModelDetails extends Schema {
 
   val modelDetails = table[ModelDetail]
+  
+  on(modelDetails)(modelDetail => declare(
+      modelDetail.id is (autoIncremented),
+      modelDetail.id is (unique)
+    ))
 
   implicit def modelDetail2Unified(modelDetail: ModelDetail): ModelDetailUnified = {
     ModelDetailUnified(

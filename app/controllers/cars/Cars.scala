@@ -14,6 +14,8 @@ import java.sql.Blob
 import play.api.libs.iteratee.Enumerator
 import java.sql.Date
 import models.Models._
+import anorm.Pk
+import anorm.NotAssigned
 
 object Cars extends Controller {
 
@@ -56,6 +58,7 @@ object Cars extends Controller {
     modelForm.bindFromRequest.fold(
       formWithErrors => {
         println("Error in save")
+        println(formWithErrors)
         BadRequest(html.cars.createForm(formWithErrors))
       },
       model => {
@@ -70,17 +73,15 @@ object Cars extends Controller {
   
   val modelForm = Form(
       mapping(
-      "id" -> longNumber,
       "make" -> longNumber,
-      "name" -> nonEmptyText,
+      "name" -> text,
       "year" -> date("yyyy-MM-dd"),
       "trim" -> optional(text),
       "seats" -> optional(number),
       "doors" -> optional(number),
-      "body" -> optional(nonEmptyText),
+      "body" -> optional(text),
       
       "modelDetails" -> mapping (
-          "id" -> longNumber,
           "engine" -> mapping(
               "position" -> optional(text),
 			  "cc" -> optional(number),
@@ -111,14 +112,20 @@ object Cars extends Controller {
 			  "torque" -> optional(number),
 			  "torque_rpm" -> optional(number)
           )(Performance.apply)(Performance.unapply)
-      )(ModelDetailUnified.apply)(ModelDetailUnified.unapply)
+        )
+        ( 
+          (engine, drivetrain, dimensions, economy, performance) => new ModelDetailUnified(0, engine, drivetrain, dimensions, economy, performance)    
+        )
+        (
+          (model: ModelDetailUnified) => Some(model.engine, model.drivetrain, model.dimensions, model.economy, model.performance)    
+        )
     )
     (
-        (id, makeId, name, year, trim, seats, doors, body, modelDetails) => 
+        (makeId, name, year, trim, seats, doors, body, modelDetails) => 
           new ModelUnified(0, name, Some(new Date(year.getTime())), trim, seats, doors, body, Makes.findById(makeId), modelDetails)
     )
     (
-        (model: ModelUnified) => Some(model.id, model.make.id, model.name, model.year.get, model.trim, model.seats, model.doors, model.body, model.details)
+        (model: ModelUnified) => Some(model.make.id, model.name, model.year.get, model.trim, model.seats, model.doors, model.body, model.details)
     )     
   )
 }
