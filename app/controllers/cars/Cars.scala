@@ -40,11 +40,11 @@ object Cars extends Controller {
 
   def update(id: Long) = UnAuthenticated { implicit request =>    modelForm.bindFromRequest.fold(
       formWithErrors => { 
-        println("Error in update")
+        println("BAD REQUEST IN UPDATE")
+        println(formWithErrors)
         BadRequest(html.cars.editForm(id, formWithErrors))
       },
       model => {
-        println("INSAVE")
         Models.update(id, model)
         Redirect(routes.Cars.edit(id)).flashing("success" -> "Model %s has been updated".format(model.name))
       })
@@ -73,8 +73,9 @@ object Cars extends Controller {
   
   val modelForm = Form(
       mapping(
+      "id" -> longNumber,
       "make" -> longNumber,
-      "name" -> text,
+      "name" -> nonEmptyText,
       "year" -> date("yyyy-MM-dd"),
       "trim" -> optional(text),
       "seats" -> optional(number),
@@ -82,6 +83,7 @@ object Cars extends Controller {
       "body" -> optional(text),
       
       "modelDetails" -> mapping (
+          "id" -> longNumber,
           "engine" -> mapping(
               "position" -> optional(text),
 			  "cc" -> optional(number),
@@ -114,18 +116,18 @@ object Cars extends Controller {
           )(Performance.apply)(Performance.unapply)
         )
         ( 
-          (engine, drivetrain, dimensions, economy, performance) => new ModelDetailUnified(0, engine, drivetrain, dimensions, economy, performance)    
+          (id, engine, drivetrain, dimensions, economy, performance) => new ModelDetailUnified(id, engine, drivetrain, dimensions, economy, performance)    
         )
         (
-          (model: ModelDetailUnified) => Some(model.engine, model.drivetrain, model.dimensions, model.economy, model.performance)    
+          (model: ModelDetailUnified) => Some(model.id, model.engine, model.drivetrain, model.dimensions, model.economy, model.performance)    
         )
     )
     (
-        (makeId, name, year, trim, seats, doors, body, modelDetails) => 
-          new ModelUnified(0, name, Some(new Date(year.getTime())), trim, seats, doors, body, Makes.findById(makeId), modelDetails)
+        (id, makeId, name, year, trim, seats, doors, body, modelDetails) => 
+          new ModelUnified(modelDetails.id, name, Some(new Date(year.getTime())), trim, seats, doors, body, Makes.findById(makeId), modelDetails)
     )
     (
-        (model: ModelUnified) => Some(model.make.id, model.name, model.year.get, model.trim, model.seats, model.doors, model.body, model.details)
+        (model: ModelUnified) => Some(model.id, model.make.id, model.name, model.year.get, model.trim, model.seats, model.doors, model.body, model.details)
     )     
   )
 }

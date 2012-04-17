@@ -45,28 +45,40 @@ case class ModelDetail(
 object ModelDetails extends Schema {
 
   val modelDetails = table[ModelDetail]
-  
+
   on(modelDetails)(modelDetail => declare(
-      modelDetail.id is (autoIncremented),
-      modelDetail.id is (unique)
-    ))
+    modelDetail.id is (autoIncremented),
+    modelDetail.id is (unique)))
 
   implicit def modelDetail2Unified(modelDetail: ModelDetail): ModelDetailUnified = {
     ModelDetailUnified(
-        modelDetail.id,
-        Engine(modelDetail.position, modelDetail.cc, modelDetail.cylinders, modelDetail.engine_type, modelDetail.valves),
-        Drivetrain(modelDetail.drivetype, modelDetail.transmission),
-        Dimensions(modelDetail.weight, modelDetail.length, modelDetail.width, modelDetail.height, modelDetail.wheelbase),
-        Economy(modelDetail.highway, modelDetail.mixed, modelDetail.city, modelDetail.tank_size),
-        Performance(modelDetail.power, modelDetail.power_rpm, modelDetail.torque, modelDetail.torque_rpm)
-        )
+      modelDetail.id,
+      Engine(modelDetail.position, modelDetail.cc, modelDetail.cylinders, modelDetail.engine_type, modelDetail.valves),
+      Drivetrain(modelDetail.drivetype, modelDetail.transmission),
+      Dimensions(modelDetail.weight, modelDetail.length, modelDetail.width, modelDetail.height, modelDetail.wheelbase),
+      Economy(modelDetail.highway, modelDetail.mixed, modelDetail.city, modelDetail.tank_size),
+      Performance(modelDetail.power, modelDetail.power_rpm, modelDetail.torque, modelDetail.torque_rpm))
   }
-  
-  
+
+  implicit def unified2ModelDetailed(unified: ModelDetailUnified): ModelDetail = {
+    ModelDetail(
+      unified.id,
+      unified.engine.position, unified.engine.cc, unified.engine.cylinders, unified.engine.engine_type, unified.engine.valves,
+      unified.drivetrain.drivetype, unified.drivetrain.transmission,
+      unified.dimensions.weight, unified.dimensions.length, unified.dimensions.width, unified.dimensions.height, unified.dimensions.wheelbase,
+      unified.economy.highway, unified.economy.mixed, unified.economy.city, unified.economy.tank_size,
+      unified.performance.power, unified.performance.power_rpm, unified.performance.torque, unified.performance.torque_rpm)
+  }
+
   def findById(id: Long): ModelDetailUnified = inTransaction {
     from(modelDetails)(m =>
       where(m.id === id)
         select (m)).head
+  }
+
+  def insert(model: ModelDetail): Long = inTransaction {
+    val id = modelDetails.insert(model)
+    id.id
   }
 }
 

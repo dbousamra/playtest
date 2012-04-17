@@ -51,7 +51,7 @@ create table model (
   id bigint not null primary key auto_increment, 
   
   makeId                    bigint,
-  modelDetailId			bigint,
+  modelDetailId			    bigint,
   
   name                      varchar(255) not null,
   year                      timestamp,
@@ -71,8 +71,8 @@ create table image (
 
 create table sale (
   id                        bigint not null,
-  userId                   bigint,
-  modelId                  bigint,
+  userId                    bigint,
+  modelId                   bigint,
   imageId					bigint,
   year                      timestamp,
   price						int,

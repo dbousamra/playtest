@@ -94,7 +94,8 @@ object Models extends Schema {
     Page(mods.toList, page, offset, totalRows)
   }
 
-  def update(id: Long, newModel: Model) = inTransaction {
+  def update(id: Long, newModel: ModelUnified) = inTransaction {
+    println("Model id = " + newModel.modelDetailId)
     models.update(m =>
       where(m.id === id) set (
         m.name := newModel.name,
@@ -103,11 +104,44 @@ object Models extends Schema {
         m.seats := newModel.seats,
         m.doors := newModel.doors,
         m.body := newModel.body,
-        m.makeId := newModel.makeId))
+        m.makeId := newModel.makeId,
+        m.modelDetailId := newModel.modelDetailId)    
+    )
+    
+    
+    modelDetails.update(m => 
+      where(m.id === id) set (
+          
+        m.position := newModel.details.engine.position,
+        m.cylinders := newModel.details.engine.cylinders,
+        m.engine_type := newModel.details.engine.engine_type,
+        m.valves := newModel.details.engine.valves,
+        
+        m.drivetype := newModel.details.drivetrain.drivetype,
+        m.transmission:= newModel.details.drivetrain.transmission,
+        
+        m.weight := newModel.details.dimensions.weight,
+        m.length := newModel.details.dimensions.length,
+        m.width := newModel.details.dimensions.width,
+        m.height := newModel.details.dimensions.height,
+        m.wheelbase := newModel.details.dimensions.wheelbase,
+        
+        m.highway := newModel.details.economy.highway,
+        m.mixed := newModel.details.economy.mixed,
+        m.city := newModel.details.economy.city,
+        m.tank_size := newModel.details.economy.tank_size,
+         
+        m.power := newModel.details.performance.power,
+        m.power_rpm := newModel.details.performance.power_rpm,
+        m.torque := newModel.details.performance.torque,
+        m.torque_rpm := newModel.details.performance.torque_rpm) 
+     )  
   }
 
-  def insert(model: Model) = inTransaction {
-    models.insert(model)
+  def insert(model: ModelUnified) = inTransaction {
+    val id = ModelDetails.insert(model.details)
+    val newModel = Model(model.id, model.makeId, id, model.name, model.year, model.trim, model.seats, model.doors, model.body)
+    models.insert(newModel)
   }
 
   def delete(id: Long) = inTransaction {

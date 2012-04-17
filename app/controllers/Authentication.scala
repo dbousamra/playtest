@@ -54,7 +54,8 @@ object Authentication extends Controller {
       formWithErrors => {
         Redirect(routes.Authentication.login).flashing("error" -> "Your email or password was incorrect.")    
       },
-      user => Redirect(routes.Management.dashboard).withSession("email" -> user._1))
+      user => Redirect(routes.Management.dashboard).withSession("email" -> user._1)
+      	.flashing("loggedIn" -> "Thank you for logging in!"))
   }
 
   def logout = Authenticated { implicit request =>

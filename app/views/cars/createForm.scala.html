@@ -30,43 +30,54 @@
             <h3>Basic Details</h3>
             <hr>
             <fieldset>
-              @inputText(modelForm("name"), '_label -> "Model name")
-  	            @select(
-  	                modelForm("make"), 
-  	                Makes.options, 
-  	                '_label -> "Make",
-  	                '_showConstraints -> false
-  	            )
+            
+              @inputText(
+              	modelForm("name"), 
+              	'_label -> "Model name",
+				'_showConstraints -> false
+              	)
+              	
+  	          @select(
+  	            modelForm("make"), 
+  	            Makes.options, 
+  	            '_label -> "Make",
+  	            '_showConstraints -> false
+  	          )
   
           
               @inputText(
                 modelForm("year"), '_label -> "Year",
-                '_error -> modelForm.error("year")
+                '_error -> modelForm.error("year"),
+                '_showConstraints -> false
               )
               
               @inputText(
                 modelForm("trim"), '_label -> "Trim",
-                '_error -> modelForm.error("trim")
+                '_error -> modelForm.error("trim"),
+                '_showConstraints -> false
               )
               
               @inputText(
                 modelForm("seats"), '_label -> "Seats",
-                '_error -> modelForm.error("seats")
+                '_error -> modelForm.error("seats"),
+                '_showConstraints -> false
               )
               
               @inputText(
                 modelForm("doors"), '_label -> "Doors",
-                '_error -> modelForm.error("doors")
+                '_error -> modelForm.error("doors"),
+                '_showConstraints -> false
               )
               
               @inputText(
                 modelForm("body"), '_label -> "Body",
-                '_error -> modelForm.error("body")
+                '_error -> modelForm.error("body"),
+                '_showConstraints -> false
               )
               
             </fieldset>
 
-            <div class="actions">
+            <div class="form-actions">
               <input type="submit" value="Create this model" class="btn primary"> or <a href="@routes.Cars.listModels()" class="btn">Cancel</a> 
             </div>
             
@@ -79,22 +90,26 @@
            
   			  @inputText(
                 modelForm("modelDetails.engine.position"), '_label -> "Position",
-                '_error -> modelForm.error("modelDetails.engine.position")
+                '_error -> modelForm.error("modelDetails.engine.position"),
+                '_showConstraints -> false
               )
               
               @inputText(
                 modelForm("modelDetails.engine.cc"), '_label -> "Cylinders",
-                '_error -> modelForm.error("modelDetails.engine.cc")
+                '_error -> modelForm.error("modelDetails.engine.cc"),
+                '_showConstraints -> false
               )
               
               @inputText(
                 modelForm("modelDetails.engine.engine_type"), '_label -> "Type",
-                '_error -> modelForm.error("modelDetails.engine.engine_type")
+                '_error -> modelForm.error("modelDetails.engine.engine_type"),
+                '_showConstraints -> false
               )
               
               @inputText(
                 modelForm("modelDetails.engine.valves"), '_label -> "Valves per cylinder",
-                '_error -> modelForm.error("modelDetails.engine.valves")
+                '_error -> modelForm.error("modelDetails.engine.valves"),
+                '_showConstraints -> false
               )
             </fieldset>
             
@@ -108,12 +123,14 @@
            
   			  @inputText(
                 modelForm("modelDetails.drivetrain.drivetype"), '_label -> "Drive type",
-                '_error -> modelForm.error("modelDetails.drivetrain.drivetype")
+                '_error -> modelForm.error("modelDetails.drivetrain.drivetype"),
+                '_showConstraints -> false
               )
               
               @inputText(
                 modelForm("modelDetails.drivetrain.transmission"), '_label -> "Transmission",
-                '_error -> modelForm.error("modelDetails.drivetrain.transmission")
+                '_error -> modelForm.error("modelDetails.drivetrain.transmission"),
+                '_showConstraints -> false
               )
             </fieldset>
           </div>
@@ -125,27 +142,32 @@
            
   			  @inputText(
                 modelForm("modelDetails.dimensions.weight"), '_label -> "Weight",
-                '_error -> modelForm.error("modelDetails.dimensions.weight")
+                '_error -> modelForm.error("modelDetails.dimensions.weight"),
+                '_showConstraints -> false
               )
               
               @inputText(
                 modelForm("modelDetails.dimensions.length"), '_label -> "Length",
-                '_error -> modelForm.error("modelDetails.dimensions.length")
+                '_error -> modelForm.error("modelDetails.dimensions.length"),
+                '_showConstraints -> false
               )
               
               @inputText(
                 modelForm("modelDetails.dimensions.width"), '_label -> "Width",
-                '_error -> modelForm.error("modelDetails.dimensions.width")
+                '_error -> modelForm.error("modelDetails.dimensions.width"),
+                '_showConstraints -> false
               )
               
               @inputText(
                 modelForm("modelDetails.dimensions.height"), '_label -> "Height",
-                '_error -> modelForm.error("modelDetails.dimensions.height")
+                '_error -> modelForm.error("modelDetails.dimensions.height"),
+                '_showConstraints -> false
               )
               
               @inputText(
                 modelForm("modelDetails.dimensions.wheelbase"), '_label -> "Wheelbase",
-                '_error -> modelForm.error("modelDetails.dimensions.wheelbase")
+                '_error -> modelForm.error("modelDetails.dimensions.wheelbase"),
+                '_showConstraints -> false
               )
             </fieldset>
             
@@ -159,22 +181,26 @@
            
   			  @inputText(
                 modelForm("modelDetails.economy.highway"), '_label -> "Highway",
-                '_error -> modelForm.error("modelDetails.economy.highway")
+                '_error -> modelForm.error("modelDetails.economy.highway"),
+                '_showConstraints -> false
               )
               
               @inputText(
                 modelForm("modelDetails.economy.mixed"), '_label -> "Mixed",
-                '_error -> modelForm.error("modelDetails.economy.mixed")
+                '_error -> modelForm.error("modelDetails.economy.mixed"),
+                '_showConstraints -> false
               )
               
               @inputText(
                 modelForm("modelDetails.economy.city"), '_label -> "City",
-                '_error -> modelForm.error("modelDetails.economy.city")
+                '_error -> modelForm.error("modelDetails.economy.city"),
+                '_showConstraints -> false
               )
               
               @inputText(
                 modelForm("modelDetails.economy.tank_size"), '_label -> "Tank Size",
-                '_error -> modelForm.error("modelDetails.economy.tank_size")
+                '_error -> modelForm.error("modelDetails.economy.tank_size"),
+                '_showConstraints -> false
               )
               
             </fieldset>
@@ -187,22 +213,26 @@
            
   			  @inputText(
                 modelForm("modelDetails.performance.power"), '_label -> "Power",
-                '_error -> modelForm.error("modelDetails.performance.power")
+                '_error -> modelForm.error("modelDetails.performance.power"),
+                '_showConstraints -> false
               )
               
               @inputText(
                 modelForm("modelDetails.performance.power_rpm"), '_label -> "Power Rpm",
-                '_error -> modelForm.error("modelDetails.performance.power_rpm")
+                '_error -> modelForm.error("modelDetails.performance.power_rpm"),
+                '_showConstraints -> false
               )
               
               @inputText(
                 modelForm("modelDetails.performance.torque"), '_label -> "Torque",
-                '_error -> modelForm.error("modelDetails.performance.torque")
+                '_error -> modelForm.error("modelDetails.performance.torque"),
+                '_showConstraints -> false
               )
               
               @inputText(
                 modelForm("modelDetails.performance.torque_rpm"), '_label -> "Torque Rpm",
-                '_error -> modelForm.error("modelDetails.performance.torque_rpm")
+                '_error -> modelForm.error("modelDetails.performance.torque_rpm"),
+                '_showConstraints -> false
               )
               
             </fieldset>

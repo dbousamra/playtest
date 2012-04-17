@@ -73,10 +73,10 @@ object SignUp extends Controller {
       }
       ,
       user => {
-        Users.create(user)
-        Ok(html.user.signUpSummary(user))
+        val createdUser = Users.create(user)
+        Redirect(routes.Management.dashboard).withSession("email" -> createdUser.email)
+        	.flashing("registered" -> "Thank you for registering!")
       }
     )
   }
-  
 }

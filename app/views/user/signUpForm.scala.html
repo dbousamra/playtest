@@ -2,6 +2,8 @@
 
 @import helper._
 @import helper.twitterBootstrap._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
 
 @title = {
     Sign Up
@@ -9,34 +11,35 @@
 
 @main {
     
-    @helper.form(action = routes.SignUp.submit) {
+    @helper.form(action = routes.SignUp.submit, 'class -> "form-horizontal") {
         
         <fieldset>
             <legend>Account informations</legend>
             
             @inputText(
                 signupForm("name"), 
-                '_label -> "Name", 
-                '_help -> "Your full name",
-                '_error -> signupForm.globalError
+                '_label -> "Name",
+                '_showConstraints -> false
             )
             
             @inputText(
-                signupForm("email"), '_label -> "Email",
-                '_help -> "Enter a valid email address."
+                signupForm("email"), 
+                '_label -> "Email",
+               '_error -> signupForm.globalError,
+               '_showConstraints -> false
             )
             
             @inputPassword(
                 signupForm("password.main"), 
                 '_label -> "Password",
-                '_help -> "A password must be at least 6 characters. "
+                '_showConstraints -> false
             )
             
             @inputPassword(
                 signupForm("password.confirm"), 
                 '_label -> "Repeat password",
-                '_help -> "Please repeat your password again.",
-                '_error -> signupForm.error("password")
+                '_error -> signupForm.error("password"),
+                '_showConstraints -> false
             )
             
         </fieldset>
@@ -52,9 +55,9 @@
             
         </fieldset>
         
-        <div class="actions">
-            <input type="submit" class="btn primary" value="Sign Up">
-            <a href="@routes.Application.index" class="btn">Cancel</a>
+        <div class="form-actions">
+            <input type="submit" class="btn-primary" value="Sign Up">
+            <a href="@routes.Application.index" class="btn btn-info">Cancel</a>
         </div>
         
     }

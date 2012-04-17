@@ -1,7 +1,13 @@
-@(user: User, sales: List[(Sale, Option[Model], Option[Make])])(implicit request: AuthenticatedRequest)
+@(user: User, sales: List[(Sale, Option[Model], Option[Make])])(implicit request: AuthenticatedRequest, flash: play.api.mvc.Flash)
 
 @management(user) {
   <h1>Dashboard</h1>
+    @flash.get("registered").map { message =>
+    	<div class="alert alert-success">Done! @message </div>
+    }
+    @flash.get("loggedIn").map { message =>
+    	<div class="alert alert-success">Done! @message </div>
+    }
     <div class="hero-unit">
       <h1>Welcome</h1>
       <h1>@user.name!</h1>
